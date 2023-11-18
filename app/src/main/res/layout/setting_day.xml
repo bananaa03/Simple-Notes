@@ -26,7 +26,7 @@
         app:layout_constraintRight_toLeftOf="@id/imageButton5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/night"
+        app:srcCompat="@drawable/dark"
         android:onClick="night_main"/>
 
     <ImageButton
@@ -40,7 +40,7 @@
         app:layout_constraintRight_toLeftOf="@id/imageButton6"
         app:layout_constraintLeft_toRightOf="@id/imageButton4"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/note" />
+        app:srcCompat="@drawable/light_note" />
 
     <ImageButton
         android:id="@+id/imageButton6"
@@ -53,7 +53,7 @@
         app:layout_constraintLeft_toRightOf="@id/imageButton5"
         app:layout_constraintRight_toLeftOf="@id/imageButton7"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/clock" />
+        app:srcCompat="@drawable/light_clock" />
 
     <ImageButton
         android:id="@+id/imageButton7"
@@ -67,7 +67,7 @@
         app:layout_constraintLeft_toRightOf="@id/imageButton6"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/setting" />
+        app:srcCompat="@drawable/light_setting" />
 
     <Button
         android:id="@+id/thongke"

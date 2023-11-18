@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray">
+    android:background="#3F2E3E">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/yellowpastel"
+        android:background="@color/darkpurple"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintTop_toTopOf="parent" />
@@ -18,64 +18,66 @@
     <ImageButton
         android:id="@+id/imageButton4"
         style="@style/Widget.AppCompat.ImageButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="1dp"
         android:layout_marginTop="10dp"
-        android:background="@color/yellowpastel"
+        android:background="@color/darkpurple"
         android:contentDescription="nightmode"
+        android:onClick="day_main"
         android:scaleType="fitXY"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/imageButton5"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/day"
-        android:onClick="day_main"/>
+        app:srcCompat="@drawable/light" />
 
     <ImageButton
         android:id="@+id/imageButton5"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/yellowpastel"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/darkpurple"
         android:contentDescription="note"
         android:scaleType="fitXY"
         app:layout_constraintLeft_toRightOf="@id/imageButton4"
         app:layout_constraintRight_toLeftOf="@id/imageButton6"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/note" />
+        app:srcCompat="@drawable/dark_note" />
 
     <ImageButton
         android:id="@+id/imageButton6"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginTop="10dp"
-        android:background="@color/yellowpastel"
+        android:background="@color/darkpurple"
         android:contentDescription="date"
         android:scaleType="fitXY"
         app:layout_constraintLeft_toRightOf="@id/imageButton5"
         app:layout_constraintRight_toLeftOf="@id/imageButton7"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/clock" />
+        app:srcCompat="@drawable/dark_clock" />
 
     <ImageButton
         android:id="@+id/imageButton7"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="1dp"
-        android:background="@color/yellowpastel"
+        android:background="@color/darkpurple"
         android:contentDescription="settings"
         android:scaleType="fitXY"
         app:layout_constraintLeft_toRightOf="@id/imageButton6"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/setting" />
+        app:srcCompat="@drawable/dark_setting" />
+
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="362dp"
         android:layout_height="47dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="90dp"
+        android:background="@color/llpurple"
         app:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
@@ -87,27 +89,27 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="410dp"
         android:layout_height="445dp"
-        android:visibility="visible"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/imageButton8"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:scaleType="fitXY"
-        android:background="@color/yellowpastel"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="30dp"
+        android:background="@color/lightpurple"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/addnewnote"/>
+        app:srcCompat="@drawable/dark_addnewnote" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
