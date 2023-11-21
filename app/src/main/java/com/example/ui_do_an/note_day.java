@@ -15,7 +15,7 @@ public class note_day extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.note_day);
 
         buttonSetting = (ImageButton) findViewById(R.id.ImageButtonSetting);
         buttonSetting.setOnClickListener(new View.OnClickListener() {

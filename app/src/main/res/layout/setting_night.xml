@@ -28,7 +28,7 @@
         app:layout_constraintRight_toLeftOf="@id/imageButton5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/day"
+        app:srcCompat="@drawable/light"
         android:onClick="night_main"/>
 
     <ImageButton

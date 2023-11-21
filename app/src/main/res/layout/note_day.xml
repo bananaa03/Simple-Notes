@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_weight="3"
+    android:background="@color/llpink"
     android:foregroundTint="#000000"
     android:orientation="vertical">
 
@@ -13,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:background="@color/darkpink"
         android:orientation="horizontal">
 
         <ImageButton
@@ -20,8 +22,7 @@
             android:layout_width="45dp"
             android:layout_height="match_parent"
             android:layout_weight="0.0001"
-            android:background="#FFFFFF"
-            android:backgroundTint="#FFFFFF"
+            android:backgroundTint="@color/darkpink"
             android:foregroundTint="#000000"
             android:src="@android:drawable/ic_menu_revert"
             app:tint="#000000" />
@@ -37,11 +38,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.0001"
-            android:backgroundTint="#FFFFFF"
+            android:backgroundTint="@color/darkpink"
             android:src="@android:drawable/ic_menu_share"
-            tools:src="@android:drawable/ic_menu_share"
             app:tint="#000000"
-            />
+            tools:src="@android:drawable/ic_menu_share" />
 
         <ImageButton
             android:id="@+id/ImageButtonSetting"
@@ -49,10 +49,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.0001"
-            android:backgroundTint="#FFFFFF"
+            android:backgroundTint="@color/darkpink"
             android:src="@android:drawable/ic_menu_info_details"
-            tools:src="@android:drawable/ic_menu_info_details"
-            app:tint="#000000" />
+            app:tint="#000000"
+            tools:src="@android:drawable/ic_menu_info_details" />
     </LinearLayout>
 
     <LinearLayout
@@ -68,7 +68,7 @@
         <EditText
             android:layout_width="204dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/custome_edit_chude"
+            android:background="@color/llpink"
             android:shadowColor="#E40E0E"
             android:text="Chủ đề"
             android:textSize="45dp"
@@ -115,9 +115,10 @@
             android:layout_height="match_parent" />
 
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="383dp"
             android:layout_height="match_parent"
             android:background="@drawable/custom_edit_textcontent"
+            android:backgroundTint="@color/llpink"
             android:hint="Nhập ở đây"
             android:textColorHint="@color/black" />
     </LinearLayout>
