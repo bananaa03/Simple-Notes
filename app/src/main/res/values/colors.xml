@@ -17,4 +17,6 @@
     <color name="lightpurple">#3F2E3E</color>
     <color name="llpurple">#A78295</color>
     <color name="llpink">#FFDFDF</color>
+    <color name="lessgray1">#B5AEAE</color>
+    <color name="lessgray2">#DFDADA</color>
 </resources>
