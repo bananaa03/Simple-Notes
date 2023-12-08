@@ -39,7 +39,6 @@
         android:background="@color/darkpurple"
         android:contentDescription="note"
         android:scaleType="fitXY"
-        android:onClick="note_day"
         app:layout_constraintLeft_toRightOf="@id/iBt_mode"
         app:layout_constraintRight_toLeftOf="@id/iBt_settime"
         app:layout_constraintTop_toTopOf="parent"

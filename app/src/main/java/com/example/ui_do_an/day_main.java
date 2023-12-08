@@ -21,8 +21,4 @@ public class day_main extends AppCompatActivity {
         Intent intent = new Intent(this, setting_day.class);
         startActivity(intent);
     }
-    public void note_day(View view){
-        Intent intent = new Intent(this, note_day.class);
-        startActivity(intent);
-    }
 }
