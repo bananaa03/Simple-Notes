@@ -19,4 +19,13 @@ public class night_main extends AppCompatActivity {
         Intent intent = new Intent(this, day_main.class);
         startActivity(intent);
     }
+
+    public void setting_night(View view){
+        Intent intent = new Intent(this, setting_night.class);
+        startActivity(intent);
+    }
+    public void note_day(View view){
+        Intent intent = new Intent(this, note_day.class);
+        startActivity(intent);
+    }
 }
