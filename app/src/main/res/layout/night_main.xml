@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/iBt_mode"
         style="@style/Widget.AppCompat.ImageButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -39,13 +39,13 @@
         android:background="@color/darkpurple"
         android:contentDescription="note"
         android:scaleType="fitXY"
-        app:layout_constraintLeft_toRightOf="@id/imageButton4"
-        app:layout_constraintRight_toLeftOf="@id/imageButton6"
+        app:layout_constraintLeft_toRightOf="@id/iBt_mode"
+        app:layout_constraintRight_toLeftOf="@id/iBt_settime"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/dark_note" />
 
     <ImageButton
-        android:id="@+id/imageButton6"
+        android:id="@+id/iBt_settime"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
@@ -53,12 +53,12 @@
         android:contentDescription="date"
         android:scaleType="fitXY"
         app:layout_constraintLeft_toRightOf="@id/imageButton5"
-        app:layout_constraintRight_toLeftOf="@id/imageButton7"
+        app:layout_constraintRight_toLeftOf="@id/iBt_setting"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/dark_clock" />
 
     <ImageButton
-        android:id="@+id/imageButton7"
+        android:id="@+id/iBt_setting"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
@@ -66,7 +66,7 @@
         android:background="@color/darkpurple"
         android:contentDescription="settings"
         android:scaleType="fitXY"
-        app:layout_constraintLeft_toRightOf="@id/imageButton6"
+        app:layout_constraintLeft_toRightOf="@id/iBt_settime"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/dark_setting" />
@@ -87,21 +87,17 @@
         app:queryHint="Search..." />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="410dp"
-        android:layout_height="445dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/rcv_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
+        app:layout_constraintVertical_bias="0.277"
+        tools:layout_editor_absoluteX="0dp"
+        android:layout_marginTop="10dp" />
 
     <ImageButton
-        android:id="@+id/imageButton8"
+        android:id="@+id/iBt_add"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginRight="30dp"

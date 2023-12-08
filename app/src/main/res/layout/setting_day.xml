@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/iBt_mode"
         style="@style/Widget.AppCompat.ImageButton"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -37,13 +37,13 @@
         android:background="@color/yellowpastel"
         android:contentDescription="note"
         android:scaleType="fitXY"
-        app:layout_constraintRight_toLeftOf="@id/imageButton6"
-        app:layout_constraintLeft_toRightOf="@id/imageButton4"
+        app:layout_constraintRight_toLeftOf="@id/iBt_settime"
+        app:layout_constraintLeft_toRightOf="@id/iBt_mode"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/light_note" />
 
     <ImageButton
-        android:id="@+id/imageButton6"
+        android:id="@+id/iBt_settime"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginTop="10dp"
@@ -51,12 +51,12 @@
         android:contentDescription="date"
         android:scaleType="fitXY"
         app:layout_constraintLeft_toRightOf="@id/imageButton5"
-        app:layout_constraintRight_toLeftOf="@id/imageButton7"
+        app:layout_constraintRight_toLeftOf="@id/iBt_setting"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/light_clock" />
 
     <ImageButton
-        android:id="@+id/imageButton7"
+        android:id="@+id/iBt_setting"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginTop="10dp"
@@ -64,7 +64,7 @@
         android:contentDescription="settings"
         android:scaleType="fitXY"
         android:layout_marginRight="1dp"
-        app:layout_constraintLeft_toRightOf="@id/imageButton6"
+        app:layout_constraintLeft_toRightOf="@id/iBt_settime"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:srcCompat="@drawable/light_setting" />
