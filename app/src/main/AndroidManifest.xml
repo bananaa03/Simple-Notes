@@ -12,6 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UIdoan"
         tools:targetApi="31">
+        <activity android:name=".day_main"/>
+        <activity android:name=".night_main"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
