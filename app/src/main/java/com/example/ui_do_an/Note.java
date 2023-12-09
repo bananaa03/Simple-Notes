@@ -2,6 +2,12 @@ package com.example.ui_do_an;
 
 public class Note {
     private int note_id;
+
+    public Note(String note_title, String note_day) {
+        this.note_title = note_title;
+        this.note_day = note_day;
+    }
+
     private String note_title;
     private String note_day;
 

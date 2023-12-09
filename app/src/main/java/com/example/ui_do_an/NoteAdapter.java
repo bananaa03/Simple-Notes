@@ -1,5 +1,6 @@
 package com.example.ui_do_an;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +16,13 @@ import java.util.ArrayList;
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
     private ArrayList<Note> listnotes;
-    private Context context;
+    private int layoutID;
+    private Activity context;
 
-    public NoteAdapter(ArrayList<Note> notes, Context context){
+    public NoteAdapter(Activity context, int layoutID, ArrayList<Note> notes){
         this.listnotes=notes;
         this.context=context;
+        this.layoutID=layoutID;
     }
     @NonNull
     @Override
