@@ -72,9 +72,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/light_setting" />
 
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="362dp"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_View"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="90dp"
@@ -85,6 +85,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         app:queryHint="Search..." />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -92,7 +94,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@id/searchView"
+        app:layout_constraintTop_toBottomOf="@id/search_View"
         app:layout_constraintVertical_bias="0.277"
         tools:layout_editor_absoluteX="0dp"
         android:layout_marginTop="10dp"/>
