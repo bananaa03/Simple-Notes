@@ -25,7 +25,7 @@ public class note_day extends AppCompatActivity {
     }
     public void openSetting()
     {
-        Intent intent = new Intent(this, setting_day.class);
+        Intent intent = new Intent(this, note_day.class);
         startActivity(intent);
     }
 }

@@ -2,6 +2,7 @@ package com.example.ui_do_an;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> im
 
         holder.notetitle.setText(note.getNote_title());
         holder.noteday.setText(note.getNote_day()+"");
+        holder.itemView.setOnClickListener((v)->{
+            Intent intent = new Intent(context, note_day.class);
+            context.startActivity(intent);
+        });
     }
 
     @Override
