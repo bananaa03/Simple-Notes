@@ -63,10 +63,8 @@ public class log_in extends AppCompatActivity {
                         if (task.isSuccessful())
                         {
                             Toast.makeText(log_in.this,"Login Sucess!", Toast.LENGTH_SHORT).show();
-                            //neu login thanh cong mo trang ke: home
-                            Intent intent=new Intent(log_in.this, MainActivity.class);
+                            Intent intent=new Intent(log_in.this, user.class);
                             startActivity(intent);
-                            finish();
                         }
                         else
                         {
