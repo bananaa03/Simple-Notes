@@ -34,7 +34,7 @@
             android:orientation="vertical"></LinearLayout>
 
         <ImageButton
-            android:id="@+id/ImageButtonShare"
+            android:id="@+id/imgbtn_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.0001"
@@ -66,11 +66,18 @@
             android:layout_height="wrap_content" />
 
         <EditText
-            android:layout_width="204dp"
+            android:id="@+id/edt_note_title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/llpink"
+            android:background="@null"
             android:shadowColor="#E40E0E"
-            android:text="Chủ đề"
+            android:hint="@string/note_title"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:includeFontPadding="false"
+            android:inputType="text"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="45dp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -115,12 +122,14 @@
             android:layout_height="match_parent" />
 
         <EditText
-            android:layout_width="383dp"
-            android:layout_height="match_parent"
+            android:id="@+id/edt_note_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/custom_edit_textcontent"
             android:backgroundTint="@color/llpink"
             android:hint="Nhập ở đây"
             android:textColorHint="@color/black" />
+
     </LinearLayout>
 
 </LinearLayout>
