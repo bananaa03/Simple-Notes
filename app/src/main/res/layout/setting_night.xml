@@ -126,11 +126,11 @@
         app:layout_constraintVertical_bias="0.430" />
 
     <Button
-        android:id="@+id/sapxep"
+        android:id="@+id/manage_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/darkpurple"
-        android:text="SẮP XẾP"
+        android:text="QUẢN LÝ TÀI KHOẢN"
         android:textColor="@color/llpurple"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -138,63 +138,9 @@
         android:layout_marginLeft="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.560" />
 
-    <Button
-        android:id="@+id/dangnhap"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/darkpurple"
-        android:text="ĐĂNG NHẬP"
-        android:textColor="@color/llpurple"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.690" />
-
-    <Button
-        android:id="@+id/dangky"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/darkpurple"
-        android:text="ĐĂNG KÝ"
-        android:textColor="@color/llpurple"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.820" />
-
-    <Button
-        android:id="@+id/btnBacktoMain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/darkpurple"
-        android:text="TRỞ VỀ"
-        android:textColor="@color/llpurple"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
-        android:onClick="btnBacktoMain_night"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.950" />
 </androidx.constraintlayout.widget.ConstraintLayout>
