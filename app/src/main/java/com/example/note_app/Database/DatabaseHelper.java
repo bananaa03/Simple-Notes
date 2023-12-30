@@ -1,4 +1,4 @@
-package com.example.ui_do_an.Database;
+package com.example.note_app.Database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.ui_do_an.Note;
+import com.example.note_app.Note;
 
 import java.util.ArrayList;
 import java.util.List;

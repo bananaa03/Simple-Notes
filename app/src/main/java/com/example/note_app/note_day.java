@@ -1,4 +1,4 @@
-package com.example.ui_do_an;
+package com.example.note_app;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;

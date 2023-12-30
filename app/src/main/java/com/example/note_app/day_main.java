@@ -1,4 +1,4 @@
-package com.example.ui_do_an;
+package com.example.note_app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;

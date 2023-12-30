@@ -18,6 +18,8 @@
         <activity android:name="setting_day"/>
         <activity android:name="setting_night"/>
         <activity android:name=".note_day"/>
+        <activity android:name=".log_in"/>
+        <activity android:name=".registerpage"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "UI-do-an"
+rootProject.name = "note_app"
 include(":app")
  
