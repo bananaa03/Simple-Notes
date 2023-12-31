@@ -1,6 +1,7 @@
 package com.example.note_app;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -18,8 +19,7 @@ public class day_main extends AppCompatActivity {
     ArrayList<Note> listNote;
     NoteAdapter noteAdapter;
     SearchView searchView;
-
-    ImageButton btnAdd;
+    ImageButton btnAdd, btnFindNote;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +76,13 @@ public class day_main extends AppCompatActivity {
             }
         });
 
+        btnFindNote = (ImageButton) findViewById(R.id.imageButtonFindNote);
+        btnFindNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findNewNote();
+            }
+        });
 
     }
     public void night_main(View view){
@@ -88,6 +95,11 @@ public class day_main extends AppCompatActivity {
         startActivity(intent);
     }
     public void openNewNote(){
+        Intent intent = new Intent(day_main.this, note_day.class);
+        startActivity(intent);
+    }
+
+    public void findNewNote(){
         Intent intent = new Intent(day_main.this, note_day.class);
         startActivity(intent);
     }

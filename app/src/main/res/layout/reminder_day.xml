@@ -23,14 +23,14 @@
         android:background="@color/yellowpastel"
         android:contentDescription="nightmode"
         android:scaleType="fitXY"
-        app:layout_constraintRight_toLeftOf="@id/imageButton5"
+        app:layout_constraintRight_toLeftOf="@id/imageButtonFindNote"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/dark"
         android:onClick="night_main"/>
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/imageButtonFindNote"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
@@ -50,7 +50,7 @@
         android:background="@color/yellowpastel"
         android:contentDescription="date"
         android:scaleType="fitXY"
-        app:layout_constraintLeft_toRightOf="@id/imageButton5"
+        app:layout_constraintLeft_toRightOf="@id/imageButtonFindNote"
         app:layout_constraintRight_toLeftOf="@id/iBt_setting"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/light_clock" />
