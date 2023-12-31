@@ -1,42 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_weight="3"
+    android:layout_height="match_parent"
     android:background="@color/llpink"
-    android:foregroundTint="#000000"
-    android:orientation="vertical">
+    android:padding="16dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@color/darkpink"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:id="@+id/ButtonRow">
 
         <ImageButton
             android:id="@+id/ImageButtonBack"
-            android:layout_width="45dp"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="0.0001"
             android:backgroundTint="@color/darkpink"
             android:foregroundTint="#000000"
             android:src="@android:drawable/ic_menu_revert"
             app:tint="#000000" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"></LinearLayout>
-
         <ImageButton
             android:id="@+id/imgbtn_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="52dp"
             android:layout_weight="0.0001"
             android:backgroundTint="@color/darkpink"
             android:src="@android:drawable/ic_menu_share"
@@ -47,87 +38,86 @@
             android:id="@+id/ImageButtonSetting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.0001"
             android:backgroundTint="@color/darkpink"
             android:src="@android:drawable/ic_menu_info_details"
             app:tint="#000000"
             tools:src="@android:drawable/ic_menu_info_details" />
-    </LinearLayout>
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <Space
-            android:layout_width="59dp"
-            android:layout_height="wrap_content" />
+        android:layout_below="@+id/ButtonRow"
+        android:layout_marginVertical="13dp"
+        android:background="@color/llpink"
+        android:backgroundTint="@color/white"
+        android:orientation="vertical">
 
         <EditText
             android:id="@+id/edt_note_title"
-            android:layout_width="204dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/llpink"
             android:hint="Chủ đề"
+            android:textAlignment="center"
             android:shadowColor="#E40E0E"
             android:textColorHint="@color/black"
             android:textSize="45dp"
             android:textStyle="bold" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <Space
-            android:layout_width="63dp"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ngày tháng năm" />
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-        <Space
-            android:layout_width="66dp"
-            android:layout_height="wrap_content" />
+            <Space
+                android:layout_width="63dp"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Số ký tự" />
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ngày tháng năm" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="25dp" />
+            <Space
+                android:layout_width="66dp"
+                android:layout_height="wrap_content" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <Space
-            android:layout_width="32dp"
-            android:layout_height="match_parent" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Số ký tự" />
+        </LinearLayout>
 
         <EditText
             android:id="@+id/edt_note_content"
             android:layout_width="match_parent"
-            android:layout_height="530dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
             android:background="@drawable/custom_edit_textcontent"
-            android:backgroundTint="@color/llpink"
+            android:backgroundTint="@color/white"
             android:gravity="top"
             android:hint="Nhập ở đây"
-            android:textColorHint="@color/black" />
+            android:minLines="15"
+            android:padding="12dp"
+            android:textColorHint="@color/black"
+            android:textSize="20sp" />
+
     </LinearLayout>
 
-</LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/deleteNote"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:text="Xóa ghi chú"
+        android:textSize="20sp"
+        android:backgroundTint="@color/darkpink"
+        android:background="@color/darkpink"/>
 
-
-
+</RelativeLayout>

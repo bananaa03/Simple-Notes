@@ -1,7 +1,6 @@
 package com.example.note_app;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -68,7 +67,7 @@ public class day_main extends AppCompatActivity {
             }
         });
 
-        btnAdd = (ImageButton) findViewById(R.id.iBt_add);
+        btnAdd = (ImageButton) findViewById(R.id.iBt_Add);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +75,7 @@ public class day_main extends AppCompatActivity {
             }
         });
 
-        btnFindNote = (ImageButton) findViewById(R.id.imageButtonFindNote);
+        btnFindNote = (ImageButton) findViewById(R.id.iBtFindNote);
         btnFindNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
