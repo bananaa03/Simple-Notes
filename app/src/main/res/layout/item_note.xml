@@ -8,15 +8,16 @@
     <TextView
         android:id="@+id/tv_notetitle"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@color/darkpink"
         android:gravity="center_vertical"
-        android:text="@string/hello_sunday"
+        android:text="@string/note_title"
         android:textSize="20sp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:orientation="horizontal">
 
         <TextView
@@ -24,7 +25,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="8"
-            android:background="@color/white"
             android:gravity="end"
             android:text="@string/dd_mm_yy"
             android:layout_marginEnd="20dp"

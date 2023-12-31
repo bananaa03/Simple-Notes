@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -53,6 +54,7 @@ public class registerpage extends AppCompatActivity {
                 email2 = iedtEmail2.getText().toString().trim();
                 password2 = iedtPassword2.getText().toString().trim();
                 username = iedtUsername.getText().toString().trim();
+                //kiểm tra kết email2, password2, username không empty
                 if (TextUtils.isEmpty(email2)) {
                     Toast.makeText(registerpage.this, "Please Enter Email", Toast.LENGTH_SHORT).show();
                     return;
@@ -60,6 +62,9 @@ public class registerpage extends AppCompatActivity {
                 if (TextUtils.isEmpty(password2)) {
                     Toast.makeText(registerpage.this, "Please enter password", Toast.LENGTH_SHORT).show();
                     return;
+                } else if (password2.length()<7){
+
+                    Toast.makeText(registerpage.this, "Password should greater than 7 digits", Toast.LENGTH_SHORT).show();
                 }
                 if (TextUtils.isEmpty(username)) {
                     Toast.makeText(registerpage.this, "Please enter username", Toast.LENGTH_SHORT).show();
@@ -70,6 +75,8 @@ public class registerpage extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful())
                                 {
+                                    Toast.makeText(registerpage.this, "Registration Successfully",Toast.LENGTH_SHORT).show();
+                                    //sendEmailVerification();
                                     // Lấy UID của người dùng vừa đăng ký
                                     String userUID = firebaseAuth.getCurrentUser().getUid();
 
@@ -81,7 +88,6 @@ public class registerpage extends AppCompatActivity {
                                     currentUserDb.child("username").setValue(username);
                                     currentUserDb.child("password").setValue(password2);
 
-                                    Toast.makeText(registerpage.this, "Registration Successfully",Toast.LENGTH_SHORT).show();
                                     Intent intent=new Intent(registerpage.this, log_in.class);
                                     startActivity(intent);
                                     finish();
@@ -96,8 +102,20 @@ public class registerpage extends AppCompatActivity {
             }
         });
 
-
-
-
+    }
+    private void sendEmailVerification(){
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        if (firebaseUser != null){
+            firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(getApplicationContext(), R.string.send_Email_Verification, Toast.LENGTH_SHORT).show();
+                    firebaseAuth.signOut();// Đăng xuất người dùng
+                }
+            });
+        }
+        else {
+            Toast.makeText(getApplicationContext(),R.string.fail_to_send_email_verify,Toast.LENGTH_SHORT).show();
+        }
     }
 }
