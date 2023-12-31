@@ -25,14 +25,13 @@
             android:backgroundTint="@color/darkpink"
             android:foregroundTint="#000000"
             android:src="@android:drawable/ic_menu_revert"
-            app:tint="#000000"
-            android:contentDescription="@string/back" />
+            app:tint="#000000" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical" />
+            android:orientation="vertical"></LinearLayout>
 
         <ImageButton
             android:id="@+id/imgbtn_share"
@@ -42,8 +41,7 @@
             android:backgroundTint="@color/darkpink"
             android:src="@android:drawable/ic_menu_share"
             app:tint="#000000"
-            tools:src="@android:drawable/ic_menu_share"
-            android:contentDescription="@string/share" />
+            tools:src="@android:drawable/ic_menu_share" />
 
         <ImageButton
             android:id="@+id/ImageButtonSetting"
@@ -54,8 +52,7 @@
             android:backgroundTint="@color/darkpink"
             android:src="@android:drawable/ic_menu_info_details"
             app:tint="#000000"
-            tools:src="@android:drawable/ic_menu_info_details"
-            android:contentDescription="@string/info" />
+            tools:src="@android:drawable/ic_menu_info_details" />
     </LinearLayout>
 
     <LinearLayout
@@ -70,18 +67,13 @@
 
         <EditText
             android:id="@+id/edt_note_title"
-            android:layout_width="match_parent"
+            android:layout_width="204dp"
             android:layout_height="wrap_content"
-            android:background="@null"
+            android:background="@color/llpink"
+            android:hint="Chủ đề"
             android:shadowColor="#E40E0E"
-            android:hint="@string/note_title"
-            android:imeOptions="actionDone"
-            android:importantForAutofill="no"
-            android:includeFontPadding="false"
-            android:inputType="text"
-            android:textColor="@color/black"
             android:textColorHint="@color/black"
-            android:textSize="45sp"
+            android:textSize="45dp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -98,7 +90,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dmy" />
+            android:text="Ngày tháng năm" />
 
         <Space
             android:layout_width="66dp"
@@ -107,7 +99,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sokytu" />
+            android:text="Số ký tự" />
     </LinearLayout>
 
     <Space
@@ -127,13 +119,12 @@
         <EditText
             android:id="@+id/edt_note_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="530dp"
             android:background="@drawable/custom_edit_textcontent"
             android:backgroundTint="@color/llpink"
-            android:hint="@string/type_here"
-            android:textColorHint="@color/black"
-            android:inputType="text"/>
-
+            android:gravity="top"
+            android:hint="Nhập ở đây"
+            android:textColorHint="@color/black" />
     </LinearLayout>
 
 </LinearLayout>

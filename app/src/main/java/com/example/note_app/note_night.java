@@ -1,5 +1,4 @@
 package com.example.note_app;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,17 +6,17 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-public class note_day extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class note_night extends AppCompatActivity {
 
     private ImageButton buttonSetting, btnShare;
     EditText edtnotetitle, edtnotecontent;
-    ImageButton buttonBack;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.note_day);
+        setContentView(R.layout.note_night);
         edtnotetitle = (EditText) findViewById(R.id.edt_note_title);
         edtnotecontent= (EditText) findViewById(R.id.edt_note_content);
 
@@ -45,23 +44,10 @@ public class note_day extends AppCompatActivity {
                 startActivity(Intent.createChooser(shareIntent,"Chia sẻ nội dung ghi chú"));
             }
         });
-
-        buttonBack = (ImageButton) findViewById(R.id.ImageButtonBack);
-        buttonBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openBack();
-            }
-        });
     }
     public void openSetting()
     {
-        Intent intent = new Intent(this, note_day.class);
-        startActivity(intent);
-    }
-
-    public void openBack(){
-        Intent intent = new Intent(note_day.this, day_main.class);
+        Intent intent = new Intent(this, note_night.class);
         startActivity(intent);
     }
 }

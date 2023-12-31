@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@color/lightpurple"
+        android:background="@color/darkpurple"
         android:orientation="horizontal">
 
         <ImageButton
@@ -22,11 +22,10 @@
             android:layout_width="45dp"
             android:layout_height="match_parent"
             android:layout_weight="0.0001"
-            android:backgroundTint="@color/lightpurple"
+            android:backgroundTint="@color/darkpurple"
             android:foregroundTint="#000000"
             android:src="@android:drawable/ic_menu_revert"
-            app:tint="#000000"
-            android:contentDescription="@string/back" />
+            app:tint="#000000" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -39,11 +38,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.0001"
-            android:backgroundTint="@color/lightpurple"
+            android:backgroundTint="@color/darkpurple"
             android:src="@android:drawable/ic_menu_share"
             app:tint="#000000"
-            tools:src="@android:drawable/ic_menu_share"
-            android:contentDescription="@string/share" />
+            tools:src="@android:drawable/ic_menu_share" />
 
         <ImageButton
             android:id="@+id/ImageButtonSetting"
@@ -51,11 +49,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.0001"
-            android:backgroundTint="@color/lightpurple"
+            android:backgroundTint="@color/darkpurple"
             android:src="@android:drawable/ic_menu_info_details"
             app:tint="#000000"
-            tools:src="@android:drawable/ic_menu_info_details"
-            android:contentDescription="@string/info" />
+            tools:src="@android:drawable/ic_menu_info_details" />
     </LinearLayout>
 
     <LinearLayout
@@ -66,22 +63,17 @@
 
         <Space
             android:layout_width="59dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            />
 
         <EditText
-            android:id="@+id/edt_note_title"
-            android:layout_width="match_parent"
+            android:layout_width="204dp"
             android:layout_height="wrap_content"
-            android:background="@null"
+            android:background="@color/llpurple"
             android:shadowColor="#E40E0E"
-            android:hint="@string/note_title"
-            android:imeOptions="actionDone"
-            android:importantForAutofill="no"
-            android:includeFontPadding="false"
-            android:inputType="text"
-            android:textColor="@color/black"
+            android:hint="Chủ đề"
+            android:textSize="45dp"
             android:textColorHint="@color/black"
-            android:textSize="45sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -98,8 +90,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dmy"
-            android:textColor="@color/black"/>
+            android:text="Ngày tháng năm" />
 
         <Space
             android:layout_width="66dp"
@@ -108,8 +99,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sokytu"
-            android:textColor="@color/black"/>
+            android:text="Số ký tự" />
     </LinearLayout>
 
     <Space
@@ -127,15 +117,14 @@
             android:layout_height="match_parent" />
 
         <EditText
-            android:id="@+id/edt_note_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="530dp"
             android:background="@drawable/custom_edit_textcontent"
             android:backgroundTint="@color/llpurple"
-            android:hint="@string/type_here"
+            android:gravity="top"
+            android:hint="Nhập ở đây"
             android:textColorHint="@color/black"
-            android:inputType="text"/>
-
+            />
     </LinearLayout>
 
 </LinearLayout>

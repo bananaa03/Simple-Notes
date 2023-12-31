@@ -3,6 +3,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -17,6 +18,8 @@ public class day_main extends AppCompatActivity {
     ArrayList<Note> listNote;
     NoteAdapter noteAdapter;
     SearchView searchView;
+
+    ImageButton btnAdd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +68,15 @@ public class day_main extends AppCompatActivity {
             }
         });
 
+        btnAdd = (ImageButton) findViewById(R.id.iBt_add);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openNewNote();
+            }
+        });
+
+
     }
     public void night_main(View view){
 
@@ -73,6 +85,10 @@ public class day_main extends AppCompatActivity {
     }
     public void setting_day(View view){
         Intent intent = new Intent(this, setting_day.class);
+        startActivity(intent);
+    }
+    public void openNewNote(){
+        Intent intent = new Intent(day_main.this, note_day.class);
         startActivity(intent);
     }
 }
