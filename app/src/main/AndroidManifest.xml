@@ -20,7 +20,8 @@
         <activity android:name=".note_day"/>
         <activity android:name=".log_in"/>
         <activity android:name=".registerpage"/>
-        <activity android:name=".user"/>
+        <activity android:name=".user_day"/>
+        <activity android:name=".user_night"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -30,6 +31,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

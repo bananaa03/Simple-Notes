@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:textSize="25dp"
-        android:text="SIGN UP HERE"/>
+        android:textSize="25sp"
+        android:text="@string/sign_up_here"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
             android:id="@+id/input_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username" />
+            android:hint="@string/username" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -38,7 +38,7 @@
             android:id="@+id/input_email2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/email"
             android:inputType="textEmailAddress"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:hint="Password"/>
+            android:hint="@string/password"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -61,11 +61,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_marginTop="50dp"
         android:backgroundTint="@color/yellowpastel"
         android:background="@drawable/item_btnlog"
-        android:text="SIGN UP"/>
+        android:text="@string/sign_up"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,15 +75,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Already have an account? "
+            android:text="@string/already_have_an_account"
             android:textColor="@color/black"
-            android:textSize="20dp"/>
+            android:textSize="20sp"/>
         <TextView
             android:id="@+id/tv_signin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign In"
+            android:text="@string/sign_in"
             android:textColor="@color/gray"
-            android:textSize="20dp"/>
+            android:textSize="20sp"/>
     </LinearLayout>
 </LinearLayout>

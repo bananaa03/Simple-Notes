@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_weight="3"
-    android:background="@color/llpink"
+    android:background="@color/llpurple"
     android:foregroundTint="#000000"
     android:orientation="vertical">
 
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@color/darkpink"
+        android:background="@color/lightpurple"
         android:orientation="horizontal">
 
         <ImageButton
@@ -22,7 +22,7 @@
             android:layout_width="45dp"
             android:layout_height="match_parent"
             android:layout_weight="0.0001"
-            android:backgroundTint="@color/darkpink"
+            android:backgroundTint="@color/lightpurple"
             android:foregroundTint="#000000"
             android:src="@android:drawable/ic_menu_revert"
             app:tint="#000000"
@@ -32,14 +32,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical" />
+            android:orientation="vertical"></LinearLayout>
 
         <ImageButton
             android:id="@+id/imgbtn_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.0001"
-            android:backgroundTint="@color/darkpink"
+            android:backgroundTint="@color/lightpurple"
             android:src="@android:drawable/ic_menu_share"
             app:tint="#000000"
             tools:src="@android:drawable/ic_menu_share"
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.0001"
-            android:backgroundTint="@color/darkpink"
+            android:backgroundTint="@color/lightpurple"
             android:src="@android:drawable/ic_menu_info_details"
             app:tint="#000000"
             tools:src="@android:drawable/ic_menu_info_details"
@@ -98,7 +98,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dmy" />
+            android:text="@string/dmy"
+            android:textColor="@color/black"/>
 
         <Space
             android:layout_width="66dp"
@@ -107,7 +108,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sokytu" />
+            android:text="@string/sokytu"
+            android:textColor="@color/black"/>
     </LinearLayout>
 
     <Space
@@ -129,7 +131,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_edit_textcontent"
-            android:backgroundTint="@color/llpink"
+            android:backgroundTint="@color/llpurple"
             android:hint="@string/type_here"
             android:textColorHint="@color/black"
             android:inputType="text"/>

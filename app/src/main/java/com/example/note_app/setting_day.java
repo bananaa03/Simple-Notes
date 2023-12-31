@@ -14,22 +14,24 @@ public class setting_day extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting_day);
-
-
     }
     public void btnBacktoMain_day(View view){
         Intent intent = new Intent(this, day_main.class);
         startActivity(intent);
     }
-    public void login(View view){
+    public void login_day(View view){
         if (firebaseAuth.getCurrentUser() != null) {
             // Người dùng đã đăng nhập, chuyển tới user.class
-            Intent intent = new Intent(this, user.class);
+            Intent intent = new Intent(this, user_day.class);
             startActivity(intent);
         } else {
             // Người dùng chưa đăng nhập, chuyển tới trang đăng nhập (log_in.class)
             Intent intent = new Intent(this, log_in.class);
             startActivity(intent);
         }
+    }
+    public void night_main(View view){
+        Intent intent = new Intent(this, night_main.class);
+        startActivity(intent);
     }
 }

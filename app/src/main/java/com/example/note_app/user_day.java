@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,11 +15,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class user extends AppCompatActivity {
+public class user_day extends AppCompatActivity {
 
     TextView Email, Username;
     FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
@@ -29,7 +25,7 @@ public class user extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user);
+        setContentView(R.layout.user_day);
         Username=findViewById(R.id.username);
         Email=findViewById(R.id.email);
 
@@ -57,16 +53,19 @@ public class user extends AppCompatActivity {
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     // Xử lý khi có lỗi xảy ra trong quá trình đọc dữ liệu
-                    Toast.makeText(user.this, "Failed to load user data.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(user_day.this, "Failed to load user data.", Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
             // Nếu người dùng không đăng nhập, bạn có thể chuyển hướng hoặc xử lý một cách phù hợp
             // Ví dụ: chuyển hướng đến trang đăng nhập
-            Intent intent = new Intent(user.this, log_in.class);
+            Intent intent = new Intent(user_day.this, log_in.class);
             startActivity(intent);
             // finish();
         }
-
+    }
+    public void setting_day(View view){
+        Intent intent = new Intent(this, setting_day.class);
+        startActivity(intent);
     }
 }

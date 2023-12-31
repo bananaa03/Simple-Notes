@@ -63,7 +63,7 @@ public class log_in extends AppCompatActivity {
                         if (task.isSuccessful())
                         {
                             Toast.makeText(log_in.this,"Login Sucess!", Toast.LENGTH_SHORT).show();
-                            Intent intent=new Intent(log_in.this, user.class);
+                            Intent intent=new Intent(log_in.this, user_day.class);
                             startActivity(intent);
                         }
                         else
