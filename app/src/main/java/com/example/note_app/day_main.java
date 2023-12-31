@@ -3,7 +3,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -19,16 +21,15 @@ public class day_main extends AppCompatActivity {
     NoteAdapter noteAdapter;
     SearchView searchView;
     ImageButton btnAdd, btnFindNote;
+    TextView btnDelete;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.day_main);
 
-
         // Các xử lý khác nếu cần thiết cho layout mới
         recyclerView= findViewById(R.id.rcv_note);
         searchView = findViewById(R.id.search_View);
-
 
         recyclerView.setHasFixedSize(false);
         listNote= new ArrayList<>();
@@ -82,6 +83,21 @@ public class day_main extends AppCompatActivity {
                 findNewNote();
             }
         });
+        /*
+        btnDelete = findViewById(R.id.btnDeleteNote);
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        */
+
+
+        // Save note
+
+
+
 
     }
     public void night_main(View view){

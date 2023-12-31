@@ -1,5 +1,8 @@
 package com.example.note_app;
 
+//import java.sql.Timestamp;
+import com.google.firebase.Timestamp;
+
 public class Note {
     private int note_id;
 
@@ -8,6 +11,9 @@ public class Note {
         this.note_day = note_day;
     }
 
+    public Note(){
+
+    }
     private String note_title;
     private String note_day;
 
@@ -50,4 +56,19 @@ public class Note {
     public void setNote_content(String note_content) {
         this.note_content = note_content;
     }
+
+    public Note(Timestamp timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public Timestamp getTimestamp(){
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    Timestamp timestamp;
+
 }
