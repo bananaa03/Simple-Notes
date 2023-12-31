@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="52dp"
+            android:layout_marginEnd="44dp"
             android:layout_weight="0.0001"
             android:backgroundTint="@color/darkpink"
             android:src="@android:drawable/ic_menu_share"
@@ -41,10 +41,23 @@
             android:layout_alignParentEnd="true"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.0001"
+            android:layout_marginEnd="94dp"
             android:backgroundTint="@color/darkpink"
             android:src="@android:drawable/ic_menu_info_details"
             app:tint="#000000"
             tools:src="@android:drawable/ic_menu_info_details" />
+
+        <ImageButton
+            android:id="@+id/iBt_Save"
+            android:layout_width="50dp"
+            android:layout_height="51dp"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.0001"
+            android:backgroundTint="@color/darkpink"
+            android:src="@drawable/baseline_done_24"
+            app:tint="#000000"
+            tools:src="@drawable/baseline_done_24"/>
 
     </RelativeLayout>
 
@@ -110,14 +123,15 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/btnDeleteNote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/deleteNote"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="@color/darkpink"
+        android:background="@color/darkpink"
         android:gravity="center"
         android:text="Xóa ghi chú"
-        android:textSize="20sp"
-        android:backgroundTint="@color/darkpink"
-        android:background="@color/darkpink"/>
+        android:textSize="20sp" />
 
 </RelativeLayout>
