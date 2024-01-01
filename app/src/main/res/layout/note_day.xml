@@ -94,6 +94,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/note_day"
                 android:text="Ngày tháng năm" />
 
             <Space
@@ -103,6 +104,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/count_character_note"
                 android:text="Số ký tự" />
         </LinearLayout>
 

@@ -4,14 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.firebase.Timestamp;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class note_day extends AppCompatActivity {
 
@@ -20,6 +27,7 @@ public class note_day extends AppCompatActivity {
     ImageButton buttonBack, btnSaveNote;
     boolean isEditMode = false;
     String title,content,docId;
+    TextView noteDay, countCharacter;
 
 
     @Override
@@ -70,8 +78,6 @@ public class note_day extends AppCompatActivity {
                 saveNote();
             }
         });
-
-
     }
     public void openSetting()
     {
@@ -95,9 +101,23 @@ public class note_day extends AppCompatActivity {
         Note note = new Note();
         note.setNote_title(noteTitle);
         note.setNote_content(noteContent);
-        note.setTimestamp(Timestamp.now());
+       // note.setTimestamp(Timestamp.now());
 
+        noteDay = (TextView) findViewById(R.id.note_day);
+        long time = System.currentTimeMillis();
+        String formatTimestamp = formatTimestamp(time);
+
+        // save time vào textview ngày tháng năm
+        noteDay.setText("" + formatTimestamp);
+        String note_day = formatTimestamp;
+        // save time vào note_day
+        note.setNote_day(note_day);
         saveNoteToFireBase(note);
+
+        //Chưa update số ký tự được
+        countCharacter = (TextView) findViewById(R.id.count_character_note);
+        edtnotecontent = (EditText) findViewById(R.id.edt_note_content);
+        //int countContent = 0;
     }
 
     public void saveNoteToFireBase(Note note){
@@ -121,5 +141,14 @@ public class note_day extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public String formatTimestamp(long timestamp) {
+        // Tạo đối tượng SimpleDateFormat với định dạng mong muốn
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
+        // Tạo đối tượng Date từ timestamp
+        Date date = new Date(timestamp);
+        // Định dạng Date thành chuỗi ngày/thời gian
+        return sdf.format(date);
     }
 }
