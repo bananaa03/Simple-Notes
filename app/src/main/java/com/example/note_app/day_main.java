@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,7 +20,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -68,6 +71,19 @@ public class day_main extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openNewNote();
+                Utility.getCollectionReferenceForNotes()
+                        .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                                ArrayList<Note> notesList = new ArrayList<>();
+                                for (QueryDocumentSnapshot document : value) {
+                                    Note note = document.toObject(Note.class);
+                                    notesList.add(note);
+                                }
+                                // Xử lý dữ liệu notesList, ví dụ: cập nhật RecyclerView
+                                loadRecyclerViewAdapter(notesList);
+                            }
+                        });
             }
         });
 
@@ -165,4 +181,5 @@ public class day_main extends AppCompatActivity {
         Intent intent = new Intent(day_main.this, note_day.class);
         startActivity(intent);
     }
+
 }
