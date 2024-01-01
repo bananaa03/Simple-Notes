@@ -135,7 +135,6 @@ public class day_main extends AppCompatActivity {
 
         if (currentUser != null){
             String userid = currentUser.getUid();
-            String test= "XnFWdZtnq3XZRQf39V5Hem3RsZG3";
 
             Utility.getCollectionReferenceForNotes()
                     //.whereEqualTo("user_id", userid)
@@ -181,5 +180,4 @@ public class day_main extends AppCompatActivity {
         Intent intent = new Intent(day_main.this, note_day.class);
         startActivity(intent);
     }
-
 }

@@ -36,9 +36,23 @@ public class note_day extends AppCompatActivity {
         setContentView(R.layout.note_day);
         edtnotetitle = (EditText) findViewById(R.id.edt_note_title);
         edtnotecontent= (EditText) findViewById(R.id.edt_note_content);
+        noteDay = (TextView) findViewById(R.id.note_day);
+
 
         buttonSetting = (ImageButton) findViewById(R.id.ImageButtonSetting);
         btnShare = (ImageButton) findViewById(R.id.imgbtn_share);
+
+        Intent intent = getIntent();
+        if (intent!=null){// click vao 1 item
+            String noteTitle = intent.getStringExtra("NOTE_TITLE");
+            String noteContent= intent.getStringExtra("NOTE_CONTENT");
+            String noteday = intent.getStringExtra("NOTE_DATE");
+
+            edtnotecontent.setText(noteContent);
+            edtnotetitle.setText(noteTitle);
+            noteDay.setText(noteday);
+        }
+
         buttonSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,7 +117,6 @@ public class note_day extends AppCompatActivity {
         note.setNote_content(noteContent);
        // note.setTimestamp(Timestamp.now());
 
-        noteDay = (TextView) findViewById(R.id.note_day);
         long time = System.currentTimeMillis();
         String formatTimestamp = formatTimestamp(time);
 
@@ -112,6 +125,7 @@ public class note_day extends AppCompatActivity {
         String note_day = formatTimestamp;
         // save time vào note_day
         note.setNote_day(note_day);
+
         saveNoteToFireBase(note);
 
         //Chưa update số ký tự được

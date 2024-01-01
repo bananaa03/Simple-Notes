@@ -44,9 +44,12 @@ public class NoteAdapter22 extends RecyclerView.Adapter<NoteAdapter22.ViewHolder
         Note note = listnotes.get(position);
 
         holder.notetitle.setText(note.getNote_title());
-        holder.noteday.setText(note.getTimestamp()+"");
+        holder.noteday.setText(note.getNote_day()+"");
         holder.itemView.setOnClickListener((v)->{
             Intent intent = new Intent(context, note_day.class);
+            intent.putExtra("NOTE_TITLE", note.getNote_title().toString());
+            intent.putExtra("NOTE_CONTENT", note.getNote_content().toString());
+            intent.putExtra("NOTE_DATE", note.getNote_day().toString());
             context.startActivity(intent);
         });
     }
