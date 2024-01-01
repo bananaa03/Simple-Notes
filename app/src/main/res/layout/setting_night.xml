@@ -119,6 +119,7 @@
         android:textStyle="bold"
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
+        android:onClick="font_night"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
