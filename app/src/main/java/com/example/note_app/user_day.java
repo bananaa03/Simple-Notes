@@ -68,4 +68,12 @@ public class user_day extends AppCompatActivity {
         Intent intent = new Intent(this, setting_day.class);
         startActivity(intent);
     }
+    public void night_user(View view){
+        Intent intent = new Intent(this, user_night.class);
+        startActivity(intent);
+    }
+    public void day_main(View view){
+        Intent intent = new Intent(this, day_main.class);
+        startActivity(intent);
+    }
 }

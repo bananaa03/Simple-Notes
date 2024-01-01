@@ -24,7 +24,7 @@
         android:layout_marginTop="13dp"
         android:background="@color/darkpurple"
         android:contentDescription="@string/nightmode"
-        android:onClick="night_main"
+        android:onClick="day_user"
         android:scaleType="fitXY"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/iBtFindNote"
@@ -33,7 +33,7 @@
 
     <ImageButton
         android:id="@+id/iBtFindNote"
-        android:onClick="btnBacktoMain_day"
+        android:onClick="night_main"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="13dp"

@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public void onImageView(View view){
-
         Intent intent = new Intent(this, day_main.class);
         startActivity(intent);
     }

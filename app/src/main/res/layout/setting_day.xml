@@ -27,7 +27,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/dark"
-        android:onClick="night_main"/>
+        android:onClick="night_setting"/>
 
     <ImageButton
         android:id="@+id/iBtFindNote"

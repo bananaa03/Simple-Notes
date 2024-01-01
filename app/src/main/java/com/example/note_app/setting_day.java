@@ -34,4 +34,8 @@ public class setting_day extends AppCompatActivity {
         Intent intent = new Intent(this, night_main.class);
         startActivity(intent);
     }
+    public void night_setting(View view){
+        Intent intent = new Intent(this, setting_night.class);
+        startActivity(intent);
+    }
 }
