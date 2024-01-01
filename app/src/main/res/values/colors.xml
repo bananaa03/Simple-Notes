@@ -19,4 +19,7 @@
     <color name="llpink">#FFDFDF</color>
     <color name="lessgray1">#B5AEAE</color>
     <color name="lessgray2">#DFDADA</color>
+    <color name="buttonBackground">#C66D7B</color>
+    <color name="buttonText">#FFFFFF</color>
+
 </resources>

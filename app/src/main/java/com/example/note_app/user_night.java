@@ -64,6 +64,19 @@ public class user_night extends AppCompatActivity {
             finish();
         }
     }
+    public void logout(View view) {
+        FirebaseAuth.getInstance().signOut(); // Đăng xuất người dùng
+        Toast.makeText(this, "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(user_night.this, setting_day.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Xóa các Activity trước đó khỏi Stack
+        startActivity(intent);
+        finish(); // Đóng Activity hiện tại
+    }
+    public void changepass(View view) {
+        // Chuyển hướng đến màn hình đổi mật khẩu
+        Intent intent = new Intent(user_night.this, changePassword.class);
+        startActivity(intent);
+    }
     public void setting_night(View view){
         Intent intent = new Intent(this, setting_night.class);
         startActivity(intent);
