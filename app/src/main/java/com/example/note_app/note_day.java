@@ -102,6 +102,7 @@ public class note_day extends AppCompatActivity {
     public void openBack(){
         Intent intent = new Intent(note_day.this, day_main.class);
         startActivity(intent);
+        finish();
     }
 
     public void saveNote(){
@@ -149,7 +150,7 @@ public class note_day extends AppCompatActivity {
                 if(task.isSuccessful()){
                     //note is added
                     Utility.showToast(note_day.this,"Note added successfully");
-                    finish();
+                    //finish();
                 }else{
                     Utility.showToast(note_day.this,"Failed while adding note");
                 }

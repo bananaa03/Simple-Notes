@@ -3,6 +3,7 @@ package com.example.note_app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -14,6 +15,7 @@ public class setting_day extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting_day);
+
     }
     public void btnBacktoMain_day(View view){
         Intent intent = new Intent(this, day_main.class);

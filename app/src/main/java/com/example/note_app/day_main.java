@@ -71,19 +71,6 @@ public class day_main extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openNewNote();
-                Utility.getCollectionReferenceForNotes()
-                        .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                            @Override
-                            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                                ArrayList<Note> notesList = new ArrayList<>();
-                                for (QueryDocumentSnapshot document : value) {
-                                    Note note = document.toObject(Note.class);
-                                    notesList.add(note);
-                                }
-                                // Xử lý dữ liệu notesList, ví dụ: cập nhật RecyclerView
-                                loadRecyclerViewAdapter(notesList);
-                            }
-                        });
             }
         });
 
@@ -138,6 +125,7 @@ public class day_main extends AppCompatActivity {
 
             Utility.getCollectionReferenceForNotes()
                     //.whereEqualTo("user_id", userid)
+                    .orderBy("note_day", Query.Direction.DESCENDING)
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -158,8 +146,8 @@ public class day_main extends AppCompatActivity {
     private void loadRecyclerViewAdapter(ArrayList<Note> notes){
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         noteAdapter= new NoteAdapter22(this, R.layout.item_note, listNote);
-        recyclerView.setAdapter(noteAdapter);
         noteAdapter.notifyDataSetChanged();
+        recyclerView.setAdapter(noteAdapter);
     }
 
     public void night_main(View view){
