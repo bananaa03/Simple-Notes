@@ -1,6 +1,5 @@
 package com.example.note_app;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -13,36 +12,33 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+
 import java.util.ArrayList;
 
-//Adapter cho Recycle View để hiển thị note ra trang day_main.java và night_main.java
-public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> implements Filterable {
+public class NoteAdapter extends FirestoreRecyclerAdapter<Note, NoteAdapter.NoteViewHolder> implements Filterable {
 
-    private ArrayList<Note> listnotes;
+    Context context;
     private int layoutID;
-    private Activity context;
+    private ArrayList<Note> listnotes;
     private ArrayList<Note> listnoteaf;
 
-    public NoteAdapter(Activity context, int layoutID, ArrayList<Note> notes){
-        this.listnotes=notes;
+    /**
+     * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
+     * FirestoreRecyclerOptions} for configuration options.
+     *
+     * @param options
+     */
+    public NoteAdapter(@NonNull FirestoreRecyclerOptions<Note> options, Context context, ArrayList<Note> notes) {
+        super(options);
         this.context=context;
-        this.layoutID=layoutID;
-        listnoteaf= new ArrayList<>(listnotes);
-    }
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View itemView= inflater.inflate(R.layout.item_note, parent, false);
-        ViewHolder viewHolder = new ViewHolder(itemView);
-        return viewHolder;
+        this.listnotes=notes;
+        this.listnoteaf=listnotes;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Note note = listnotes.get(position);
-
+    protected void onBindViewHolder(@NonNull NoteAdapter.NoteViewHolder holder, int position, @NonNull Note note) {
         holder.notetitle.setText(note.getNote_title());
         holder.noteday.setText(note.getNote_day()+"");
         holder.itemView.setOnClickListener((v)->{
@@ -51,16 +47,17 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> im
         });
     }
 
+    @NonNull
     @Override
-    public int getItemCount() {
-        return listnotes.size();
+    public NoteAdapter.NoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_note, parent, false);
+        return new NoteViewHolder(view);
     }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class NoteViewHolder extends RecyclerView.ViewHolder{
         private View itemview;
         public TextView notetitle;
         public TextView noteday;
-        public ViewHolder(View itemview){
+        public NoteViewHolder(View itemview){
             super(itemview);
             itemview=itemview;
             notetitle=itemview.findViewById(R.id.tv_notetitle);
@@ -68,37 +65,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> im
         }
     }
     @Override
-    public Filter getFilter(){
-        return listnotesFilter;
+    public Filter getFilter() {
+        return null;
     }
-
-    private Filter listnotesFilter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            ArrayList<Note> filterList = new ArrayList<>();
-
-            if(constraint==null || constraint.length() == 0){
-                filterList.addAll(listnoteaf);
-            } else {
-                String filterPattern = constraint.toString().toLowerCase().trim();
-
-                for (Note item : listnoteaf){
-                    if(item.getNote_title().toLowerCase().contains(filterPattern)){
-                        filterList.add(item);
-                    }
-                }
-            }
-            FilterResults results = new FilterResults();
-            results.values= filterList;
-
-            return results;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            listnotes.clear();
-            listnotes.addAll((ArrayList) results.values);
-            notifyDataSetChanged();
-        }
-    };
 }

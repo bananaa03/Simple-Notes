@@ -5,6 +5,9 @@ import com.google.firebase.Timestamp;
 
 public class Note {
     private int note_id;
+    private String note_title;
+    private String note_day;
+    private String note_label;
 
     public Note(String note_title, String note_day) {
         this.note_title = note_title;
@@ -14,8 +17,6 @@ public class Note {
     public Note(){
 
     }
-    private String note_title;
-    private String note_day;
 
     public Note(int note_id, String note_title, String note_day, String note_content) {
         this.note_id = note_id;
