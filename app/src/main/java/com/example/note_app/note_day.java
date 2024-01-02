@@ -7,14 +7,22 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Firebase;
 import com.google.firebase.Timestamp;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,7 +35,10 @@ public class note_day extends AppCompatActivity {
     ImageButton buttonBack, btnSaveNote;
     boolean isEditMode = false;
     String title,content,docId;
+
+    FirebaseFirestore db;
     TextView noteDay, countCharacter;
+    Button btnDelete;
 
 
     @Override
@@ -96,7 +107,18 @@ public class note_day extends AppCompatActivity {
                 finish();
             }
         });
+
+        //Delete note
+        btnDelete = (Button) findViewById(R.id.btnDeleteNote);
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               deleteNoteFromFirebase();
+            }
+        });
     }
+
+
     public void openSetting()
     {
         Intent intent = new Intent(this, note_day.class);
@@ -110,6 +132,7 @@ public class note_day extends AppCompatActivity {
         finish();
     }
 
+        // Save note
     public void saveNote(){
         String noteTitle = edtnotetitle.getText().toString();
         String noteContent = edtnotecontent.getText().toString();
@@ -170,5 +193,23 @@ public class note_day extends AppCompatActivity {
         Date date = new Date(timestamp);
         // Định dạng Date thành chuỗi ngày/thời gian
         return sdf.format(date);
+    }
+
+    // delete note
+    public void deleteNoteFromFirebase(){
+        DocumentReference documentReference;
+            documentReference = Utility.getCollectionReferenceForNotes().document(docId);
+        documentReference.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    //note is deleted
+                    Utility.showToast(note_day.this,"Note deleted successfully");
+                    //finish();
+                }else{
+                    Utility.showToast(note_day.this,"Failed while deleting note");
+                }
+            }
+        });
     }
 }

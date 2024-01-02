@@ -124,14 +124,15 @@
 
     </LinearLayout>
 
-    <TextView
+    <Button
         android:id="@+id/btnDeleteNote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="4dp"
-        android:backgroundTint="@color/darkpink"
         android:background="@color/darkpink"
+        android:backgroundTint="@color/darkpink"
+        app:backgroundTint="@color/darkpink"
         android:gravity="center"
         android:text="Xóa ghi chú"
         android:textSize="20sp" />

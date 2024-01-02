@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 //Adapter cho Recycle View để hiển thị note ra trang day_main.java và night_main.java
 public class NoteAdapter22 extends RecyclerView.Adapter<NoteAdapter22.ViewHolder> implements Filterable {
-
     private ArrayList<Note> listnotes;
     private int layoutID;
     private Activity context;
@@ -38,7 +37,6 @@ public class NoteAdapter22 extends RecyclerView.Adapter<NoteAdapter22.ViewHolder
         ViewHolder viewHolder = new ViewHolder(itemView);
         return viewHolder;
     }
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Note note = listnotes.get(position);
@@ -53,12 +51,10 @@ public class NoteAdapter22 extends RecyclerView.Adapter<NoteAdapter22.ViewHolder
             context.startActivity(intent);
         });
     }
-
     @Override
     public int getItemCount() {
         return listnotes.size();
     }
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         private View itemview;
         public TextView notetitle;
@@ -74,7 +70,6 @@ public class NoteAdapter22 extends RecyclerView.Adapter<NoteAdapter22.ViewHolder
     public Filter getFilter(){
         return listnotesFilter;
     }
-
     private Filter listnotesFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -96,7 +91,6 @@ public class NoteAdapter22 extends RecyclerView.Adapter<NoteAdapter22.ViewHolder
 
             return results;
         }
-
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             listnotes.clear();
