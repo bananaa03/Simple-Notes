@@ -90,6 +90,9 @@ public class note_day extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveNote();
+                // Khi lưu note thì sẽ thoát ra khỏi note và quay về trang menu
+                Intent intent = new Intent(note_day.this, day_main.class);
+                startActivity(intent);
             }
         });
     }
