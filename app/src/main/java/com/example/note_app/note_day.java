@@ -34,13 +34,9 @@ public class note_day extends AppCompatActivity {
     EditText edtnotetitle, edtnotecontent;
     ImageButton buttonBack, btnSaveNote;
     boolean isEditMode = false;
-<<<<<<< Updated upstream
-    String title,content,docId;
 
     FirebaseFirestore db;
-=======
     String notetitle, notecontent, noteday, docId;
->>>>>>> Stashed changes
     TextView noteDay, countCharacter;
     Button btnDelete;
 
@@ -111,8 +107,6 @@ public class note_day extends AppCompatActivity {
     }
 
 
-<<<<<<< Updated upstream
-=======
 
 
 
@@ -130,7 +124,6 @@ public class note_day extends AppCompatActivity {
         shareIntent.putExtra(Intent.EXTRA_TEXT, fullNote);
         startActivity(Intent.createChooser(shareIntent,"Chia sẻ nội dung ghi chú"));
     }
->>>>>>> Stashed changes
     public void openSetting()
     {
         Intent intent = new Intent(this, note_day.class);
