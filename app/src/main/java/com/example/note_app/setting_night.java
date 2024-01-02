@@ -2,7 +2,13 @@ package com.example.note_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
+import android.content.SharedPreferences;
+import android.graphics.Typeface;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +20,36 @@ public class setting_night extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting_night);
+
+        // Đọc các cài đặt font và size từ SharedPreferences
+        SharedPreferences preferences = getSharedPreferences("MyPreferences", MODE_PRIVATE);
+
+        String fontName = preferences.getString("selectedFont", null);
+        Typeface typeface = Typeface.DEFAULT;
+        if (fontName != null) {
+            try {
+                typeface = Typeface.createFromFile(fontName);
+            } catch (Exception e) {
+                Log.e("SettingDayActivity", "Failed to create typeface from file", e);
+                Toast.makeText(getApplicationContext(), "Failed to create typeface from file", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        float textSize = preferences.getFloat("selectedTextSize", 16);
+
+        Button thongke = findViewById(R.id.thongke);
+        Button dongbo = findViewById(R.id.dongbo);
+        Button font = findViewById(R.id.font);
+        Button manage_user = findViewById(R.id.manage_user);
+
+        thongke.setTypeface(typeface);
+        thongke.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        dongbo.setTypeface(typeface);
+        dongbo.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        font.setTypeface(typeface);
+        font.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        manage_user.setTypeface(typeface);
+        manage_user.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
     }
     public void btnBacktoMain_night(View view){
         Intent intent = new Intent(this, night_main.class);

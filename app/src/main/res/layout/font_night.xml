@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/llpurple"
-    tools:context=".font_night">
+    tools:context=".font_day">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:background="@color/lightpurple"
+        android:background="@color/darkpurple"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,23 +23,23 @@
         android:layout_height="40dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="13dp"
-        android:background="@color/lightpurple"
+        android:background="@color/darkpurple"
         android:contentDescription="@string/nightmode"
-        android:onClick="font_day"
+        android:onClick="font_night"
         android:scaleType="fitXY"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/iBtFindNote"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/light" />
+        app:srcCompat="@drawable/light"/>
 
     <ImageButton
         android:id="@+id/iBtFindNote"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="13dp"
-        android:background="@color/lightpurple"
+        android:background="@color/darkpurple"
         android:contentDescription="@string/note"
-        android:onClick="night_main"
+        android:onClick="day_main"
         android:scaleType="fitXY"
         app:layout_constraintLeft_toRightOf="@id/iBt_mode"
         app:layout_constraintRight_toLeftOf="@id/iBt_settime"
@@ -65,7 +65,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="13dp"
         android:layout_marginEnd="1dp"
-        android:background="@color/lightpurple"
+        android:background="@color/darkpurple"
         android:contentDescription="@string/settings"
         android:scaleType="fitXY"
         android:onClick="setting_night"
@@ -82,13 +82,16 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <TextView
+            android:id="@+id/selectFontTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Chọn phông chữ"
-            android:textSize="26sp"
-            android:textStyle="bold"
             android:layout_marginLeft="30dp"
-            android:textColor="@color/lightpurple"/>
+            android:layout_marginTop="30dp"
+            android:fontFamily="sans-serif"
+            android:text="Chọn phông chữ"
+            android:textColor="@color/darkpurple"
+            android:textSize="26sp"
+            android:textStyle="bold" />
 
         <RadioGroup
             android:id="@+id/fontRadioGroup"
@@ -102,39 +105,41 @@
                 android:id="@+id/radioSerif"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="serif"
                 android:text="Serif"
-                android:textColor="@color/lightpurple"
-                android:textSize="16sp" />
+                android:textColor="@color/darkpurple"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif"/>
 
             <RadioButton
-                android:id="@+id/radioCasual"
+                android:id="@+id/radioDancing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="casual"
-                android:text="Casual"
-                android:textColor="@color/lightpurple"
-                android:textSize="16sp" />
+                android:text="Dancing"
+                android:textColor="@color/darkpurple"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif"/>
 
             <RadioButton
                 android:id="@+id/radioMonospace"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="monospace"
                 android:text="Monospace"
-                android:textColor="@color/lightpurple"
-                android:textSize="16sp" />
-
+                android:textColor="@color/darkpurple"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif"/>
         </RadioGroup>
 
         <TextView
+            android:id="@+id/chooseSizeTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Chọn cỡ chữ"
             android:textSize="26sp"
             android:textStyle="bold"
             android:layout_marginLeft="30dp"
-            android:textColor="@color/lightpurple"/>
+            android:textColor="@color/darkpurple"
+            android:layout_marginTop="30dp"
+            android:fontFamily="sans-serif"/>
 
         <RadioGroup
             android:id="@+id/textSizeRadioGroup"
@@ -149,24 +154,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nhỏ"
+                android:textColor="@color/darkpurple"
                 android:textSize="16sp"
-                android:textColor="@color/lightpurple"/>
+                android:fontFamily="sans-serif"/>
 
             <RadioButton
                 android:id="@+id/radioMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Vừa"
-                android:textSize="20sp"
-                android:textColor="@color/lightpurple"/>
+                android:textSize="16sp"
+                android:textColor="@color/darkpurple"
+                android:fontFamily="sans-serif"/>
 
             <RadioButton
                 android:id="@+id/radioBig"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lớn"
-                android:textSize="24sp"
-                android:textColor="@color/lightpurple"/>
+                android:textSize="16sp"
+                android:textColor="@color/darkpurple"
+                android:fontFamily="sans-serif"/>
 
         </RadioGroup>
 
@@ -176,10 +184,10 @@
             android:layout_height="wrap_content"
             android:text="Áp dụng"
             android:textSize="16sp"
-            android:textStyle="bold"
             android:textColor="@color/llpurple"
             android:layout_gravity="center"
-            android:backgroundTint="@color/lightpurple"/>
+            android:backgroundTint="@color/darkpurple"
+            android:fontFamily="sans-serif"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,29 +1,22 @@
 package com.example.note_app;
 import android.content.Intent;
-import android.icu.util.ULocale;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -151,7 +144,7 @@ public class day_main extends AppCompatActivity {
     }
     private void loadRecyclerViewAdapter(ArrayList<Note> notes){
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        noteAdapter= new NoteAdapter22(this, R.layout.item_note, listNote);
+        noteAdapter= new NoteAdapter22(this, R.layout.item_note_day, listNote);
         noteAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(noteAdapter);
     }

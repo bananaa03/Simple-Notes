@@ -95,8 +95,10 @@
         android:layout_height="wrap_content"
         android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@id/search_View"
-        tools:listitem="@layout/item_note"
-        android:layout_marginTop="10dp"/>
+        tools:listitem="@layout/item_note_day"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageButton
         android:id="@+id/iBt_Add"

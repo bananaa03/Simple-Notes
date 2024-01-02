@@ -34,7 +34,7 @@ public class NoteAdapter22 extends RecyclerView.Adapter<NoteAdapter22.ViewHolder
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View itemView= inflater.inflate(R.layout.item_note, parent, false);
+        View itemView= inflater.inflate(R.layout.item_note_day, parent, false);
         ViewHolder viewHolder = new ViewHolder(itemView);
         return viewHolder;
     }

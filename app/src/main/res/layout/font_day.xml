@@ -86,6 +86,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="sans-serif"
             android:text="Chọn phông chữ"
             android:textColor="@color/darkpink"
             android:textSize="26sp"
@@ -103,28 +105,28 @@
                 android:id="@+id/radioSerif"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="serif"
                 android:text="Serif"
                 android:textColor="@color/darkpink"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:fontFamily="sans-serif"/>
 
             <RadioButton
-                android:id="@+id/radioCasual"
+                android:id="@+id/radioDancing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/dancing_script_bold"
-                android:text="Casual"
+                android:text="Dancing"
                 android:textColor="@color/darkpink"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:fontFamily="sans-serif"/>
 
             <RadioButton
                 android:id="@+id/radioMonospace"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="monospace"
                 android:text="Monospace"
                 android:textColor="@color/darkpink"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:fontFamily="sans-serif"/>
         </RadioGroup>
 
         <TextView
@@ -135,7 +137,9 @@
             android:textSize="26sp"
             android:textStyle="bold"
             android:layout_marginLeft="30dp"
-            android:textColor="@color/darkpink"/>
+            android:textColor="@color/darkpink"
+            android:layout_marginTop="30dp"
+            android:fontFamily="sans-serif"/>
 
         <RadioGroup
             android:id="@+id/textSizeRadioGroup"
@@ -150,24 +154,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nhỏ"
+                android:textColor="@color/darkpink"
                 android:textSize="16sp"
-                android:textColor="@color/darkpink"/>
+                android:fontFamily="sans-serif"/>
 
             <RadioButton
                 android:id="@+id/radioMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Vừa"
-                android:textSize="20sp"
-                android:textColor="@color/darkpink"/>
+                android:textSize="16sp"
+                android:textColor="@color/darkpink"
+                android:fontFamily="sans-serif"/>
 
             <RadioButton
                 android:id="@+id/radioBig"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lớn"
-                android:textSize="24sp"
-                android:textColor="@color/darkpink"/>
+                android:textSize="16sp"
+                android:textColor="@color/darkpink"
+                android:fontFamily="sans-serif"/>
 
         </RadioGroup>
 
@@ -179,7 +186,8 @@
             android:textSize="16sp"
             android:textColor="@color/llpink"
             android:layout_gravity="center"
-            android:backgroundTint="@color/darkpink"/>
+            android:backgroundTint="@color/darkpink"
+            android:fontFamily="sans-serif"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
