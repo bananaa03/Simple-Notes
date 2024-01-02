@@ -34,9 +34,13 @@ public class note_day extends AppCompatActivity {
     EditText edtnotetitle, edtnotecontent;
     ImageButton buttonBack, btnSaveNote;
     boolean isEditMode = false;
+<<<<<<< Updated upstream
     String title,content,docId;
 
     FirebaseFirestore db;
+=======
+    String notetitle, notecontent, noteday, docId;
+>>>>>>> Stashed changes
     TextView noteDay, countCharacter;
     Button btnDelete;
 
@@ -48,19 +52,17 @@ public class note_day extends AppCompatActivity {
         edtnotetitle = (EditText) findViewById(R.id.edt_note_title);
         edtnotecontent= (EditText) findViewById(R.id.edt_note_content);
         noteDay = (TextView) findViewById(R.id.note_day);
-
-
         buttonSetting = (ImageButton) findViewById(R.id.ImageButtonSetting);
         btnShare = (ImageButton) findViewById(R.id.imgbtn_share);
 
+        // click vao 1 item: 1. get dữ liệu từ intent trước (day_main)
         Intent intent = getIntent();
-        if (intent!=null){// click vao 1 item
-            String noteTitle = intent.getStringExtra("NOTE_TITLE");
-            String noteContent= intent.getStringExtra("NOTE_CONTENT");
-            String noteday = intent.getStringExtra("NOTE_DATE");
-
-            edtnotecontent.setText(noteContent);
-            edtnotetitle.setText(noteTitle);
+        if (intent!=null){
+            notetitle = intent.getStringExtra("NOTE_TITLE");
+            notecontent = intent.getStringExtra("NOTE_CONTENT");
+            noteday = intent.getStringExtra("NOTE_DATE");
+            edtnotecontent.setText(notecontent);
+            edtnotetitle.setText(notetitle);
             noteDay.setText(noteday);
         }
 
@@ -73,17 +75,7 @@ public class note_day extends AppCompatActivity {
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String noteTitle = edtnotetitle.getText().toString();
-                String noteContent = edtnotecontent.getText().toString();
-                String fullNote = noteTitle+"Chủ nhật"+"\n\n"+ noteContent+"Hi";
-
-                //Tạo intent chia sẻ nội dung
-                Intent shareIntent = new Intent();
-                shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, fullNote);
-
-                startActivity(Intent.createChooser(shareIntent,"Chia sẻ nội dung ghi chú"));
+                sharenote();
             }
         });
 
@@ -119,6 +111,26 @@ public class note_day extends AppCompatActivity {
     }
 
 
+<<<<<<< Updated upstream
+=======
+
+
+
+
+    //ngoài onCreate
+    public void sharenote(){
+        notetitle = edtnotetitle.getText().toString();
+        notecontent = edtnotecontent.getText().toString();
+        String fullNote = "Tiêu đề: " + notetitle + "\n\n" + "Nội dung: " +notecontent ;
+
+        //Tạo intent chia sẻ nội dung
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, fullNote);
+        startActivity(Intent.createChooser(shareIntent,"Chia sẻ nội dung ghi chú"));
+    }
+>>>>>>> Stashed changes
     public void openSetting()
     {
         Intent intent = new Intent(this, note_day.class);

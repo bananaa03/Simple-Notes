@@ -88,7 +88,6 @@ public class NoteAdapter22 extends RecyclerView.Adapter<NoteAdapter22.ViewHolder
             }
             FilterResults results = new FilterResults();
             results.values= filterList;
-
             return results;
         }
         @Override
