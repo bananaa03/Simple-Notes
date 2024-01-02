@@ -20,27 +20,33 @@ public class setting_day extends AppCompatActivity {
     public void btnBacktoMain_day(View view){
         Intent intent = new Intent(this, day_main.class);
         startActivity(intent);
+        finish();
     }
     public void login_day(View view){
         if (firebaseAuth.getCurrentUser() != null) {
             // Người dùng đã đăng nhập, chuyển tới user.class
             Intent intent = new Intent(this, user_day.class);
             startActivity(intent);
+            finish();
         } else {
             // Người dùng chưa đăng nhập, chuyển tới trang đăng nhập (log_in.class)
             Intent intent = new Intent(this, log_in.class);
             startActivity(intent);
+            finish();
         }
     }
     public void night_main(View view){
         Intent intent = new Intent(this, night_main.class);
         startActivity(intent);
+        finish();
     }
     public void night_setting(View view){
         Intent intent = new Intent(this, setting_night.class);
         startActivity(intent);
+        finish();
     }
     public void font_day(View view){
         Intent intent = new Intent(this, font_day.class);
         startActivity(intent);
+        finish();
     }}

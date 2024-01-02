@@ -61,7 +61,7 @@ public class changePassword extends AppCompatActivity {
         } else {
             Intent intent = new Intent(changePassword.this, log_in.class);
             startActivity(intent);
-            // finish();
+            finish();
         }
         findViewById(R.id.btn_changepaswd).setOnClickListener(new View.OnClickListener() {
             @Override

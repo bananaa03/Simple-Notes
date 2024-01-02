@@ -57,11 +57,10 @@ public class user_day extends AppCompatActivity {
                 }
             });
         } else {
-            // Nếu người dùng không đăng nhập, bạn có thể chuyển hướng hoặc xử lý một cách phù hợp
-            // Ví dụ: chuyển hướng đến trang đăng nhập
+            // Nếu người dùng không đăng nhập
             Intent intent = new Intent(user_day.this, log_in.class);
             startActivity(intent);
-            // finish();
+            finish();
         }
     }
     public void logout(View view){
@@ -76,17 +75,21 @@ public class user_day extends AppCompatActivity {
         // Chuyển hướng đến màn hình đổi mật khẩu
         Intent intent = new Intent(user_day.this, changePassword.class);
         startActivity(intent);
+        finish();
     }
     public void setting_day(View view){
         Intent intent = new Intent(this, setting_day.class);
         startActivity(intent);
+        finish();
     }
     public void night_user(View view){
         Intent intent = new Intent(this, user_night.class);
         startActivity(intent);
+        finish();
     }
     public void day_main(View view){
         Intent intent = new Intent(this, day_main.class);
         startActivity(intent);
+        finish();
     }
 }

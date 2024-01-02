@@ -93,6 +93,7 @@ public class note_day extends AppCompatActivity {
                 // Khi lưu note thì sẽ thoát ra khỏi note và quay về trang menu
                 Intent intent = new Intent(note_day.this, day_main.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -100,6 +101,7 @@ public class note_day extends AppCompatActivity {
     {
         Intent intent = new Intent(this, note_day.class);
         startActivity(intent);
+        finish();
     }
 
     public void openBack(){

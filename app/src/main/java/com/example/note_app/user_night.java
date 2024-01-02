@@ -76,17 +76,21 @@ public class user_night extends AppCompatActivity {
         // Chuyển hướng đến màn hình đổi mật khẩu
         Intent intent = new Intent(user_night.this, changePassword.class);
         startActivity(intent);
+        finish();
     }
     public void setting_night(View view){
         Intent intent = new Intent(this, setting_night.class);
         startActivity(intent);
+        finish();
     }
     public void day_user(View view){
         Intent intent = new Intent(this, user_day.class);
         startActivity(intent);
+        finish();
     }
     public void night_main(View view){
         Intent intent = new Intent(this, night_main.class);
         startActivity(intent);
+        finish();
     }
 }

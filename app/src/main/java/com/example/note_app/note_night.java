@@ -49,5 +49,6 @@ public class note_night extends AppCompatActivity {
     {
         Intent intent = new Intent(this, note_night.class);
         startActivity(intent);
+        finish();
     }
 }

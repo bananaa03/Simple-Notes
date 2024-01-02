@@ -38,6 +38,7 @@ public class log_in extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent= new Intent(log_in.this,registerpage.class);
                 startActivity(intent);
+                finish();
 
             }
         });
@@ -65,6 +66,7 @@ public class log_in extends AppCompatActivity {
                             Toast.makeText(log_in.this,"Login Sucess!", Toast.LENGTH_SHORT).show();
                             Intent intent=new Intent(log_in.this, user_day.class);
                             startActivity(intent);
+                            finish();
                         }
                         else
                         {

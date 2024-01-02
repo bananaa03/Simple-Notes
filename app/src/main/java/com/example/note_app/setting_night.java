@@ -18,29 +18,35 @@ public class setting_night extends AppCompatActivity {
     public void btnBacktoMain_night(View view){
         Intent intent = new Intent(this, night_main.class);
         startActivity(intent);
+        finish();
     }
     public void login_night(View view){
         if (firebaseAuth.getCurrentUser() != null) {
             // Người dùng đã đăng nhập, chuyển tới user.class
             Intent intent = new Intent(this, user_night.class);
             startActivity(intent);
+            finish();
         } else {
             // Người dùng chưa đăng nhập, chuyển tới trang đăng nhập (log_in.class)
             Intent intent = new Intent(this, log_in.class);
             startActivity(intent);
+            finish();
         }
     }
     public void day_main(View view){
         Intent intent = new Intent(this, day_main.class);
         startActivity(intent);
+        finish();
     }
 
     public void day_setting (View view){
         Intent intent = new Intent(this, setting_day.class);
         startActivity(intent);
+        finish();
     }
     public void font_night(View view){
         Intent intent = new Intent(this, font_night.class);
         startActivity(intent);
+        finish();
     }
 }

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,6 +46,11 @@ public class day_main extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.day_main);
+
+        //kiểm tra user
+        if(currentUser==null){
+            Toast.makeText(this, "Vui lòng đăng nhập để xem ghi chú", Toast.LENGTH_SHORT).show();
+        }
 
         // Các xử lý khác nếu cần thiết cho layout mới
         recyclerView= findViewById(R.id.rcv_note);
@@ -154,18 +160,28 @@ public class day_main extends AppCompatActivity {
 
         Intent intent = new Intent(this, night_main.class);
         startActivity(intent);
+        finish();
     }
     public void setting_day(View view){
         Intent intent = new Intent(this, setting_day.class);
         startActivity(intent);
+        finish();
     }
     public void openNewNote(){
-        Intent intent = new Intent(day_main.this, note_day.class);
-        startActivity(intent);
+        if(currentUser==null){
+            Toast.makeText(this, "Vui lòng đăng nhập để bắt đầu ghi chú", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, log_in.class));
+            finish();
+        }else {
+            Intent intent = new Intent(day_main.this, note_day.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     public void findNewNote(){
-        Intent intent = new Intent(day_main.this, note_day.class);
+        Intent intent = new Intent(day_main.this, day_main.class);
         startActivity(intent);
+        finish();
     }
 }
