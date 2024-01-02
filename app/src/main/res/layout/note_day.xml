@@ -134,6 +134,7 @@
         android:background="@color/darkpink"
         android:gravity="center"
         android:text="Xóa ghi chú"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:onClick="detele_note"/>
 
 </RelativeLayout>

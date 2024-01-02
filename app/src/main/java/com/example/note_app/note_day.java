@@ -15,6 +15,9 @@ import com.google.firebase.Timestamp;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -64,7 +67,7 @@ public class note_day extends AppCompatActivity {
             public void onClick(View v) {
                 String noteTitle = edtnotetitle.getText().toString();
                 String noteContent = edtnotecontent.getText().toString();
-                String fullNote = noteTitle+"Chủ nhật"+"\n\n"+ noteContent+"Hi";
+                String fullNote = noteTitle+"\n\n"+ noteContent;
 
                 //Tạo intent chia sẻ nội dung
                 Intent shareIntent = new Intent();
@@ -170,5 +173,26 @@ public class note_day extends AppCompatActivity {
         Date date = new Date(timestamp);
         // Định dạng Date thành chuỗi ngày/thời gian
         return sdf.format(date);
+    }
+
+    public void detele_note(View view){
+
+        if(docId != null){
+            Utility.getCollectionReferenceForNotes().document(docId).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                Utility.showToast(note_day.this, "Note deleted successfully");
+                                // You may choose to finish the activity or perform any other action after deletion
+                                finish();
+                            }else{
+                                Utility.showToast(note_day.this, "Failed while deleting note");
+                            }
+                        }
+                    });
+        } else {
+            // Handle the case where docId is null or empty (no document to delete)
+            Utility.showToast(note_day.this, "No note to delete");
+        }
     }
 }
