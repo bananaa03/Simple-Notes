@@ -21,5 +21,8 @@
     <color name="lessgray2">#DFDADA</color>
     <color name="buttonBackground">#C66D7B</color>
     <color name="buttonText">#FFFFFF</color>
+    <color name="backgroundlg">#51E4E1E1</color>
+    <color name="backgroundlogin">#85F6F3F3</color>
+    <color name="black2">#A62E2A2A</color>
 
 </resources>

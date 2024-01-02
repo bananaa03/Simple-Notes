@@ -50,8 +50,6 @@ public class day_main extends AppCompatActivity {
         searchView = findViewById(R.id.search_View);
 
         setupRecycleView();
-
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -80,48 +78,15 @@ public class day_main extends AppCompatActivity {
                 findNewNote();
             }
         });
-        /*
-        btnDelete = findViewById(R.id.btnDeleteNote);
-        btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        */
-
-
-        // Save note
-
-
-
-
     }
 
-    private void setupRecycleView() {
-        /*
-        recyclerView.setHasFixedSize(false);
-        listNote= new ArrayList<>();
-        listNote.add(new Note("b", "b"));
-        noteAdapter= new NoteAdapter(this, R.layout.item_note, listNote);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(noteAdapter);
-        */
-        /*listNote= new ArrayList<>();
-        Query query= Utility.getCollectionReferenceForNotes()
-                .whereEqualTo("user")
-                .orderBy("timestamp", Query.Direction.DESCENDING);
-        FirestoreRecyclerOptions<Note> options = new FirestoreRecyclerOptions.Builder<Note>()
-                .setQuery(query, Note.class).build();
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        noteAdapter = new NoteAdapter(options, this, listNote);
-        recyclerView.setAdapter(noteAdapter);*/
-        //listNote = new ArrayList<>();
 
+
+
+    //ngoài onCreate
+    private void setupRecycleView() {
         if (currentUser != null){
             String userid = currentUser.getUid();
-
             Utility.getCollectionReferenceForNotes()
                     //.whereEqualTo("user_id", userid)
                     .orderBy("note_day", Query.Direction.DESCENDING)
