@@ -109,7 +109,7 @@ public class day_main extends AppCompatActivity {
     }
     private void loadRecyclerViewAdapter(ArrayList<Note> notes){
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        noteAdapter= new NoteAdapter22(this, R.layout.item_note_day, listNote);
+        noteAdapter= new NoteAdapter22(this, R.layout.item_note, listNote);
         noteAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(noteAdapter);
     }
