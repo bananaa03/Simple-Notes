@@ -19,10 +19,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/darkpink"
+                android:textColor="@color/darkyellow"
                 android:textStyle="bold"
                 android:textSize="25sp"
                 android:gravity="center"
+                android:layout_marginTop="30dp"
                 android:text="@string/sign_up_here"/>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -70,14 +71,15 @@
 
             <Button
                 android:id="@+id/btn_signup"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:layout_marginTop="50dp"
                 android:backgroundTint="@color/backgroundlogin"
-                android:textColor="@color/darkpink"
-                android:text="@string/sign_up"/>
+                android:textColor="@color/darkyellow"
+                android:text="Sign Up"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -94,9 +96,10 @@
                     android:id="@+id/tv_signin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/sign_in"
+                    android:text="Log In"
                     android:textColor="@color/gray"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:layout_marginStart="10dp"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

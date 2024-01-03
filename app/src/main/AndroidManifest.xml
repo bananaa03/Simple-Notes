@@ -24,6 +24,8 @@
         <activity android:name=".user_night" />
         <activity android:name=".font_day"/>
         <activity android:name=".font_night"/>
+        <activity android:name=".changePassword"/>
+        <activity android:name=".item_note"/>
         <activity
             android:name=".day_main"
             android:exported="true">

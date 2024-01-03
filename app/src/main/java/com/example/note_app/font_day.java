@@ -21,9 +21,9 @@ public class font_day extends AppCompatActivity {
     private RadioButton radioSmall;
     private RadioButton radioMedium;
     private RadioButton radioBig;
-    private RadioButton radioSerif;
+    private RadioButton radioOpen_sans;
     private RadioButton radioDancing;
-    private RadioButton radioMonospace;
+    private RadioButton radioComfortaa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,22 +35,19 @@ public class font_day extends AppCompatActivity {
         radioSmall = findViewById(R.id.radioSmall);
         radioMedium = findViewById(R.id.radioMedium);
         radioBig = findViewById(R.id.radioBig);
-        radioSerif = findViewById(R.id.radioSerif);
+        radioOpen_sans = findViewById(R.id.radioOpen_sans);
         radioDancing = findViewById(R.id.radioDancing);
-        radioMonospace = findViewById(R.id.radioMonospace);
-        int originalSelectFontTextStyle = selectFontTextView.getTypeface().getStyle();
-        int originalChooseSizeTextStyle = chooseSizeTextView.getTypeface().getStyle();
-        //Button applyButton = findViewById(R.id.applyButton);
+        radioComfortaa = findViewById(R.id.radioComfortaa);
 
         RadioGroup fontRadioGroup = findViewById(R.id.fontRadioGroup);
         fontRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             Typeface typeface;
-            if (checkedId == R.id.radioSerif) {
-                typeface = Typeface.DEFAULT;
-            } else if (checkedId == R.id.radioMonospace) {
-                typeface = Typeface.MONOSPACE;
+            if (checkedId == R.id.radioOpen_sans) {
+                typeface = Typeface.createFromAsset(getAssets(), "open_sans.ttf");
+            } else if (checkedId == R.id.radioComfortaa) {
+                typeface = Typeface.createFromAsset(getAssets(), "comfortaa.ttf");
             } else if (checkedId == R.id.radioDancing) {
-                typeface = getResources().getFont(R.font.dancing_script_bold);
+                typeface = Typeface.createFromAsset(getAssets(), "dancing_script_bold.ttf");
             } else {
                 // Mặc định sử dụng phông chữ mặc định
                 typeface = Typeface.DEFAULT;
@@ -61,14 +58,6 @@ public class font_day extends AppCompatActivity {
             radioSmall.setTypeface(typeface);
             radioMedium.setTypeface(typeface);
             radioBig.setTypeface(typeface);
-            radioMonospace.setTypeface(typeface);
-            radioSerif.setTypeface(typeface);
-            radioDancing.setTypeface(typeface);
-            //applyButton.setTypeface(typeface);
-
-            // Làm mới lại giao diện
-            selectFontTextView.invalidate();
-            chooseSizeTextView.invalidate();
 
             // Lưu trữ cài đặt font chữ
             saveFontSettings(typeface);
@@ -85,14 +74,11 @@ public class font_day extends AppCompatActivity {
                 textSize = 30;
             }
 
-            selectFontTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-            chooseSizeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-            radioSerif.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+            //selectFontTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+            //chooseSizeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+            radioOpen_sans.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
             radioDancing.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-            radioMonospace.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-            radioSmall.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-            radioMedium.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-            radioBig.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+            radioComfortaa.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
 
             //applyButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
 
@@ -109,8 +95,17 @@ public class font_day extends AppCompatActivity {
         if (typeface != null && typeface != Typeface.DEFAULT) {
             SharedPreferences preferences = getSharedPreferences("MyPreferences", MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
-            String fontName = typeface.toString();
-            editor.putString("selectedFont", fontName);;
+            String fontName;
+            if (typeface.equals(Typeface.createFromAsset(getAssets(), "open_sans.ttf"))) {
+                fontName = "open_sans.ttf";
+            } else if (typeface.equals(Typeface.createFromAsset(getAssets(), "comfortaa.ttf"))) {
+                fontName = "comfortaa.ttf";
+            } else if (typeface.equals(Typeface.createFromAsset(getAssets(), "dancing_script_bold.ttf"))) {
+                fontName = "dancing_script_bold.ttf";
+            } else {
+                fontName = "";
+            }
+            editor.putString("selectedFont", fontName);
             editor.apply();
         }
     }
@@ -134,7 +129,7 @@ public class font_day extends AppCompatActivity {
         Typeface typeface = Typeface.DEFAULT;
         if (fontName != null) {
             try {
-                typeface = Typeface.createFromFile(fontName);
+                typeface = Typeface.createFromAsset(getAssets(), fontName);
             } catch (Exception e) {
                 Log.e("FontDayActivity", "Failed to create typeface from file", e);
                 Toast.makeText(getApplicationContext(), "Failed to create typeface from file", Toast.LENGTH_SHORT).show();
@@ -146,53 +141,16 @@ public class font_day extends AppCompatActivity {
         radioSmall.setTypeface(typeface);
         radioMedium.setTypeface(typeface);
         radioBig.setTypeface(typeface);
-        radioDancing.setTypeface(typeface);
-        radioSerif.setTypeface(typeface);
-        radioMonospace.setTypeface(typeface);
 
         // Khôi phục kích thước chữ
         float textSize = preferences.getFloat("selectedTextSize", 16);
-        selectFontTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-        chooseSizeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-        radioSerif.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        //selectFontTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        //chooseSizeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        radioOpen_sans.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
         radioDancing.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-        radioMonospace.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-        radioSmall.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-        radioMedium.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-        radioBig.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        radioComfortaa.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
     }
 
-
-
-    /*public void applyFontAndTextSizeToAllViews(ViewGroup viewGroup, String fontFamily, float textSizeOption) {
-        int childCount = viewGroup.getChildCount();
-        for (int i = 0; i < childCount; i++) {
-            View childView = viewGroup.getChildAt(i);
-
-            if (childView instanceof ViewGroup) {
-                // Nếu là ViewGroup, tiếp tục duyệt qua các View con
-                applyFontAndTextSizeToAllViews((ViewGroup) childView, fontFamily, textSizeOption);
-            } else if (childView instanceof TextView) {
-                // Nếu là TextView, áp dụng thay đổi phông chữ và kích thước chữ
-                TextView textView = (TextView) childView;
-                // Lưu lại kích thước chữ ban đầu
-                float originalTextSize = textView.getTextSize();
-
-                // Tùy chọn kích thước chữ
-                float newTextSize;
-                if (textSizeOption == 1.5) {
-                    newTextSize = originalTextSize * 1.5f;
-                } else if (textSizeOption == 1.75) {
-                    newTextSize = originalTextSize * 1.75f;
-                } else {
-                    newTextSize = originalTextSize;
-                }
-
-                textView.setTypeface(Typeface.create(fontFamily, Typeface.NORMAL));
-                textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, newTextSize);
-            }
-        }
-    }*/
     public void day_main(View view){
         Intent intent = new Intent(this, day_main.class);
         startActivity(intent);

@@ -90,7 +90,7 @@
             android:fontFamily="sans-serif"
             android:text="Chọn phông chữ"
             android:textColor="@color/darkpurple"
-            android:textSize="26sp"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
         <RadioGroup
@@ -102,13 +102,13 @@
             android:layout_marginRight="20dp">
 
             <RadioButton
-                android:id="@+id/radioSerif"
+                android:id="@+id/radioOpen_sans"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Serif"
+                android:text="Open-sans"
                 android:textColor="@color/darkpurple"
                 android:textSize="16sp"
-                android:fontFamily="sans-serif"/>
+                android:fontFamily="@font/open_sans"/>
 
             <RadioButton
                 android:id="@+id/radioDancing"
@@ -117,16 +117,16 @@
                 android:text="Dancing"
                 android:textColor="@color/darkpurple"
                 android:textSize="16sp"
-                android:fontFamily="sans-serif"/>
+                android:fontFamily="@font/dancing_script_bold"/>
 
             <RadioButton
-                android:id="@+id/radioMonospace"
+                android:id="@+id/radioComfortaa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Monospace"
+                android:text="Comfortaa"
                 android:textColor="@color/darkpurple"
                 android:textSize="16sp"
-                android:fontFamily="sans-serif"/>
+                android:fontFamily="@font/comfortaa"/>
         </RadioGroup>
 
         <TextView
@@ -134,7 +134,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Chọn cỡ chữ"
-            android:textSize="26sp"
+            android:textSize="30sp"
             android:textStyle="bold"
             android:layout_marginLeft="30dp"
             android:textColor="@color/darkpurple"
@@ -178,16 +178,6 @@
 
         </RadioGroup>
 
-        <Button
-            android:id="@+id/applyButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Áp dụng"
-            android:textSize="16sp"
-            android:textColor="@color/llpurple"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/darkpurple"
-            android:fontFamily="sans-serif"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

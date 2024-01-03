@@ -27,10 +27,10 @@
     <string name="back">back</string>
     <string name="info">info</string>
     <string name="share">share</string>
-    <string name="thongke">THỐNG KÊ</string>
-    <string name="dongbo">ĐỒNG BỘ</string>
-    <string name="phongchu">PHÔNG CHỮ VÀ CỠ CHỮ</string>
-    <string name="quanlytaikhoan">QUẢN LÝ TÀI KHOẢN</string>
+    <string name="thongke">Thống kê</string>
+    <string name="dongbo">Đồng bộ</string>
+    <string name="phongchu">Phông chữ và Cỡ chữ</string>
+    <string name="quanlytaikhoan">Quản lý tài khoản</string>
     <string name="thongtinnguoidung">THÔNG TIN NGƯỜI DÙNG</string>
     <string name="forgot_password">Forgot your password?</string>
     <string name="send_Email_Verification">Verification Email is Sent, Verify and Log In Again</string>

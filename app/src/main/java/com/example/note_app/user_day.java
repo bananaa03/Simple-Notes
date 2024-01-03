@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +19,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+
+import android.content.SharedPreferences;
+import android.graphics.Typeface;
 
 public class user_day extends AppCompatActivity {
 
@@ -62,6 +68,45 @@ public class user_day extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+
+        // Đọc các cài đặt font và size từ SharedPreferences
+        SharedPreferences preferences = getSharedPreferences("MyPreferences", MODE_PRIVATE);
+
+        String fontName = preferences.getString("selectedFont", null);
+        Typeface typeface = Typeface.DEFAULT;
+        if (fontName != null) {
+            try {
+                typeface = Typeface.createFromAsset(getAssets(), fontName);
+            } catch (Exception e) {
+                Log.e("SettingDayActivity", "Failed to create typeface from file", e);
+                Toast.makeText(getApplicationContext(), "Failed to create typeface from file", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        float textSize = preferences.getFloat("selectedTextSize", 16);
+
+        TextView textView= findViewById(R.id.textView);
+        TextView textView2 = findViewById(R.id.textView2);
+        TextView username = findViewById(R.id.username);
+        TextView textView3 = findViewById(R.id.textView3);
+        TextView email = findViewById(R.id.email);
+        Button changepsw = findViewById(R.id.changepasw);
+        Button logout = findViewById(R.id.logout);
+
+        textView.setTypeface(typeface);
+        //textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        textView2.setTypeface(typeface);
+        textView2.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        textView3.setTypeface(typeface);
+        textView3.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        username.setTypeface(typeface);
+        username.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        email.setTypeface(typeface);
+        email.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        changepsw.setTypeface(typeface);
+        changepsw.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        logout.setTypeface(typeface);
+        logout.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
     }
     public void logout(View view){
         FirebaseAuth.getInstance().signOut(); // Đăng xuất người dùng

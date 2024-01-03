@@ -20,7 +20,7 @@
             android:backgroundTint="@color/darkpink"
             android:foregroundTint="#000000"
             android:src="@android:drawable/ic_menu_revert"
-            app:tint="#000000" />
+            app:tint="@color/white" />
 
         <ImageButton
             android:id="@+id/imgbtn_share"
@@ -31,7 +31,7 @@
             android:layout_weight="0.0001"
             android:backgroundTint="@color/darkpink"
             android:src="@android:drawable/ic_menu_share"
-            app:tint="#000000"
+            app:tint="@color/white"
             tools:src="@android:drawable/ic_menu_share" />
 
         <ImageButton
@@ -44,7 +44,7 @@
             android:layout_marginEnd="94dp"
             android:backgroundTint="@color/darkpink"
             android:src="@android:drawable/ic_menu_info_details"
-            app:tint="#000000"
+            app:tint="@color/white"
             tools:src="@android:drawable/ic_menu_info_details" />
 
         <ImageButton
@@ -56,7 +56,7 @@
             android:layout_weight="0.0001"
             android:backgroundTint="@color/darkpink"
             android:src="@drawable/baseline_done_24"
-            app:tint="#000000"
+            app:tint="@color/white"
             tools:src="@drawable/baseline_done_24"/>
 
     </RelativeLayout>
@@ -77,7 +77,6 @@
             android:hint="Chủ đề"
             android:textAlignment="center"
             android:shadowColor="#E40E0E"
-            android:textColorHint="@color/black"
             android:textSize="45dp"
             android:textStyle="bold" />
 
@@ -119,7 +118,6 @@
             android:hint="Nhập ở đây"
             android:minLines="15"
             android:padding="12dp"
-            android:textColorHint="@color/black"
             android:textSize="20sp" />
 
     </LinearLayout>
@@ -135,6 +133,7 @@
         app:backgroundTint="@color/darkpink"
         android:gravity="center"
         android:text="Xóa ghi chú"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textColor="@color/llpink"/>
 
 </RelativeLayout>
