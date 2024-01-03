@@ -14,26 +14,29 @@
             android:padding="30dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="25sp"
+                android:fontFamily="serif"
                 android:gravity="center"
                 android:text="@string/welcome_to_note_app"
-                android:layout_marginTop="30dp"/>
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/log_in"
                 android:layout_marginTop="10dp"
-                android:textStyle="bold"
-                android:textColor="@color/darkyellow"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:textSize="25sp"/>
+                android:text="@string/log_in"
+                android:textColor="@color/darkpink"
+                android:textSize="25sp"
+                android:textStyle="bold" />
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,17 +67,18 @@
                     android:background="@color/backgroundlogin"
                     />
             </com.google.android.material.textfield.TextInputLayout>
+
             <Button
                 android:id="@+id/btn_signin"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textStyle="bold"
-                android:textSize="20sp"
                 android:layout_marginTop="50dp"
-                android:textColor="@color/darkyellow"
                 android:backgroundTint="@color/backgroundlogin"
-                android:text="@string/login"/>
+                android:fontFamily="sans-serif"
+                android:text="@string/login"
+                android:textColor="@color/darkpink"
+                android:textSize="20sp"
+                android:textStyle="bold" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -85,20 +89,24 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="20dp"
                 android:gravity="center">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
                     android:text="@string/forgot_password"
                     android:textColor="@color/black"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp" />
+
                 <TextView
                     android:id="@+id/tv_signup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="sans-serif"
                     android:text="@string/forgot_passwd"
                     android:textColor="@color/black2"
-                    android:layout_marginLeft="5dp"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

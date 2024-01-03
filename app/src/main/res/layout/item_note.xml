@@ -3,13 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    app:cardElevation="12dp"
+    app:cardElevation="5dp"
     app:cardCornerRadius="12dp"
-    android:layout_marginTop="10dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
-    tools:context=".item_note">
+    android:layout_marginBottom="10dp"
+    >
 
     <LinearLayout
         android:paddingLeft="10dp"
@@ -18,7 +17,8 @@
         android:orientation="vertical"
         android:paddingBottom="5dp"
         android:paddingTop="5dp"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        >
         <TextView
             android:id="@+id/tv_notetitle"
             android:layout_width="match_parent"
