@@ -1,7 +1,5 @@
 package com.example.note_app;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -10,7 +8,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,38 +35,20 @@ public class day_main extends AppCompatActivity {
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
-    ImageButton nightmode;
-    SharedPreferences sharedPreferences;
-    Boolean mode_status;
-    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.day_main);
-
-
 
         //kiểm tra user
         if(currentUser==null){
             Toast.makeText(this, "Vui lòng đăng nhập để xem ghi chú", Toast.LENGTH_SHORT).show();
         }
 
-        nightmode=findViewById(R.id.iBt_mode);
+        // Các xử lý khác nếu cần thiết cho layout mới
         recyclerView= findViewById(R.id.rcv_note);
         searchView = findViewById(R.id.search_View);
 
-
-
-        // Các xử lý khác nếu cần thiết cho layout mới
-
-
-
-        sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
-
-        mode_status = sharedPreferences.getBoolean("night", false);
-        if(mode_status){
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        }
         setupRecycleView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -79,7 +58,7 @@ public class day_main extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (noteAdapter!= null) noteAdapter.getFilter().filter(newText);
+                noteAdapter.getFilter().filter(newText);
                 return false;
             }
         });
@@ -99,33 +78,12 @@ public class day_main extends AppCompatActivity {
                 findNewNote();
             }
         });
-        nightmode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changemode();
-            }
-        });
     }
 
 
 
 
     //ngoài onCreate
-    private void changemode(){
-        if (mode_status == true) mode_status=false;
-        else mode_status = true;
-        if (mode_status){
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            editor = sharedPreferences.edit();
-            editor.putBoolean("night", false);
-            editor.apply();
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            editor = sharedPreferences.edit();
-            editor.putBoolean("night", true);
-            editor.apply();
-        }
-    }
     private void setupRecycleView() {
         if (currentUser != null){
             String userid = currentUser.getUid();
