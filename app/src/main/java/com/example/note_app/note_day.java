@@ -7,17 +7,22 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Firebase;
 import com.google.firebase.Timestamp;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,8 +34,11 @@ public class note_day extends AppCompatActivity {
     EditText edtnotetitle, edtnotecontent;
     ImageButton buttonBack, btnSaveNote;
     boolean isEditMode = false;
-    String title,content,docId;
+
+    FirebaseFirestore db;
+    String notetitle, notecontent, noteday, docId;
     TextView noteDay, countCharacter;
+    Button btnDelete;
 
 
     @Override
@@ -40,19 +48,17 @@ public class note_day extends AppCompatActivity {
         edtnotetitle = (EditText) findViewById(R.id.edt_note_title);
         edtnotecontent= (EditText) findViewById(R.id.edt_note_content);
         noteDay = (TextView) findViewById(R.id.note_day);
-
-
         buttonSetting = (ImageButton) findViewById(R.id.ImageButtonSetting);
         btnShare = (ImageButton) findViewById(R.id.imgbtn_share);
 
+        // click vao 1 item: 1. get dữ liệu từ intent trước (day_main)
         Intent intent = getIntent();
-        if (intent!=null){// click vao 1 item
-            String noteTitle = intent.getStringExtra("NOTE_TITLE");
-            String noteContent= intent.getStringExtra("NOTE_CONTENT");
-            String noteday = intent.getStringExtra("NOTE_DATE");
-
-            edtnotecontent.setText(noteContent);
-            edtnotetitle.setText(noteTitle);
+        if (intent!=null){
+            notetitle = intent.getStringExtra("NOTE_TITLE");
+            notecontent = intent.getStringExtra("NOTE_CONTENT");
+            noteday = intent.getStringExtra("NOTE_DATE");
+            edtnotecontent.setText(notecontent);
+            edtnotetitle.setText(notetitle);
             noteDay.setText(noteday);
         }
 
@@ -65,17 +71,7 @@ public class note_day extends AppCompatActivity {
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String noteTitle = edtnotetitle.getText().toString();
-                String noteContent = edtnotecontent.getText().toString();
-                String fullNote = noteTitle+"\n\n"+ noteContent;
-
-                //Tạo intent chia sẻ nội dung
-                Intent shareIntent = new Intent();
-                shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, fullNote);
-
-                startActivity(Intent.createChooser(shareIntent,"Chia sẻ nội dung ghi chú"));
+                sharenote();
             }
         });
 
@@ -99,6 +95,34 @@ public class note_day extends AppCompatActivity {
                 finish();
             }
         });
+
+        //Delete note
+        btnDelete = (Button) findViewById(R.id.btnDeleteNote);
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteNoteFromFirebase();
+            }
+        });
+    }
+
+
+
+
+
+
+    //ngoài onCreate
+    public void sharenote(){
+        notetitle = edtnotetitle.getText().toString();
+        notecontent = edtnotecontent.getText().toString();
+        String fullNote = "Tiêu đề: " + notetitle + "\n\n" + "Nội dung: " +notecontent ;
+
+        //Tạo intent chia sẻ nội dung
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, fullNote);
+        startActivity(Intent.createChooser(shareIntent,"Chia sẻ nội dung ghi chú"));
     }
     public void openSetting()
     {
@@ -113,6 +137,7 @@ public class note_day extends AppCompatActivity {
         finish();
     }
 
+    // Save note
     public void saveNote(){
         String noteTitle = edtnotetitle.getText().toString();
         String noteContent = edtnotecontent.getText().toString();
@@ -124,7 +149,7 @@ public class note_day extends AppCompatActivity {
         Note note = new Note();
         note.setNote_title(noteTitle);
         note.setNote_content(noteContent);
-       // note.setTimestamp(Timestamp.now());
+        // note.setTimestamp(Timestamp.now());
 
         long time = System.currentTimeMillis();
         String formatTimestamp = formatTimestamp(time);
@@ -175,24 +200,21 @@ public class note_day extends AppCompatActivity {
         return sdf.format(date);
     }
 
-    public void detele_note(View view){
-
-        if(docId != null){
-            Utility.getCollectionReferenceForNotes().document(docId).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                Utility.showToast(note_day.this, "Note deleted successfully");
-                                // You may choose to finish the activity or perform any other action after deletion
-                                finish();
-                            }else{
-                                Utility.showToast(note_day.this, "Failed while deleting note");
-                            }
-                        }
-                    });
-        } else {
-            // Handle the case where docId is null or empty (no document to delete)
-            Utility.showToast(note_day.this, "No note to delete");
-        }
+    // delete note
+    public void deleteNoteFromFirebase(){
+        DocumentReference documentReference;
+        documentReference = Utility.getCollectionReferenceForNotes().document(docId);
+        documentReference.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    //note is deleted
+                    Utility.showToast(note_day.this,"Note deleted successfully");
+                    //finish();
+                }else{
+                    Utility.showToast(note_day.this,"Failed while deleting note");
+                }
+            }
+        });
     }
 }
