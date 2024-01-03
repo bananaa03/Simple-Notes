@@ -156,12 +156,7 @@ public class day_main extends AppCompatActivity {
         recyclerView.setAdapter(noteAdapter);
     }
 
-    public void night_main(View view){
 
-        Intent intent = new Intent(this, night_main.class);
-        startActivity(intent);
-        finish();
-    }
     public void setting_day(View view){
         Intent intent = new Intent(this, setting_day.class);
         startActivity(intent);

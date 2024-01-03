@@ -159,19 +159,10 @@ public class font_night extends AppCompatActivity {
         radioBig.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
     }
 
-    public void night_main(View view){
-        Intent intent = new Intent(this, night_main.class);
-        startActivity(intent);
-        finish();
-    }
     public void font_day(View view){
         Intent intent = new Intent(this, font_day.class);
         startActivity(intent);
         finish();
     }
-    public void setting_night(View view){
-        Intent intent = new Intent(this, setting_night.class);
-        startActivity(intent);
-        finish();
-    }
+
 }

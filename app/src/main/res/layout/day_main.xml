@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/Screenbackground"
     tools:context=".day_main">
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,7 +25,7 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
-                    android:background="@color/darkpink"
+                    style="@style/BarBackground"
                     android:minHeight="?attr/actionBarSize"
                     android:theme="?attr/actionBarTheme"
                     app:layout_constraintTop_toTopOf="parent"
@@ -36,39 +37,36 @@
                     android:layout_height="40dp"
                     android:layout_marginStart="1dp"
                     android:layout_marginTop="13dp"
-                    android:background="@color/darkpink"
                     android:contentDescription="@string/nightmode"
                     android:scaleType="fitXY"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/iBtFindNote"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/dark" />
+                    style="@style/ImageButton_Changemode" />
 
                 <ImageButton
                     android:id="@+id/iBtFindNote"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="13dp"
-                    android:background="@color/darkpink"
                     android:contentDescription="@string/note"
                     android:scaleType="fitXY"
                     app:layout_constraintLeft_toRightOf="@id/iBt_mode"
                     app:layout_constraintRight_toLeftOf="@id/iBt_settime"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/light_note" />
+                    style="@style/ImageButton_Note" />
 
                 <ImageButton
                     android:id="@+id/iBt_settime"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="13dp"
-                    android:background="@color/darkpink"
                     android:contentDescription="@string/date"
                     android:scaleType="fitXY"
                     app:layout_constraintLeft_toRightOf="@id/iBtFindNote"
                     app:layout_constraintRight_toLeftOf="@id/iBt_setting"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/light_clock" />
+                    style="@style/ImageButton_Clock" />
 
                 <ImageButton
                     android:id="@+id/iBt_setting"
@@ -77,13 +75,12 @@
                     android:layout_marginTop="13dp"
                     android:layout_marginEnd="1dp"
                     android:onClick="setting_day"
-                    android:background="@color/darkpink"
                     android:contentDescription="@string/settings"
                     android:scaleType="fitXY"
                     app:layout_constraintLeft_toRightOf="@id/iBt_settime"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/light_setting" />
+                    style="@style/ImageButton_Setting" />
 
                 <androidx.appcompat.widget.SearchView
                     android:id="@+id/search_View"
@@ -91,7 +88,7 @@
                     android:layout_height="0dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="90dp"
-                    android:background="@color/white"
+                    style="@style/SearchBackground"
                     app:iconifiedByDefault="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.489"
@@ -134,12 +131,11 @@
                     android:layout_height="70dp"
                     android:layout_marginEnd="30dp"
                     android:layout_marginBottom="30dp"
-                    android:background="@color/llpink"
                     android:contentDescription="@string/addnewnote"
                     android:scaleType="fitXY"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:srcCompat="@drawable/light_addnewnote" />
+                    style="@style/ImageButton_AddNewNote" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>

@@ -208,9 +208,4 @@ public class font_day extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-    public void setting_night(View view){
-        Intent intent = new Intent(this, setting_night.class);
-        startActivity(intent);
-        finish();
-    }
 }
