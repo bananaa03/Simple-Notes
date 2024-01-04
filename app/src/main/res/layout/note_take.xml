@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/llpink"
+    style="@style/Screenbackground"
     android:padding="16dp">
 
     <RelativeLayout
@@ -14,60 +14,53 @@
 
         <ImageButton
             android:id="@+id/ImageButtonBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="55dp"
+            android:layout_height="50dp"
             android:layout_weight="0.0001"
-            android:backgroundTint="@color/darkpink"
-            android:foregroundTint="#000000"
-            android:src="@android:drawable/ic_menu_revert"
-            app:tint="#000000" />
-
-        <ImageButton
-            android:id="@+id/imgbtn_share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="44dp"
-            android:layout_weight="0.0001"
-            android:backgroundTint="@color/darkpink"
-            android:src="@android:drawable/ic_menu_share"
-            app:tint="#000000"
-            tools:src="@android:drawable/ic_menu_share" />
-
+            android:src="@drawable/backarrow"
+            android:scaleType="fitXY"
+            android:backgroundTint="@color/darkpink"/>
         <ImageButton
             android:id="@+id/ImageButtonSetting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="55dp"
+            android:layout_height="50dp"
             android:layout_alignParentEnd="true"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.0001"
-            android:layout_marginEnd="94dp"
+            android:layout_marginEnd="100dp"
+            android:src="@drawable/information"
+            android:scaleType="fitXY"
+            android:backgroundTint="@color/darkpink"/>
+        <ImageButton
+            android:id="@+id/imgbtn_share"
+            android:layout_width="55dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="50dp"
+            android:layout_weight="0.0001"
+            android:src="@drawable/share"
             android:backgroundTint="@color/darkpink"
-            android:src="@android:drawable/ic_menu_info_details"
-            app:tint="#000000"
-            tools:src="@android:drawable/ic_menu_info_details" />
+            android:scaleType="fitCenter"/>
 
         <ImageButton
             android:id="@+id/iBt_Save"
-            android:layout_width="50dp"
-            android:layout_height="51dp"
+            android:layout_width="55dp"
+            android:layout_height="50dp"
             android:layout_alignParentEnd="true"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.0001"
+            android:src="@drawable/check"
             android:backgroundTint="@color/darkpink"
-            android:src="@drawable/baseline_done_24"
-            app:tint="#000000"
-            tools:src="@drawable/baseline_done_24"/>
+            android:scaleType="fitCenter"/>
 
     </RelativeLayout>
-
     <LinearLayout
+        android:id="@+id/linear_take_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ButtonRow"
-        android:layout_marginVertical="13dp"
-        android:background="@color/llpink"
-        android:backgroundTint="@color/white"
+        android:layout_above="@+id/radioButton"
+        style="@style/Bg_linear_take_note"
         android:orientation="vertical">
 
         <EditText
@@ -76,36 +69,27 @@
             android:layout_height="wrap_content"
             android:hint="Chủ đề"
             android:textAlignment="center"
-            android:shadowColor="#E40E0E"
-            android:textColorHint="@color/black"
             android:textSize="45dp"
             android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Space
-                android:layout_width="63dp"
-                android:layout_height="wrap_content" />
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/note_day"
-                android:text="Ngày tháng năm" />
-
-            <Space
-                android:layout_width="66dp"
-                android:layout_height="wrap_content" />
+                android:text="Ngày tháng năm"
+                android:layout_gravity="center"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/count_character_note"
-                android:text="Số ký tự" />
+                android:text="Số ký tự"
+                android:layout_gravity="center"/>
         </LinearLayout>
 
         <EditText
@@ -113,28 +97,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="20dp"
-            android:background="@drawable/custom_edit_textcontent"
-            android:backgroundTint="@color/white"
             android:gravity="top"
             android:hint="Nhập ở đây"
             android:minLines="15"
             android:padding="12dp"
-            android:textColorHint="@color/black"
             android:textSize="20sp" />
 
     </LinearLayout>
 
-    <TextView
+    <Button
         android:id="@+id/btnDeleteNote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="4dp"
-        android:backgroundTint="@color/darkpink"
-        android:background="@color/darkpink"
+        style="@style/Button_Delete"
         android:gravity="center"
         android:text="Xóa ghi chú"
         android:textSize="20sp"
-        android:onClick="detele_note"/>
+        android:textColor="@color/white"/>
 
+    <RadioButton
+        android:id="@+id/radioButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đặt note là yêu thích"
+        android:layout_above="@+id/btnDeleteNote"
+        android:layout_marginStart="30dp"/>
 </RelativeLayout>

@@ -17,9 +17,11 @@
     <color name="lightpurple">#3F2E3E</color>
     <color name="llpurple">#A78295</color>
     <color name="llpink">#FFDFDF</color>
-    <color name="lessgray1">#B5AEAE</color>
-    <color name="lessgray2">#DFDADA</color>
     <color name="buttonBackground">#C66D7B</color>
     <color name="buttonText">#FFFFFF</color>
+    <color name="backgroundlg">#51E4E1E1</color>
+    <color name="backgroundlogin">#85F6F3F3</color>
+
+    <color name="black2">#854D4A4E</color>
 
 </resources>

@@ -1,40 +1,36 @@
 package com.example.note_app;
+import android.content.Context;
 import android.content.Intent;
-import android.icu.util.ULocale;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class day_main extends AppCompatActivity {
+public class main extends AppCompatActivity {
 
     RecyclerView recyclerView;
     ArrayList<Note> listNote;
-    NoteAdapter22 noteAdapter;
+    NoteAdapter noteAdapter;
     SearchView searchView;
     ImageButton btnAdd, btnFindNote;
     TextView btnDelete;
@@ -42,93 +38,82 @@ public class day_main extends AppCompatActivity {
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
+    ImageButton nightmode;
+    SharedPreferences sharedPreferences;
+    Boolean mode_status;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.day_main);
+        setContentView(R.layout.main);
 
+
+        findbyviewIds();
         //kiểm tra user
         if(currentUser==null){
             Toast.makeText(this, "Vui lòng đăng nhập để xem ghi chú", Toast.LENGTH_SHORT).show();
         }
 
         // Các xử lý khác nếu cần thiết cho layout mới
-        recyclerView= findViewById(R.id.rcv_note);
-        searchView = findViewById(R.id.search_View);
-
+        sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        mode_status = sharedPreferences.getBoolean("night", false);
+        if(mode_status){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
         setupRecycleView();
-
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
-                noteAdapter.getFilter().filter(newText);
+                if (noteAdapter!= null) noteAdapter.getFilter().filter(newText);
                 return false;
             }
         });
-
-        btnAdd = (ImageButton) findViewById(R.id.iBt_Add);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openNewNote();
             }
         });
-
-        btnFindNote = (ImageButton) findViewById(R.id.iBtFindNote);
         btnFindNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 findNewNote();
             }
         });
-        /*
-        btnDelete = findViewById(R.id.btnDeleteNote);
-        btnDelete.setOnClickListener(new View.OnClickListener() {
+        nightmode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                changemode();
             }
         });
-        */
-
-
-        // Save note
-
-
-
-
     }
 
-    private void setupRecycleView() {
-        /*
-        recyclerView.setHasFixedSize(false);
-        listNote= new ArrayList<>();
-        listNote.add(new Note("b", "b"));
-        noteAdapter= new NoteAdapter(this, R.layout.item_note, listNote);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(noteAdapter);
-        */
-        /*listNote= new ArrayList<>();
-        Query query= Utility.getCollectionReferenceForNotes()
-                .whereEqualTo("user")
-                .orderBy("timestamp", Query.Direction.DESCENDING);
-        FirestoreRecyclerOptions<Note> options = new FirestoreRecyclerOptions.Builder<Note>()
-                .setQuery(query, Note.class).build();
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        noteAdapter = new NoteAdapter(options, this, listNote);
-        recyclerView.setAdapter(noteAdapter);*/
-        //listNote = new ArrayList<>();
 
+
+
+    //ngoài onCreate
+    private void changemode(){
+        if (mode_status == true) mode_status=false;
+        else mode_status = true;
+        if (mode_status){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            editor = sharedPreferences.edit();
+            editor.putBoolean("night", false);
+            editor.apply();
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            editor = sharedPreferences.edit();
+            editor.putBoolean("night", true);
+            editor.apply();
+        }
+    }
+    private void setupRecycleView() {
         if (currentUser != null){
             String userid = currentUser.getUid();
-
             Utility.getCollectionReferenceForNotes()
                     //.whereEqualTo("user_id", userid)
                     .orderBy("note_day", Query.Direction.DESCENDING)
@@ -151,19 +136,14 @@ public class day_main extends AppCompatActivity {
     }
     private void loadRecyclerViewAdapter(ArrayList<Note> notes){
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        noteAdapter= new NoteAdapter22(this, R.layout.item_note, listNote);
+        noteAdapter= new NoteAdapter(this, R.layout.item_note, listNote);
         noteAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(noteAdapter);
     }
 
-    public void night_main(View view){
 
-        Intent intent = new Intent(this, night_main.class);
-        startActivity(intent);
-        finish();
-    }
     public void setting_day(View view){
-        Intent intent = new Intent(this, setting_day.class);
+        Intent intent = new Intent(this, setting.class);
         startActivity(intent);
         finish();
     }
@@ -173,15 +153,22 @@ public class day_main extends AppCompatActivity {
             startActivity(new Intent(this, log_in.class));
             finish();
         }else {
-            Intent intent = new Intent(day_main.this, note_day.class);
+            Intent intent = new Intent(main.this, note_take.class);
             startActivity(intent);
             finish();
         }
     }
 
     public void findNewNote(){
-        Intent intent = new Intent(day_main.this, day_main.class);
+        Intent intent = new Intent(main.this, main.class);
         startActivity(intent);
         finish();
+    }
+    private void findbyviewIds(){
+        nightmode=findViewById(R.id.iBt_mode);
+        recyclerView= findViewById(R.id.rcv_note);
+        searchView = findViewById(R.id.search_View);
+        btnAdd = (ImageButton) findViewById(R.id.iBt_Add);
+        btnFindNote = (ImageButton) findViewById(R.id.iBtFindNote);
     }
 }

@@ -14,18 +14,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UIdoan"
         tools:targetApi="31">
-        <activity android:name=".night_main" />
-        <activity android:name=".setting_day" />
-        <activity android:name=".setting_night" />
-        <activity android:name=".note_day" />
+        <activity android:name=".setting" />
+        <activity android:name=".note_take" />
         <activity android:name=".log_in" />
         <activity android:name=".registerpage" />
-        <activity android:name=".user_day" />
-        <activity android:name=".user_night" />
-        <activity android:name=".font_day"/>
-        <activity android:name=".font_night"/>
+        <activity android:name=".user_manager" />
+        <activity android:name=".font"/>
+        <activity android:name=".changePassword"/>
+
         <activity
-            android:name=".day_main"
+            android:name=".main"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,6 +31,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

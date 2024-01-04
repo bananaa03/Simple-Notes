@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/llpink">
+    tools:context=".user_manager"
+    >
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -73,96 +74,109 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/light_setting" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="361dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="84dp"
-        android:text="@string/thongtinnguoidung"
-        android:textColor="@color/darkpink"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.32"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.147" />
-
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:layout_marginTop="70dp"
+        android:weightSum="10"
+        android:layout_marginStart="0dp"
+        android:paddingRight="0dp"
+        android:layout_marginEnd="0dp"
+        android:paddingLeft="0dp">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="5">
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="40dp"
         android:text="@string/username"
         android:textColor="@color/darkpink"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_gravity="end"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <TextView
-        android:id="@+id/textView3"
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/email"
+            android:textColor="@color/darkpink"
+            android:textSize="20sp"
+            android:layout_gravity="end"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="52dp"
-        android:text="@string/email"
-        android:textColor="@color/darkpink"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="5">
     <TextView
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="40dp"
         android:hint="@string/username"
         android:textSize="20sp"
+        android:layout_marginStart="5dp"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
-
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:hint="@string/email"
+            android:textSize="20sp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toEndOf="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/username" />
+    </LinearLayout>
+    </LinearLayout>
     <TextView
-        android:id="@+id/email"
-        android:layout_width="wrap_content"
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="52dp"
-        android:hint="@string/email"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
-
+        android:layout_marginTop="50dp"
+        android:text="@string/thongtinnguoidung"
+        android:textColor="@color/darkpink"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/linear"
+        android:layout_marginTop="100dp"
+        android:gravity="center">
     <Button
         android:id="@+id/changepasw"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="ĐỔI MẬT KHẨU"
-        android:background="@drawable/item_btnlog"
-        app:layout_constraintBottom_toTopOf="@+id/logout"
+        android:text="Đổi mật khẩu"
+        android:backgroundTint="@color/darkpink"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.0"
-        android:onClick="changepass"/>
-
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="116dp"
-        android:background="@drawable/item_btnlog"
-        android:text="ĐĂNG XUẤT"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email"
-        app:layout_constraintVertical_bias="0.922"
-        android:onClick="logout"/>
-
-
+        android:onClick="changepass" />
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/darkpink"
+            android:text="Đăng xuất"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/changepasw"
+            android:onClick="logout"/>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

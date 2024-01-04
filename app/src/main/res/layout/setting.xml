@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/llpink">
+    style="@style/Screenbackground"
+    tools:context=".setting">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -14,17 +15,17 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        />
 
     <ImageButton
         android:id="@+id/iBt_mode"
+        style="@style/Widget.AppCompat.ImageButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="13dp"
         android:background="@color/darkpink"
         android:contentDescription="@string/nightmode"
-        android:onClick="night_main"
         android:scaleType="fitXY"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/iBtFindNote"
@@ -38,6 +39,7 @@
         android:layout_marginTop="13dp"
         android:background="@color/darkpink"
         android:contentDescription="@string/note"
+        android:onClick="btnBacktoMain_day"
         android:scaleType="fitXY"
         app:layout_constraintLeft_toRightOf="@id/iBt_mode"
         app:layout_constraintRight_toLeftOf="@id/iBt_settime"
@@ -63,7 +65,6 @@
         android:layout_height="40dp"
         android:layout_marginTop="13dp"
         android:layout_marginEnd="1dp"
-        android:onClick="setting_day"
         android:background="@color/darkpink"
         android:contentDescription="@string/settings"
         android:scaleType="fitXY"
@@ -72,43 +73,71 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/light_setting" />
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_View"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="90dp"
-        android:background="@color/white"
-        app:iconifiedByDefault="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        app:queryHint="Search..." />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcv_note"
+    <Button
+        android:id="@+id/thongke"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@id/search_View"
-        tools:listitem="@layout/item_note"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:backgroundTint="@color/darkpink"
+        android:text="@string/thongke"
+        android:textAllCaps="false"
+        style="@style/TextStyle_White_day"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/dongbo"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:layout_marginTop="10dp"
+        />
 
-    <ImageButton
-        android:id="@+id/iBt_Add"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
-        android:background="@color/llpink"
-        android:contentDescription="@string/addnewnote"
-        android:scaleType="fitXY"
+    <Button
+        android:id="@+id/dongbo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:backgroundTint="@color/darkpink"
+        android:text="@string/dongbo"
+        style="@style/TextStyle_White_day"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/thongke"
+        app:layout_constraintBottom_toTopOf="@id/font"
+        android:layout_marginTop="5dp"
+        />
+
+    <Button
+        android:id="@+id/font"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:backgroundTint="@color/darkpink"
+        android:text="@string/phongchu"
+        style="@style/TextStyle_White_day"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:onClick="font_day"
+        app:layout_constraintTop_toBottomOf="@id/dongbo"
+        app:layout_constraintBottom_toTopOf="@id/manage_user"
+        android:layout_marginTop="5dp"
+        />
+
+    <Button
+        android:id="@+id/manage_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:backgroundTint="@color/darkpink"
+        android:onClick="login_day"
+        android:text="@string/quanlytaikhoan"
+        style="@style/TextStyle_White_day"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/font"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/light_addnewnote" />
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="100dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
