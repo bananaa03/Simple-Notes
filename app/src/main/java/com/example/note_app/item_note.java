@@ -22,7 +22,7 @@ public class item_note extends AppCompatActivity {
         Typeface typeface = Typeface.DEFAULT;
         if (fontName != null) {
             try {
-                typeface = Typeface.createFromFile(fontName);
+                typeface = Typeface.createFromAsset(getAssets(), fontName);
             } catch (Exception e) {
                 Log.e("item_note", "Failed to create typeface from file", e);
                 Toast.makeText(getApplicationContext(), "Failed to create typeface from file", Toast.LENGTH_SHORT).show();

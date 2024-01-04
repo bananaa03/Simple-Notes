@@ -20,6 +20,8 @@
         <activity android:name=".registerpage" />
         <activity android:name=".user_manager" />
         <activity android:name=".font"/>
+        <activity android:name=".changePassword"/>
+
         <activity
             android:name=".main"
             android:exported="true">
