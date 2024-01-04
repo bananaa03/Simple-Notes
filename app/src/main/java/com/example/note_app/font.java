@@ -1,5 +1,6 @@
 package com.example.note_app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -7,26 +8,30 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
-public class font_night extends AppCompatActivity {
+public class font extends AppCompatActivity {
     private TextView selectFontTextView;
     private TextView chooseSizeTextView;
     private RadioButton radioSmall;
     private RadioButton radioMedium;
-    private RadioButton radioBig;
-    private RadioButton radioSerif;
-    private RadioButton radioDancing;
-    private RadioButton radioMonospace;
+    private RadioButton radioBig, radioSerif, radioDancing, radioMonospace;
+    ImageButton nightmode;
+    SharedPreferences sharedPreferences;
+    Boolean mode_status;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.font_night);
+        setContentView(R.layout.font);
 
         selectFontTextView = findViewById(R.id.selectFontTextView);
         chooseSizeTextView = findViewById(R.id.chooseSizeTextView);
@@ -36,6 +41,22 @@ public class font_night extends AppCompatActivity {
         radioSerif = findViewById(R.id.radioSerif);
         radioDancing = findViewById(R.id.radioDancing);
         radioMonospace = findViewById(R.id.radioMonospace);
+        nightmode= findViewById(R.id.iBt_mode);
+
+        sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        mode_status = sharedPreferences.getBoolean("night", false);
+        if(mode_status){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+        nightmode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changemode();
+            }
+        });
+        int originalSelectFontTextStyle = selectFontTextView.getTypeface().getStyle();
+        int originalChooseSizeTextStyle = chooseSizeTextView.getTypeface().getStyle();
+        //Button applyButton = findViewById(R.id.applyButton);
 
         RadioGroup fontRadioGroup = findViewById(R.id.fontRadioGroup);
         fontRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
@@ -98,9 +119,7 @@ public class font_night extends AppCompatActivity {
 
         // Khôi phục cài đặt font chữ và kích thước chữ
         restoreSettings();
-
     }
-
     // Hàm lưu trữ cài đặt font chữ
     private void saveFontSettings(Typeface typeface) {
         if (typeface != null && typeface != Typeface.DEFAULT) {
@@ -159,10 +178,60 @@ public class font_night extends AppCompatActivity {
         radioBig.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
     }
 
-    public void font_day(View view){
-        Intent intent = new Intent(this, font_day.class);
+
+
+    /*public void applyFontAndTextSizeToAllViews(ViewGroup viewGroup, String fontFamily, float textSizeOption) {
+        int childCount = viewGroup.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View childView = viewGroup.getChildAt(i);
+
+            if (childView instanceof ViewGroup) {
+                // Nếu là ViewGroup, tiếp tục duyệt qua các View con
+                applyFontAndTextSizeToAllViews((ViewGroup) childView, fontFamily, textSizeOption);
+            } else if (childView instanceof TextView) {
+                // Nếu là TextView, áp dụng thay đổi phông chữ và kích thước chữ
+                TextView textView = (TextView) childView;
+                // Lưu lại kích thước chữ ban đầu
+                float originalTextSize = textView.getTextSize();
+
+                // Tùy chọn kích thước chữ
+                float newTextSize;
+                if (textSizeOption == 1.5) {
+                    newTextSize = originalTextSize * 1.5f;
+                } else if (textSizeOption == 1.75) {
+                    newTextSize = originalTextSize * 1.75f;
+                } else {
+                    newTextSize = originalTextSize;
+                }
+
+                textView.setTypeface(Typeface.create(fontFamily, Typeface.NORMAL));
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, newTextSize);
+            }
+        }
+    }*/
+    public void day_main(View view){
+        Intent intent = new Intent(this, main.class);
         startActivity(intent);
         finish();
     }
-
+    public void setting_day(View view) {
+        Intent intent = new Intent(this, setting.class);
+        startActivity(intent);
+        finish();
+    }
+    private void changemode(){
+        if (mode_status == true) mode_status=false;
+        else mode_status = true;
+        if (mode_status){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            editor = sharedPreferences.edit();
+            editor.putBoolean("night", false);
+            editor.apply();
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            editor = sharedPreferences.edit();
+            editor.putBoolean("night", true);
+            editor.apply();
+        }
+    }
 }

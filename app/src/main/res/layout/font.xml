@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/llpurple"
-    tools:context=".font_day">
+    style="@style/Screenbackground"
+    tools:context=".font">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:background="@color/darkpurple"
+        android:background="@color/darkpink"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,41 +23,41 @@
         android:layout_height="40dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="13dp"
-        android:background="@color/darkpurple"
+        android:background="@color/darkpink"
         android:contentDescription="@string/nightmode"
         android:onClick="font_night"
         android:scaleType="fitXY"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/iBtFindNote"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/light"/>
+        app:srcCompat="@drawable/dark"/>
 
     <ImageButton
         android:id="@+id/iBtFindNote"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="13dp"
-        android:background="@color/darkpurple"
+        android:background="@color/darkpink"
         android:contentDescription="@string/note"
         android:onClick="day_main"
         android:scaleType="fitXY"
         app:layout_constraintLeft_toRightOf="@id/iBt_mode"
         app:layout_constraintRight_toLeftOf="@id/iBt_settime"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dark_note" />
+        app:srcCompat="@drawable/light_note" />
 
     <ImageButton
         android:id="@+id/iBt_settime"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="13dp"
-        android:background="@color/darkpurple"
+        android:background="@color/darkpink"
         android:contentDescription="@string/date"
         android:scaleType="fitXY"
         app:layout_constraintLeft_toRightOf="@id/iBtFindNote"
         app:layout_constraintRight_toLeftOf="@id/iBt_setting"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dark_clock" />
+        app:srcCompat="@drawable/light_clock" />
 
     <ImageButton
         android:id="@+id/iBt_setting"
@@ -65,14 +65,14 @@
         android:layout_height="40dp"
         android:layout_marginTop="13dp"
         android:layout_marginEnd="1dp"
-        android:background="@color/darkpurple"
+        android:background="@color/darkpink"
         android:contentDescription="@string/settings"
         android:scaleType="fitXY"
-        android:onClick="setting_night"
+        android:onClick="setting_day"
         app:layout_constraintLeft_toRightOf="@id/iBt_settime"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dark_setting" />
+        app:srcCompat="@drawable/light_setting" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -89,7 +89,7 @@
             android:layout_marginTop="30dp"
             android:fontFamily="sans-serif"
             android:text="Chọn phông chữ"
-            android:textColor="@color/darkpurple"
+            android:textColor="@color/darkpink"
             android:textSize="26sp"
             android:textStyle="bold" />
 
@@ -106,7 +106,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Serif"
-                android:textColor="@color/darkpurple"
+                android:textColor="@color/darkpink"
                 android:textSize="16sp"
                 android:fontFamily="sans-serif"/>
 
@@ -115,7 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dancing"
-                android:textColor="@color/darkpurple"
+                android:textColor="@color/darkpink"
                 android:textSize="16sp"
                 android:fontFamily="sans-serif"/>
 
@@ -124,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Monospace"
-                android:textColor="@color/darkpurple"
+                android:textColor="@color/darkpink"
                 android:textSize="16sp"
                 android:fontFamily="sans-serif"/>
         </RadioGroup>
@@ -137,7 +137,7 @@
             android:textSize="26sp"
             android:textStyle="bold"
             android:layout_marginLeft="30dp"
-            android:textColor="@color/darkpurple"
+            android:textColor="@color/darkpink"
             android:layout_marginTop="30dp"
             android:fontFamily="sans-serif"/>
 
@@ -154,7 +154,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nhỏ"
-                android:textColor="@color/darkpurple"
+                android:textColor="@color/darkpink"
                 android:textSize="16sp"
                 android:fontFamily="sans-serif"/>
 
@@ -164,7 +164,7 @@
                 android:layout_height="wrap_content"
                 android:text="Vừa"
                 android:textSize="16sp"
-                android:textColor="@color/darkpurple"
+                android:textColor="@color/darkpink"
                 android:fontFamily="sans-serif"/>
 
             <RadioButton
@@ -173,7 +173,7 @@
                 android:layout_height="wrap_content"
                 android:text="Lớn"
                 android:textSize="16sp"
-                android:textColor="@color/darkpurple"
+                android:textColor="@color/darkpink"
                 android:fontFamily="sans-serif"/>
 
         </RadioGroup>
@@ -184,9 +184,9 @@
             android:layout_height="wrap_content"
             android:text="Áp dụng"
             android:textSize="16sp"
-            android:textColor="@color/llpurple"
+            android:textColor="@color/llpink"
             android:layout_gravity="center"
-            android:backgroundTint="@color/darkpurple"
+            android:backgroundTint="@color/darkpink"
             android:fontFamily="sans-serif"/>
     </LinearLayout>
 

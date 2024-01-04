@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/Screenbackground"
-    tools:context=".day_main">
+    tools:context=".main">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

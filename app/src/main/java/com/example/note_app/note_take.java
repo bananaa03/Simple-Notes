@@ -4,38 +4,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.Firebase;
-import com.google.firebase.Timestamp;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class note_day extends AppCompatActivity {
+public class note_take extends AppCompatActivity {
 
     private ImageButton buttonSetting, btnShare;
     EditText edtnotetitle, edtnotecontent;
     ImageButton buttonBack, btnSaveNote;
     boolean isEditMode = false;
-
-    FirebaseFirestore db;
     String notetitle, notecontent, noteday, docId;
     TextView noteDay, countCharacter;
     Button btnDelete;
@@ -44,12 +32,8 @@ public class note_day extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.note_day);
-        edtnotetitle = (EditText) findViewById(R.id.edt_note_title);
-        edtnotecontent= (EditText) findViewById(R.id.edt_note_content);
-        noteDay = (TextView) findViewById(R.id.note_day);
-        buttonSetting = (ImageButton) findViewById(R.id.ImageButtonSetting);
-        btnShare = (ImageButton) findViewById(R.id.imgbtn_share);
+        setContentView(R.layout.note_take);
+        findbyviewIds();
 
         // click vao 1 item: 1. get dữ liệu từ intent trước (day_main)
         Intent intent = getIntent();
@@ -74,8 +58,6 @@ public class note_day extends AppCompatActivity {
                 sharenote();
             }
         });
-
-        buttonBack = (ImageButton) findViewById(R.id.ImageButtonBack);
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,20 +66,16 @@ public class note_day extends AppCompatActivity {
         });
 
         //Save note
-        btnSaveNote = (ImageButton) findViewById(R.id.iBt_Save);
         btnSaveNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveNote();
                 // Khi lưu note thì sẽ thoát ra khỏi note và quay về trang menu
-                Intent intent = new Intent(note_day.this, day_main.class);
-                startActivity(intent);
-                finish();
+                openBack();
             }
         });
 
         //Delete note
-        btnDelete = (Button) findViewById(R.id.btnDeleteNote);
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,13 +104,13 @@ public class note_day extends AppCompatActivity {
     }
     public void openSetting()
     {
-        Intent intent = new Intent(this, note_day.class);
+        Intent intent = new Intent(this, note_take.class);
         startActivity(intent);
         finish();
     }
 
     public void openBack(){
-        Intent intent = new Intent(note_day.this, day_main.class);
+        Intent intent = new Intent(note_take.this, main.class);
         startActivity(intent);
         finish();
     }
@@ -145,23 +123,18 @@ public class note_day extends AppCompatActivity {
             edtnotetitle.setError("Hãy nhập chủ đề");
             return;
         }
-
         Note note = new Note();
         note.setNote_title(noteTitle);
         note.setNote_content(noteContent);
        // note.setTimestamp(Timestamp.now());
-
         long time = System.currentTimeMillis();
         String formatTimestamp = formatTimestamp(time);
-
         // save time vào textview ngày tháng năm
         noteDay.setText("" + formatTimestamp);
         String note_day = formatTimestamp;
         // save time vào note_day
         note.setNote_day(note_day);
-
         saveNoteToFireBase(note);
-
         //Chưa update số ký tự được
         countCharacter = (TextView) findViewById(R.id.count_character_note);
         edtnotecontent = (EditText) findViewById(R.id.edt_note_content);
@@ -182,10 +155,10 @@ public class note_day extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
                     //note is added
-                    Utility.showToast(note_day.this,"Note added successfully");
+                    Utility.showToast(note_take.this,"Note added successfully");
                     //finish();
                 }else{
-                    Utility.showToast(note_day.this,"Failed while adding note");
+                    Utility.showToast(note_take.this,"Failed while adding note");
                 }
             }
         });
@@ -209,12 +182,22 @@ public class note_day extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
                     //note is deleted
-                    Utility.showToast(note_day.this,"Note deleted successfully");
+                    Utility.showToast(note_take.this,"Note deleted successfully");
                     //finish();
                 }else{
-                    Utility.showToast(note_day.this,"Failed while deleting note");
+                    Utility.showToast(note_take.this,"Failed while deleting note");
                 }
             }
         });
+    }
+    private void findbyviewIds(){
+        edtnotetitle = (EditText) findViewById(R.id.edt_note_title);
+        edtnotecontent= (EditText) findViewById(R.id.edt_note_content);
+        noteDay = (TextView) findViewById(R.id.note_day);
+        buttonSetting = (ImageButton) findViewById(R.id.ImageButtonSetting);
+        btnShare = (ImageButton) findViewById(R.id.imgbtn_share);
+        buttonBack = (ImageButton) findViewById(R.id.ImageButtonBack);
+        btnSaveNote = (ImageButton) findViewById(R.id.iBt_Save);
+        btnDelete = (Button) findViewById(R.id.btnDeleteNote);
     }
 }

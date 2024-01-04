@@ -16,13 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 //Adapter cho Recycle View để hiển thị note ra trang day_main.java và night_main.java
-public class NoteAdapter22 extends RecyclerView.Adapter<NoteAdapter22.ViewHolder> implements Filterable {
+public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> implements Filterable {
     private ArrayList<Note> listnotes;
     private int layoutID;
     private Activity context;
     private ArrayList<Note> listnoteaf;
 
-    public NoteAdapter22(Activity context, int layoutID, ArrayList<Note> notes){
+    public NoteAdapter(Activity context, int layoutID, ArrayList<Note> notes){
         this.listnotes=notes;
         this.context=context;
         this.layoutID=layoutID;
@@ -44,7 +44,7 @@ public class NoteAdapter22 extends RecyclerView.Adapter<NoteAdapter22.ViewHolder
         holder.notetitle.setText(note.getNote_title());
         holder.noteday.setText(note.getNote_day()+"");
         holder.itemView.setOnClickListener((v)->{
-            Intent intent = new Intent(context, note_day.class);
+            Intent intent = new Intent(context, note_take.class);
             intent.putExtra("NOTE_TITLE", note.getNote_title().toString());
             intent.putExtra("NOTE_CONTENT", note.getNote_content().toString());
             intent.putExtra("NOTE_DATE", note.getNote_day().toString());
