@@ -1,5 +1,6 @@
 package com.example.note_app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,24 +9,43 @@ import android.view.View;
 import android.widget.Button;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
-import android.widget.TextView;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
 import com.google.firebase.auth.FirebaseAuth;
 
-public class setting_day extends AppCompatActivity {
+public class setting extends AppCompatActivity {
 
+    ImageButton nightmode;
+    SharedPreferences sharedPreferences;
+    Boolean mode_status;
+    SharedPreferences.Editor editor;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.setting_day);
+        setContentView(R.layout.setting);
+
+        nightmode=findViewById(R.id.iBt_mode);
+        sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        mode_status = sharedPreferences.getBoolean("night", false);
+        if(mode_status){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+        nightmode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changemode();
+            }
+        });
 
         // Đọc các cài đặt font và size từ SharedPreferences
         SharedPreferences preferences = getSharedPreferences("MyPreferences", MODE_PRIVATE);
-
         String fontName = preferences.getString("selectedFont", null);
+        float textSize = preferences.getFloat("selectedTextSize", 16);
         Typeface typeface = Typeface.DEFAULT;
         if (fontName != null) {
             try {
@@ -35,14 +55,10 @@ public class setting_day extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Failed to create typeface from file", Toast.LENGTH_SHORT).show();
             }
         }
-
-        float textSize = preferences.getFloat("selectedTextSize", 16);
-
         Button thongke = findViewById(R.id.thongke);
         Button dongbo = findViewById(R.id.dongbo);
         Button font = findViewById(R.id.font);
         Button manage_user = findViewById(R.id.manage_user);
-
         thongke.setTypeface(typeface);
         thongke.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
         dongbo.setTypeface(typeface);
@@ -53,14 +69,14 @@ public class setting_day extends AppCompatActivity {
         manage_user.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
     }
     public void btnBacktoMain_day(View view){
-        Intent intent = new Intent(this, day_main.class);
+        Intent intent = new Intent(this, main.class);
         startActivity(intent);
         finish();
     }
     public void login_day(View view){
         if (firebaseAuth.getCurrentUser() != null) {
             // Người dùng đã đăng nhập, chuyển tới user.class
-            Intent intent = new Intent(this, user_day.class);
+            Intent intent = new Intent(this, user_manager.class);
             startActivity(intent);
             finish();
         } else {
@@ -70,18 +86,26 @@ public class setting_day extends AppCompatActivity {
             finish();
         }
     }
-    public void night_main(View view){
-        Intent intent = new Intent(this, night_main.class);
-        startActivity(intent);
-        finish();
-    }
-    public void night_setting(View view){
-        Intent intent = new Intent(this, setting_night.class);
-        startActivity(intent);
-        finish();
-    }
+
+
     public void font_day(View view){
-        Intent intent = new Intent(this, font_day.class);
+        Intent intent = new Intent(this, font.class);
         startActivity(intent);
         finish();
-    }}
+    }
+    private void changemode(){
+        if (mode_status == true) mode_status=false;
+        else mode_status = true;
+        if (mode_status){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            editor = sharedPreferences.edit();
+            editor.putBoolean("night", false);
+            editor.apply();
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            editor = sharedPreferences.edit();
+            editor.putBoolean("night", true);
+            editor.apply();
+        }
+    }
+}

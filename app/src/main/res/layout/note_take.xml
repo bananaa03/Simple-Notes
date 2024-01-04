@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/llpurple"
+    style="@style/Screenbackground"
     android:padding="16dp">
 
     <RelativeLayout
@@ -17,23 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.0001"
-            android:backgroundTint="@color/darkpurple"
-            android:foregroundTint="@color/llpink"
-            android:src="@android:drawable/ic_menu_revert"
-            app:tint="@color/llpink" />
-
-        <ImageButton
-            android:id="@+id/imgbtn_share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="52dp"
-            android:layout_weight="0.0001"
-            android:backgroundTint="@color/darkpurple"
-            android:src="@android:drawable/ic_menu_share"
-            app:tint="@color/llpink"
-            tools:src="@android:drawable/ic_menu_share" />
-
+            style="@style/ImageButton_Back" />
         <ImageButton
             android:id="@+id/ImageButtonSetting"
             android:layout_width="wrap_content"
@@ -41,20 +25,33 @@
             android:layout_alignParentEnd="true"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.0001"
-            android:backgroundTint="@color/darkpurple"
-            android:src="@android:drawable/ic_menu_info_details"
-            app:tint="@color/llpink"
-            tools:src="@android:drawable/ic_menu_info_details" />
+            android:layout_marginEnd="94dp"
+            style="@style/ImageButton_SetANote" />
+        <ImageButton
+            android:id="@+id/imgbtn_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="44dp"
+            android:layout_weight="0.0001"
+            style="@style/ImageButton_Share"/>
+
+        <ImageButton
+            android:id="@+id/iBt_Save"
+            android:layout_width="50dp"
+            android:layout_height="51dp"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.0001"
+            style="@style/ImageButton_Save"/>
 
     </RelativeLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ButtonRow"
         android:layout_marginVertical="13dp"
-        android:background="@color/llpurple"
-        android:backgroundTint="@color/llpurple"
+        style="@style/Bg_linear_take_note"
         android:orientation="vertical">
 
         <EditText
@@ -63,7 +60,8 @@
             android:layout_height="wrap_content"
             android:hint="Chủ đề"
             android:textAlignment="center"
-            android:shadowColor="#E40E0E"
+            style="@style/text_title"
+            android:textColor="@color/black"
             android:textSize="45dp"
             android:textStyle="bold" />
 
@@ -80,8 +78,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ngày tháng năm"
-                android:id="@+id/note_day"/>
+                android:id="@+id/note_day"
+                android:textColor="@color/black"
+                android:text="Ngày tháng năm" />
 
             <Space
                 android:layout_width="66dp"
@@ -90,8 +89,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Số ký tự"
-                android:id="@+id/count_character_note"/>
+                android:id="@+id/count_character_note"
+                android:textColor="@color/black"
+                android:text="Số ký tự" />
         </LinearLayout>
 
         <EditText
@@ -99,27 +99,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="20dp"
-            android:background="@drawable/custom_edit_textcontent"
-            android:backgroundTint="@color/llpink"
             android:gravity="top"
             android:hint="Nhập ở đây"
             android:minLines="15"
             android:padding="12dp"
+            style="@style/text_content"
             android:textSize="20sp" />
 
     </LinearLayout>
-
-    <TextView
+    <Button
+        android:id="@+id/btnDeleteNote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/deleteNote"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="4dp"
+        style="@style/Button_Delete"
         android:gravity="center"
         android:text="Xóa ghi chú"
-        android:textColor="@color/llpurple"
-        android:textStyle="normal"
-        android:textSize="20sp"
-        android:backgroundTint="@color/darkpurple"
-        android:background="@color/darkpurple"/>
-
+        android:textSize="20sp" />
 </RelativeLayout>
