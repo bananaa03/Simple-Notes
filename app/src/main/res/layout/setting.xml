@@ -85,12 +85,10 @@
         style="@style/TextStyle_White_day"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.170" />
+        app:layout_constraintBottom_toTopOf="@id/dongbo"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:layout_marginTop="10dp"
+        />
 
     <Button
         android:id="@+id/dongbo"
@@ -103,12 +101,10 @@
         style="@style/TextStyle_White_day"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.300" />
+        app:layout_constraintTop_toBottomOf="@id/thongke"
+        app:layout_constraintBottom_toTopOf="@id/font"
+        android:layout_marginTop="5dp"
+        />
 
     <Button
         android:id="@+id/font"
@@ -122,12 +118,10 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:onClick="font_day"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.430" />
+        app:layout_constraintTop_toBottomOf="@id/dongbo"
+        app:layout_constraintBottom_toTopOf="@id/manage_user"
+        android:layout_marginTop="5dp"
+        />
 
     <Button
         android:id="@+id/manage_user"
@@ -141,11 +135,9 @@
         style="@style/TextStyle_White_day"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/font"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.560" />
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="100dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
