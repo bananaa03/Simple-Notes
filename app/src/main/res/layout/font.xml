@@ -117,7 +117,7 @@
                 android:text="Dancing"
                 android:textColor="@color/darkpink"
                 android:textSize="16sp"
-                android:fontFamily="sans-serif"/>
+                android:fontFamily="@font/dancing_script_bold"/>
 
             <RadioButton
                 android:id="@+id/radioComfortaa"

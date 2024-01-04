@@ -14,36 +14,44 @@
 
         <ImageButton
             android:id="@+id/ImageButtonBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="55dp"
+            android:layout_height="50dp"
             android:layout_weight="0.0001"
-            style="@style/ImageButton_Back" />
+            android:src="@drawable/backarrow"
+            android:scaleType="fitXY"
+            android:backgroundTint="@color/darkpink"/>
         <ImageButton
             android:id="@+id/ImageButtonSetting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="55dp"
+            android:layout_height="50dp"
             android:layout_alignParentEnd="true"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.0001"
-            android:layout_marginEnd="94dp"
-            style="@style/ImageButton_SetANote" />
+            android:layout_marginEnd="100dp"
+            android:src="@drawable/information"
+            android:scaleType="fitXY"
+            android:backgroundTint="@color/darkpink"/>
         <ImageButton
             android:id="@+id/imgbtn_share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="55dp"
+            android:layout_height="50dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="44dp"
+            android:layout_marginEnd="50dp"
             android:layout_weight="0.0001"
-            style="@style/ImageButton_Share"/>
+            android:src="@drawable/share"
+            android:backgroundTint="@color/darkpink"
+            android:scaleType="fitCenter"/>
 
         <ImageButton
             android:id="@+id/iBt_Save"
-            android:layout_width="50dp"
-            android:layout_height="51dp"
+            android:layout_width="55dp"
+            android:layout_height="50dp"
             android:layout_alignParentEnd="true"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.0001"
-            style="@style/ImageButton_Save"/>
+            android:src="@drawable/check"
+            android:backgroundTint="@color/darkpink"
+            android:scaleType="fitCenter"/>
 
     </RelativeLayout>
     <LinearLayout
@@ -53,7 +61,8 @@
         android:layout_below="@+id/ButtonRow"
         android:layout_marginVertical="13dp"
         style="@style/Bg_linear_take_note"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="30dp">
 
         <EditText
             android:id="@+id/edt_note_title"
@@ -61,38 +70,27 @@
             android:layout_height="wrap_content"
             android:hint="Chủ đề"
             android:textAlignment="center"
-            style="@style/text_title"
-            android:textColor="@color/black"
             android:textSize="45dp"
             android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Space
-                android:layout_width="63dp"
-                android:layout_height="wrap_content" />
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/note_day"
-                android:textColor="@color/black"
-                android:text="Ngày tháng năm" />
-
-            <Space
-                android:layout_width="66dp"
-                android:layout_height="wrap_content" />
+                android:text="Ngày tháng năm"
+                android:layout_gravity="center"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/count_character_note"
-                android:textColor="@color/black"
-                android:text="Số ký tự" />
+                android:text="Số ký tự"
+                android:layout_gravity="center"/>
         </LinearLayout>
 
         <EditText
@@ -104,7 +102,6 @@
             android:hint="Nhập ở đây"
             android:minLines="15"
             android:padding="12dp"
-            style="@style/text_content"
             android:textSize="20sp" />
 
     </LinearLayout>
@@ -112,11 +109,12 @@
         android:id="@+id/btnDeleteNote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="4dp"
         style="@style/Button_Delete"
         android:gravity="center"
         android:text="Xóa ghi chú"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textColor="@color/white"/>
 </RelativeLayout>
