@@ -8,21 +8,23 @@ public class Note {
     private String note_title;
     private String note_day;
     private String note_label;
+    private boolean isFavorite;
 
     public Note(String note_title, String note_day) {
         this.note_title = note_title;
         this.note_day = note_day;
     }
 
-    public Note(){
-
+    public Note() {
+        this.isFavorite = false;
     }
 
-    public Note(int note_id, String note_title, String note_day, String note_content) {
+    public Note(int note_id, String note_title, String note_day, String note_content, boolean isFavorite) {
         this.note_id = note_id;
         this.note_title = note_title;
         this.note_day = note_day;
         this.note_content = note_content;
+        this.isFavorite = isFavorite;
     }
 
     private String note_content;
@@ -57,7 +59,12 @@ public class Note {
     public void setNote_content(String note_content) {
         this.note_content = note_content;
     }
-
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+    public void setFavorite(boolean favorite) {
+        this.isFavorite = favorite;
+    }
     public Note(Timestamp timestamp) {
         this.timestamp = timestamp;
     }

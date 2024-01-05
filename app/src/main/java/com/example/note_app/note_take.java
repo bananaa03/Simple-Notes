@@ -10,6 +10,8 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -32,6 +34,7 @@ public class note_take extends AppCompatActivity {
     String notetitle, notecontent, noteday, docId;
     TextView noteDay, countCharacter;
     Button btnDelete;
+    boolean isFavorite;
 
 
     @Override
@@ -39,16 +42,19 @@ public class note_take extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.note_take);
         findbyviewIds();
+        CheckBox cbFavorite = findViewById(R.id.cbFavorite);
 
-        // click vao 1 item: 1. get dữ liệu từ intent trước (day_main)
+        // click vào 1 item: 1. lấy dữ liệu từ intent trước (day_main)
         Intent intent = getIntent();
         if (intent != null) {
             notetitle = intent.getStringExtra("NOTE_TITLE");
             notecontent = intent.getStringExtra("NOTE_CONTENT");
             noteday = intent.getStringExtra("NOTE_DATE");
+            isFavorite = intent.getBooleanExtra("IS_FAVORITE", false);
             edtnotecontent.setText(notecontent);
             edtnotetitle.setText(notetitle);
             noteDay.setText(noteday);
+            cbFavorite.setChecked(isFavorite);
         }
 
         buttonSetting.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +73,18 @@ public class note_take extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openBack();
+            }
+        });
+
+        // Thêm sự kiện nghe cho CheckBox
+        cbFavorite.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            // Xử lý khi trạng thái của CheckBox thay đổi
+            if (isChecked) {
+                // Note được đánh dấu là yêu thích
+                Utility.showToast(note_take.this, "Note đã được đánh dấu là yêu thích");
+            } else {
+                // Note không được đánh dấu là yêu thích
+                Utility.showToast(note_take.this, "Note không còn là yêu thích");
             }
         });
 
@@ -120,12 +138,9 @@ public class note_take extends AppCompatActivity {
         edt_note_content.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
         btnDeleteNote.setTypeface(typeface);
         btnDeleteNote.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        cbFavorite.setTypeface(typeface);
+        cbFavorite.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
 }
-
-
-
-
-
 
     //ngoài onCreate
     public void sharenote(){
@@ -164,6 +179,12 @@ public class note_take extends AppCompatActivity {
         Note note = new Note();
         note.setNote_title(noteTitle);
         note.setNote_content(noteContent);
+
+        // Kiểm tra trạng thái của CheckBox
+        CheckBox checkBoxFavorite = findViewById(R.id.cbFavorite);
+        boolean isFavorite = checkBoxFavorite.isChecked();
+        note.setFavorite(isFavorite);
+
        // note.setTimestamp(Timestamp.now());
         long time = System.currentTimeMillis();
         String formatTimestamp = formatTimestamp(time);

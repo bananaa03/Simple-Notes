@@ -4,7 +4,6 @@
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
-
     <!-- NIGHT MODE -->
     <style name="TextStyle_Black_day"><item name="android:textColor">@color/white</item></style>
     <style name="TextStyle_White_day"><item name="android:textColor">@color/black</item></style>

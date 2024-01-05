@@ -6,21 +6,26 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
-//Adapter cho Recycle View để hiển thị note ra trang day_main.java và night_main.java
+//Adapter cho Recycle View để hiển thị note ra trang main.java
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> implements Filterable {
     private ArrayList<Note> listnotes;
     private int layoutID;
     private Activity context;
     private ArrayList<Note> listnoteaf;
+    RecyclerView rcv_note;
 
     public NoteAdapter(Activity context, int layoutID, ArrayList<Note> notes){
         this.listnotes=notes;
@@ -43,13 +48,32 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> im
 
         holder.notetitle.setText(note.getNote_title());
         holder.noteday.setText(note.getNote_day()+"");
+        // Set trạng thái của imageView dựa vào trạng thái yêu thích của note
+        if (note.isFavorite()) {
+            holder.imageView.setVisibility(View.VISIBLE);
+        } else {
+            holder.imageView.setVisibility(View.GONE);
+        }
+        //holder.cbFavorite.setChecked(note.isFavorite());
+
         holder.itemView.setOnClickListener((v)->{
             Intent intent = new Intent(context, note_take.class);
             intent.putExtra("NOTE_TITLE", note.getNote_title().toString());
             intent.putExtra("NOTE_CONTENT", note.getNote_content().toString());
             intent.putExtra("NOTE_DATE", note.getNote_day().toString());
+            intent.putExtra("IS_FAVORITE", note.isFavorite());
             context.startActivity(intent);
         });
+    }
+    public void sortNotesByFavorite() {
+        Collections.sort(listnotes, new Comparator<Note>() {
+            @Override
+            public int compare(Note note1, Note note2) {
+                // Sắp xếp theo trạng thái yêu thích giảm dần (true sẽ lên đầu)
+                return Boolean.compare(note2.isFavorite(), note1.isFavorite());
+            }
+        });
+        notifyDataSetChanged();
     }
     @Override
     public int getItemCount() {
@@ -59,11 +83,15 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> im
         private View itemview;
         public TextView notetitle;
         public TextView noteday;
+        public CheckBox cbFavorite;
+        public ImageView imageView;
         public ViewHolder(View itemview){
             super(itemview);
             itemview=itemview;
             notetitle=itemview.findViewById(R.id.tv_notetitle);
             noteday=itemview.findViewById(R.id.tv_noteday);
+            cbFavorite = itemview.findViewById(R.id.cbFavorite);
+            imageView = itemview.findViewById(R.id.imageView);
         }
     }
     @Override
