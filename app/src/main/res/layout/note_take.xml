@@ -17,7 +17,7 @@
             android:layout_width="55dp"
             android:layout_height="50dp"
             android:layout_weight="0.0001"
-            android:src="@drawable/backarrow"
+            style="@style/ImageButton_Back"
             android:scaleType="fitXY"
             android:backgroundTint="@color/darkpink"/>
         <ImageButton
@@ -28,7 +28,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.0001"
             android:layout_marginEnd="100dp"
-            android:src="@drawable/information"
+            style="@style/ImageButton_SetANote"
             android:scaleType="fitXY"
             android:backgroundTint="@color/darkpink"/>
         <ImageButton
@@ -38,7 +38,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="50dp"
             android:layout_weight="0.0001"
-            android:src="@drawable/share"
+            style="@style/ImageButton_Share"
             android:backgroundTint="@color/darkpink"
             android:scaleType="fitCenter"/>
 
@@ -49,7 +49,7 @@
             android:layout_alignParentEnd="true"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.0001"
-            android:src="@drawable/check"
+            style="@style/ImageButton_Save"
             android:backgroundTint="@color/darkpink"
             android:scaleType="fitCenter"/>
 
