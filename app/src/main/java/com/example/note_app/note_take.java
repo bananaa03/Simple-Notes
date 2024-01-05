@@ -34,6 +34,7 @@ public class note_take extends AppCompatActivity {
     String notetitle, notecontent, noteday, docId;
     TextView noteDay, countCharacter;
     Button btnDelete;
+    boolean isFavorite;
 
 
     @Override
@@ -43,15 +44,17 @@ public class note_take extends AppCompatActivity {
         findbyviewIds();
         CheckBox cbFavorite = findViewById(R.id.cbFavorite);
 
-        // click vao 1 item: 1. get dữ liệu từ intent trước (day_main)
+        // click vào 1 item: 1. lấy dữ liệu từ intent trước (day_main)
         Intent intent = getIntent();
         if (intent != null) {
             notetitle = intent.getStringExtra("NOTE_TITLE");
             notecontent = intent.getStringExtra("NOTE_CONTENT");
             noteday = intent.getStringExtra("NOTE_DATE");
+            isFavorite = intent.getBooleanExtra("IS_FAVORITE", false);
             edtnotecontent.setText(notecontent);
             edtnotetitle.setText(notetitle);
             noteDay.setText(noteday);
+            cbFavorite.setChecked(isFavorite);
         }
 
         buttonSetting.setOnClickListener(new View.OnClickListener() {
