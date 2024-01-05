@@ -56,13 +56,13 @@ public class setting extends AppCompatActivity {
             }
         }
         Button thongke = findViewById(R.id.thongke);
-        Button dongbo = findViewById(R.id.dongbo);
+        //Button dongbo = findViewById(R.id.dongbo);
         Button font = findViewById(R.id.font);
         Button manage_user = findViewById(R.id.manage_user);
         thongke.setTypeface(typeface);
         thongke.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-        dongbo.setTypeface(typeface);
-        dongbo.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        //dongbo.setTypeface(typeface);
+        //dongbo.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
         font.setTypeface(typeface);
         font.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
         manage_user.setTypeface(typeface);

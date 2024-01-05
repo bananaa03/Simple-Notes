@@ -85,25 +85,9 @@
         style="@style/TextStyle_White_day"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/dongbo"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        android:layout_marginTop="10dp"
-        />
-
-    <Button
-        android:id="@+id/dongbo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:backgroundTint="@color/darkpink"
-        android:text="@string/dongbo"
-        style="@style/TextStyle_White_day"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/thongke"
         app:layout_constraintBottom_toTopOf="@id/font"
-        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:layout_marginTop="0dp"
         />
 
     <Button
@@ -118,9 +102,9 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:onClick="font_day"
-        app:layout_constraintTop_toBottomOf="@id/dongbo"
+        app:layout_constraintTop_toBottomOf="@id/thongke"
         app:layout_constraintBottom_toTopOf="@id/manage_user"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         />
 
     <Button
@@ -137,7 +121,7 @@
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/font"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="100dp"/>
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="300dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

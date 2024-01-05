@@ -138,6 +138,8 @@ public class note_take extends AppCompatActivity {
         edt_note_content.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
         btnDeleteNote.setTypeface(typeface);
         btnDeleteNote.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        cbFavorite.setTypeface(typeface);
+        cbFavorite.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
 }
 
     //ngoài onCreate
