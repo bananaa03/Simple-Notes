@@ -10,6 +10,8 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -39,6 +41,7 @@ public class note_take extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.note_take);
         findbyviewIds();
+        CheckBox cbFavorite = findViewById(R.id.cbFavorite);
 
         // click vao 1 item: 1. get dữ liệu từ intent trước (day_main)
         Intent intent = getIntent();
@@ -67,6 +70,18 @@ public class note_take extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openBack();
+            }
+        });
+
+        // Thêm sự kiện nghe cho CheckBox
+        cbFavorite.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            // Xử lý khi trạng thái của CheckBox thay đổi
+            if (isChecked) {
+                // Note được đánh dấu là yêu thích
+                Utility.showToast(note_take.this, "Note đã được đánh dấu là yêu thích");
+            } else {
+                // Note không được đánh dấu là yêu thích
+                Utility.showToast(note_take.this, "Note không còn là yêu thích");
             }
         });
 
@@ -122,11 +137,6 @@ public class note_take extends AppCompatActivity {
         btnDeleteNote.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
 }
 
-
-
-
-
-
     //ngoài onCreate
     public void sharenote(){
         notetitle = edtnotetitle.getText().toString();
@@ -164,6 +174,12 @@ public class note_take extends AppCompatActivity {
         Note note = new Note();
         note.setNote_title(noteTitle);
         note.setNote_content(noteContent);
+
+        // Kiểm tra trạng thái của CheckBox
+        CheckBox checkBoxFavorite = findViewById(R.id.cbFavorite);
+        boolean isFavorite = checkBoxFavorite.isChecked();
+        note.setFavorite(isFavorite);
+
        // note.setTimestamp(Timestamp.now());
         long time = System.currentTimeMillis();
         String formatTimestamp = formatTimestamp(time);

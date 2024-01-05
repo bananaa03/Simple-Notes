@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-//Adapter cho Recycle View để hiển thị note ra trang day_main.java và night_main.java
+//Adapter cho Recycle View để hiển thị note ra trang main.java
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> implements Filterable {
     private ArrayList<Note> listnotes;
     private int layoutID;

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/Screenbackground"
-    android:padding="16dp">
+    android:padding="16dp"
+    style="@style/Bg_linear_take_note">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -59,8 +59,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ButtonRow"
-        android:layout_above="@+id/radioButton"
-        style="@style/Bg_linear_take_note"
+        android:layout_above="@+id/cbFavorite"
+        style="@style/Screenbackground"
         android:orientation="vertical">
 
         <EditText
@@ -117,11 +117,20 @@
         android:textSize="20sp"
         android:textColor="@color/white"/>
 
-    <RadioButton
-        android:id="@+id/radioButton"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Đặt note là yêu thích"
         android:layout_above="@+id/btnDeleteNote"
-        android:layout_marginStart="30dp"/>
+        android:gravity="center"
+        android:layout_marginBottom="5dp">
+        <CheckBox
+            android:id="@+id/cbFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thêm vào yêu thích"
+            android:textSize="20sp"
+            android:checked="false"
+            style="@style/Screenbackground"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+    </LinearLayout>
 </RelativeLayout>
