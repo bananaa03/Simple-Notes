@@ -2,12 +2,14 @@ package com.example.note_app;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import java.text.SimpleDateFormat;
@@ -15,14 +17,25 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
 public class reminder_take extends AppCompatActivity {
     Button btnPickDate;
     Button btnPickTime;
     EditText editTextDate;
     EditText editTextTime;
+    EditText editTextContent;
 
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private TimePickerDialog.OnTimeSetListener timeSetListener;
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +46,15 @@ public class reminder_take extends AppCompatActivity {
         btnPickTime = findViewById(R.id.btnPickTime);
         editTextDate = findViewById(R.id.date);
         editTextTime = findViewById(R.id.time);
+        editTextContent=findViewById(R.id.edt_content);
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            String userUID = currentUser.getUid();
+            String content = editTextContent.getText().toString().trim();
+            mDatabase = FirebaseDatabase.getInstance().getReference().child("reminder").child(userUID).child(content);
+        }
 
         btnPickDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,5 +116,17 @@ public class reminder_take extends AppCompatActivity {
                 true
         );
         timePickerDialog.show();
+    }
+
+    public void save(View view) {
+        String date = editTextDate.getText().toString().trim();
+        String time = editTextTime.getText().toString().trim();
+
+        if (!date.isEmpty() && !time.isEmpty()) {
+            mDatabase.setValue(date + " " + time);
+        }
+        Toast.makeText(this, "Đã lưu nhắc nhở", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(reminder_take.this, reminder.class);
+        startActivity(intent);
     }
 }
