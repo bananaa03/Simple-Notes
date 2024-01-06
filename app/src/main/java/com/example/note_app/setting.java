@@ -93,6 +93,11 @@ public class setting extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+    public void reminder(View view){
+        Intent intent = new Intent(this, reminder.class);
+        startActivity(intent);
+        finish();
+    }
     private void changemode(){
         if (mode_status == true) mode_status=false;
         else mode_status = true;

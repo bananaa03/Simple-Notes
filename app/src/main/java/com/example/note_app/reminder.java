@@ -31,5 +31,14 @@ public class reminder extends AppCompatActivity {
             //finish();
         }
     }
-
+    public void main(View view){
+        Intent intent = new Intent(this, main.class);
+        startActivity(intent);
+        finish();
+    }
+    public void setting(View view){
+        Intent intent = new Intent(this, setting.class);
+        startActivity(intent);
+        finish();
+    }
 }
