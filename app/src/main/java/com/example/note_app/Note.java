@@ -4,7 +4,7 @@ package com.example.note_app;
 import com.google.firebase.Timestamp;
 
 public class Note {
-    private int note_id;
+    private String note_id;
     private String note_title;
     private String note_day;
     private String note_label;
@@ -19,7 +19,7 @@ public class Note {
         this.isFavorite = false;
     }
 
-    public Note(int note_id, String note_title, String note_day, String note_content, boolean isFavorite) {
+    public Note(String note_id, String note_title, String note_day, String note_content, boolean isFavorite) {
         this.note_id = note_id;
         this.note_title = note_title;
         this.note_day = note_day;
@@ -28,11 +28,11 @@ public class Note {
     }
 
     private String note_content;
-    public int getNote_id() {
+    public String getNote_id() {
         return note_id;
     }
 
-    public void setNote_id(int note_id) {
+    public void setNote_id(String note_id) {
         this.note_id = note_id;
     }
 

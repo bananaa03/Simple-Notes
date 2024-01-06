@@ -55,7 +55,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> im
             holder.imageView.setVisibility(View.GONE);
         }
         //holder.cbFavorite.setChecked(note.isFavorite());
-
         holder.itemView.setOnClickListener((v)->{
             Intent intent = new Intent(context, note_take.class);
             intent.putExtra("NOTE_TITLE", note.getNote_title().toString());
@@ -125,4 +124,5 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> im
             notifyDataSetChanged();
         }
     };
+
 }
