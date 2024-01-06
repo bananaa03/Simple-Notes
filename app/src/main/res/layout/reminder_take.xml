@@ -44,7 +44,8 @@
             android:layout_weight="0.0001"
             style="@style/ImageButton_Save"
             android:backgroundTint="@color/darkpink"
-            android:scaleType="fitCenter"/>
+            android:scaleType="fitCenter"
+            android:onClick="save"/>
 
     </RelativeLayout>
     <LinearLayout
@@ -57,7 +58,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/edt_note_content"
+            android:id="@+id/edt_content"
             android:layout_width="match_parent"
             android:layout_height="146dp"
             android:layout_marginVertical="20dp"
@@ -74,34 +75,38 @@
         android:id="@+id/date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="270dp"
+        android:layout_below="@+id/linear_take_note"
+        android:layout_marginTop="27dp"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
         android:hint="1/1/2000"
         android:padding="12dp"
-        android:textSize="20sp"
-        android:focusable="false"
-        android:clickable="false"
-        android:cursorVisible="false"/>
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="350dp"
+        android:layout_below="@+id/btnPickDate"
+        android:layout_marginTop="20dp"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
         android:hint="00:00"
         android:padding="12dp"
-        android:textSize="20sp"
-        android:focusable="false"
-        android:clickable="false"
-        android:cursorVisible="false"/>
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/btnPickDate"
         style="@style/Button_PickDay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="200dp"
+        android:layout_below="@+id/date"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="32dp"
         android:gravity="center"
+        android:layout="@+id/time"
         android:text="Chọn ngày"
         android:textColor="@color/white"
         android:textSize="20sp" />
@@ -111,8 +116,9 @@
         style="@style/Button_PickTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="140dp"
+        android:layout_below="@+id/time"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="41dp"
         android:gravity="center"
         android:text="Chọn giờ"
         android:textColor="@color/white"

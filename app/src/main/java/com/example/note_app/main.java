@@ -173,14 +173,14 @@ public class main extends AppCompatActivity {
     }
 
     public void reminder(View view){
-//        if(currentUser==null){
-//            Toast.makeText(this, "Vui lòng đăng nhập để bắt đầu nhắc nhở", Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(this, log_in.class));
-//            finish();
-//        }else {
+        if(currentUser==null){
+            Toast.makeText(this, "Vui lòng đăng nhập để bắt đầu nhắc nhở", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, log_in.class));
+            finish();
+        }else {
             Intent intent = new Intent(main.this, reminder.class);
             startActivity(intent);
             finish();
-
+        }
     }
 }
