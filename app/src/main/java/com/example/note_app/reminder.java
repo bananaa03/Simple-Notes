@@ -24,11 +24,11 @@ public class reminder extends AppCompatActivity {
         if(currentUser==null){
             Toast.makeText(this, "Vui lòng đăng nhập để bắt đầu nhắc nhở", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, log_in.class));
-            //finish();
+            finish();
         }else {
             Intent intent = new Intent(reminder.this, reminder_take.class);
             startActivity(intent);
-            //finish();
+            finish();
         }
     }
     public void main(View view){

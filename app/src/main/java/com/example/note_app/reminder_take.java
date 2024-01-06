@@ -11,12 +11,15 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -35,7 +38,7 @@ public class reminder_take extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private TimePickerDialog.OnTimeSetListener timeSetListener;
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase, nDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +55,9 @@ public class reminder_take extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             String userUID = currentUser.getUid();
-            String content = editTextContent.getText().toString().trim();
-            mDatabase = FirebaseDatabase.getInstance().getReference().child("reminder").child(userUID).child(content);
+            mDatabase = FirebaseDatabase.getInstance().getReference().child("reminder").child(userUID);
+            String key = mDatabase.push().getKey();
+            nDatabase = mDatabase.child(key);
         }
 
         btnPickDate.setOnClickListener(new View.OnClickListener() {
@@ -121,12 +125,35 @@ public class reminder_take extends AppCompatActivity {
     public void save(View view) {
         String date = editTextDate.getText().toString().trim();
         String time = editTextTime.getText().toString().trim();
-
+        String content = editTextContent.getText().toString().trim();
         if (!date.isEmpty() && !time.isEmpty()) {
-            mDatabase.setValue(date + " " + time);
+            nDatabase.child("Date").setValue(date + " " + time);
+            nDatabase.child("Content").setValue(content);
         }
-        Toast.makeText(this, "Đã lưu nhắc nhở", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Đã lưu nhắc nhở" , Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(reminder_take.this, reminder.class);
         startActivity(intent);
+    }
+    public void delete(View view){
+        if (nDatabase != null) {
+            nDatabase.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(reminder_take.this, "Đã xóa nhắc nhở", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(reminder_take.this, reminder.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(reminder_take.this, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+    }
+    public void returned(View view){
+        Intent intent = new Intent(reminder_take.this, reminder.class);
+        startActivity(intent);
+        finish();
     }
 }
