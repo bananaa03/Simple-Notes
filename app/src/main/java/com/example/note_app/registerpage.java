@@ -86,7 +86,6 @@ public class registerpage extends AppCompatActivity {
                                     // Lưu thông tin người dùng vào Realtime Database
                                     currentUserDb.child("email").setValue(email2);
                                     currentUserDb.child("username").setValue(username);
-                                    currentUserDb.child("password").setValue(password2);
 
                                     Intent intent=new Intent(registerpage.this, log_in.class);
                                     startActivity(intent);

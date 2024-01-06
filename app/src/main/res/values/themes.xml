@@ -71,5 +71,19 @@
         <item name="android:textColor">@color/black</item>
     </style>
     <!-- -->
+    <!--reminder-->
+    <style name="Button_PickDay">
+        <item name="android:background">@color/darkpink</item>
+        <item name="android:backgroundTint">@color/darkpink</item>
+        <item name="backgroundTint">@color/darkpink</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Button_PickTime">
+        <item name="android:background">@color/darkpink</item>
+        <item name="android:backgroundTint">@color/darkpink</item>
+        <item name="backgroundTint">@color/darkpink</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 
 </resources>

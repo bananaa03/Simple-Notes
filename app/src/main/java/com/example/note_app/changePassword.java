@@ -1,8 +1,10 @@
 package com.example.note_app;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -89,7 +91,20 @@ public class changePassword extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 // Thành công khi đổi mật khẩu
-                                Toast.makeText(changePassword.this, "Mật khẩu đã được thay đổi", Toast.LENGTH_SHORT).show();
+                                AlertDialog.Builder builder = new AlertDialog.Builder(changePassword.this);
+                                builder.setMessage("Mật khẩu đã được thay đổi")
+                                        .setCancelable(false)
+                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                // Perform your action here when "OK" is clicked
+                                                Intent intent = new Intent(changePassword.this, log_in.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        });
+
+                                AlertDialog alert = builder.create();
+                                alert.show();
                             } else {
                                 // Xảy ra lỗi khi đổi mật khẩu
                                 Toast.makeText(changePassword.this, "Thay đổi mật khẩu thất bại", Toast.LENGTH_SHORT).show();
