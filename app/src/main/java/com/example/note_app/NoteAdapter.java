@@ -61,6 +61,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> im
             intent.putExtra("NOTE_CONTENT", note.getNote_content().toString());
             intent.putExtra("NOTE_DATE", note.getNote_day().toString());
             intent.putExtra("IS_FAVORITE", note.isFavorite());
+            intent.putExtra("NOTE_ID", note.getNote_id());
             context.startActivity(intent);
         });
     }

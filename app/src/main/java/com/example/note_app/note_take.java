@@ -31,7 +31,7 @@ public class note_take extends AppCompatActivity {
     EditText edtnotetitle, edtnotecontent;
     ImageButton buttonBack, btnSaveNote;
     boolean isEditMode = false;
-    String notetitle, notecontent, noteday, docId;
+    String notetitle, notecontent, noteday, docId, noteID;
     TextView noteDay, countCharacter;
     Button btnDelete;
     boolean isFavorite;
@@ -51,6 +51,7 @@ public class note_take extends AppCompatActivity {
             notecontent = intent.getStringExtra("NOTE_CONTENT");
             noteday = intent.getStringExtra("NOTE_DATE");
             isFavorite = intent.getBooleanExtra("IS_FAVORITE", false);
+            noteID = intent.getStringExtra("NOTE_ID");
             edtnotecontent.setText(notecontent);
             edtnotetitle.setText(notetitle);
             noteDay.setText(noteday);
@@ -200,16 +201,16 @@ public class note_take extends AppCompatActivity {
         //int countContent = 0;
     }
 
+    String noteId;
     public void saveNoteToFireBase(Note note){
         DocumentReference documentReference;
         if(isEditMode){
             //update the note
-            documentReference = Utility.getCollectionReferenceForNotes().document(docId);
+            documentReference = Utility.getCollectionReferenceForNotes().document(noteID);
         }else{
             //create new note
             documentReference = Utility.getCollectionReferenceForNotes().document();
-            String noteId = documentReference.getId();
-
+             noteId= documentReference.getId();
             // Gán note_id cho trường note_id của note
             note.setNote_id(noteId);
         }
@@ -217,7 +218,6 @@ public class note_take extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-
                     //note is added
                     Utility.showToast(note_take.this,"Note added successfully");
                     //finish();
@@ -240,7 +240,7 @@ public class note_take extends AppCompatActivity {
     // delete note
     public void deleteNoteFromFirebase(){
         DocumentReference documentReference;
-            documentReference = Utility.getCollectionReferenceForNotes().document(docId);
+            documentReference = Utility.getCollectionReferenceForNotes().document(noteID);
         documentReference.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
