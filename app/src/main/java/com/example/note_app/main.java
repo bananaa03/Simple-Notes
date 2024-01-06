@@ -139,6 +139,7 @@ public class main extends AppCompatActivity {
         noteAdapter= new NoteAdapter(this, R.layout.item_note, listNote);
         noteAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(noteAdapter);
+        noteAdapter.sortNotesByFavorite();
     }
 
 

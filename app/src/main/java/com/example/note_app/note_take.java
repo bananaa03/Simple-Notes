@@ -2,10 +2,13 @@ package com.example.note_app;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
@@ -35,6 +38,7 @@ public class note_take extends AppCompatActivity {
     TextView noteDay, countCharacter;
     Button btnDelete;
     boolean isFavorite;
+    Integer countword, countword_before_text;
 
 
     @Override
@@ -43,7 +47,7 @@ public class note_take extends AppCompatActivity {
         setContentView(R.layout.note_take);
         findbyviewIds();
         CheckBox cbFavorite = findViewById(R.id.cbFavorite);
-
+        countCharacter = (TextView) findViewById(R.id.count_character_note);
         // click vào 1 item: 1. lấy dữ liệu từ intent trước (day_main)
         Intent intent = getIntent();
         if (intent != null) {
@@ -56,8 +60,26 @@ public class note_take extends AppCompatActivity {
             edtnotetitle.setText(notetitle);
             noteDay.setText(noteday);
             cbFavorite.setChecked(isFavorite);
+            if (edtnotecontent!= null)
+                countword = edtnotecontent.length();
+            countCharacter.setText("Số lý tự: " + countword.toString());
         }
 
+        edtnotecontent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                countword = s.length();
+                countCharacter.setText("Số lý tự: " + countword.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         buttonSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,8 +115,12 @@ public class note_take extends AppCompatActivity {
         btnSaveNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveNote();
-                // Khi lưu note thì sẽ thoát ra khỏi note và quay về trang menu
+                if(notecontent == null)
+                    saveNote();
+                else {
+                    deleteNoteFromFirebase();
+                    saveNote();
+                }
                 openBack();
             }
         });
@@ -104,6 +130,7 @@ public class note_take extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 deleteNoteFromFirebase();
+                openBack();
             }
         });
 
@@ -185,8 +212,7 @@ public class note_take extends AppCompatActivity {
         CheckBox checkBoxFavorite = findViewById(R.id.cbFavorite);
         boolean isFavorite = checkBoxFavorite.isChecked();
         note.setFavorite(isFavorite);
-
-       // note.setTimestamp(Timestamp.now());
+        // note.setTimestamp(Timestamp.now());
         long time = System.currentTimeMillis();
         String formatTimestamp = formatTimestamp(time);
         // save time vào textview ngày tháng năm
@@ -196,22 +222,21 @@ public class note_take extends AppCompatActivity {
         note.setNote_day(note_day);
         saveNoteToFireBase(note);
         //Chưa update số ký tự được
-        countCharacter = (TextView) findViewById(R.id.count_character_note);
-        edtnotecontent = (EditText) findViewById(R.id.edt_note_content);
+
+
         //int countContent = 0;
     }
-
     String noteId;
     public void saveNoteToFireBase(Note note){
         DocumentReference documentReference;
         if(isEditMode){
             //update the note
-            documentReference = Utility.getCollectionReferenceForNotes().document(noteID);
+            documentReference = Utility.getCollectionReferenceForNotes().document(noteId);
+            //deleteNoteFromFirebase();
         }else{
             //create new note
             documentReference = Utility.getCollectionReferenceForNotes().document();
-             noteId= documentReference.getId();
-            // Gán note_id cho trường note_id của note
+            noteId= documentReference.getId();
             note.setNote_id(noteId);
         }
         documentReference.set(note).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -54,69 +54,65 @@
             android:scaleType="fitCenter"/>
 
     </RelativeLayout>
-    <LinearLayout
-        android:id="@+id/linear_take_note"
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ButtonRow"
-        android:layout_above="@+id/cbFavorite"
-        android:background="@color/black2"
-        style="@style/Screenbackground"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/edt_note_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Chủ đề"
-            android:textAlignment="center"
-            android:textSize="45dp"
-            android:textStyle="bold" />
-
+        android:id="@+id/scrollView"
+        android:layout_marginBottom="120dp"
+        >
         <LinearLayout
+            android:id="@+id/linear_take_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="@color/backgroundlg"
+            style="@style/Screenbackground"
+            android:orientation="vertical"
+            >
 
-            <TextView
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/edt_note_title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/note_day"
-                android:text="Ngày tháng năm"
-                android:layout_gravity="center"/>
+                android:hint="Chủ đề"
+                android:textAlignment="center"
+                android:textSize="45sp"
+                android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/count_character_note"
-                android:text="Số ký tự"
-                android:layout_gravity="center"/>
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/note_day"
+                    android:text="Ngày tháng năm"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/count_character_note"
+                    android:text="Số ký tự"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/edt_note_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:gravity="top"
+                android:hint="Nhập ở đây"
+                android:minLines="15"
+                android:padding="12dp"
+                android:textSize="20sp"
+                />
         </LinearLayout>
-
-        <EditText
-            android:id="@+id/edt_note_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="20dp"
-            android:gravity="top"
-            android:hint="Nhập ở đây"
-            android:minLines="15"
-            android:padding="12dp"
-            android:textSize="20sp" />
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btnDeleteNote"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="4dp"
-        style="@style/Button_Delete"
-        android:gravity="center"
-        android:text="Xóa ghi chú"
-        android:textSize="20sp"
-        android:textColor="@color/white"/>
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -134,4 +130,15 @@
             style="@style/Screenbackground"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
     </LinearLayout>
+    <Button
+        android:id="@+id/btnDeleteNote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="4dp"
+        style="@style/Button_Delete"
+        android:gravity="center"
+        android:text="Xóa ghi chú"
+        android:textSize="20sp"
+        android:textColor="@color/white"/>
 </RelativeLayout>
