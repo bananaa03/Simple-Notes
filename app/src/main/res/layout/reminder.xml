@@ -123,8 +123,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:layout_editor_absoluteX="0dp"
-                            tools:listitem="@layout/reminder_item"
-                            android:onClick="new_reminder"/>
+                            tools:listitem="@layout/reminder_item" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </ScrollView>
                 <ImageButton
@@ -138,7 +137,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     style="@style/ImageButton_AddNewNote"
-                    android:background="@drawable/round_button_background"/>
+                    android:background="@drawable/round_button_background"
+                    android:onClick="new_reminder"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>

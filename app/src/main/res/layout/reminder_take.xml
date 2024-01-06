@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    style="@style/Screenbackground">
+    style="@style/Screenbackground"
+    tools:context=".reminder_take">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -51,7 +52,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ButtonRow"
-        android:layout_above="@+id/alarm"
         android:background="@color/black2"
         style="@style/Screenbackground"
         android:orientation="vertical">
@@ -59,7 +59,7 @@
         <EditText
             android:id="@+id/edt_note_content"
             android:layout_width="match_parent"
-            android:layout_height="292dp"
+            android:layout_height="146dp"
             android:layout_marginVertical="20dp"
             android:gravity="top"
             android:hint="Nhập ở đây"
@@ -67,16 +67,32 @@
             android:padding="12dp"
             android:textSize="20sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-
-        </LinearLayout>
-
 
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="270dp"
+        android:hint="1/1/2000"
+        android:padding="12dp"
+        android:textSize="20sp"
+        android:focusable="false"
+        android:clickable="false"
+        android:cursorVisible="false"/>
+
+    <EditText
+        android:id="@+id/time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="350dp"
+        android:hint="00:00"
+        android:padding="12dp"
+        android:textSize="20sp"
+        android:focusable="false"
+        android:clickable="false"
+        android:cursorVisible="false"/>
 
     <Button
         android:id="@+id/btnPickDate"
@@ -84,9 +100,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="195dp"
-        android:text="Chọn ngày"
+        android:layout_marginBottom="200dp"
         android:gravity="center"
+        android:text="Chọn ngày"
         android:textColor="@color/white"
         android:textSize="20sp" />
 
@@ -131,4 +147,5 @@
             android:textSize="20sp"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
     </LinearLayout>
+
 </RelativeLayout>
