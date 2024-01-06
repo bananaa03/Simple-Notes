@@ -60,6 +60,11 @@ public class reminder_take extends AppCompatActivity {
             nDatabase = mDatabase.child(key);
         }
 
+        // Lấy nội dung titile của intent note_take hiện lên edit text
+        Intent intent = getIntent();
+        String contentIntentFromNotetake = intent.getStringExtra("Title");
+        editTextContent.setText(contentIntentFromNotetake);
+
         btnPickDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +105,8 @@ public class reminder_take extends AppCompatActivity {
                 editTextTime.setText(selectedTime);
             }
         };
+
+
     }
 
     private void showDatePickerDialog() {

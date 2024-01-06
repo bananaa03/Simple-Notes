@@ -309,6 +309,10 @@ public class note_take extends AppCompatActivity {
                 {
                     showMessage("Bạn đã chọn nhắc nhở");
                     Intent intent = new Intent(note_take.this, reminder_take.class);
+
+                    // Lấy title từ intent note_take
+                    String intentTitleNotetake = edtnotetitle.getText().toString();
+                    intent.putExtra("Title", intentTitleNotetake);
                     startActivity(intent);
                 }
 
