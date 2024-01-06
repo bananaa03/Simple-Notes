@@ -13,7 +13,7 @@
     <!--night_main-->
     <style name="Screenbackground"><item name="android:background">@color/black2</item></style>
     <style name="BarBackground"><item name="android:background">@color/darkpink</item></style>
-    <style name="SearchBackground"><item name="android:background">@color/black2</item><item name="android:textColorHint">@color/black</item></style>
+    <style name="SearchBackground"><item name="android:background">@drawable/find_text_border_night</item><item name="android:textColorHint">@color/black</item></style>
     <style name="ImageButton_Changemode"><item name="srcCompat">@drawable/dark</item><item name="android:background">@color/darkpink</item></style>
     <style name="ImageButton_Note"><item name="srcCompat">@drawable/light_note</item><item name="android:background">@color/darkpink</item></style>
     <style name="ImageButton_Clock"><item name="srcCompat">@drawable/light_clock</item><item name="android:background">@color/darkpink</item></style>

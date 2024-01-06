@@ -208,11 +208,16 @@ public class note_take extends AppCompatActivity {
         }else{
             //create new note
             documentReference = Utility.getCollectionReferenceForNotes().document();
+            String noteId = documentReference.getId();
+
+            // Gán note_id cho trường note_id của note
+            note.setNote_id(noteId);
         }
         documentReference.set(note).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
+
                     //note is added
                     Utility.showToast(note_take.this,"Note added successfully");
                     //finish();

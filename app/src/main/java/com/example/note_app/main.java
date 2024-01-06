@@ -61,12 +61,6 @@ public class main extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
         setupRecycleView();
-        nightmode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changemode();
-            }
-        });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -90,7 +84,12 @@ public class main extends AppCompatActivity {
                 findNewNote();
             }
         });
-
+        nightmode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changemode();
+            }
+        });
     }
 
 
@@ -101,14 +100,14 @@ public class main extends AppCompatActivity {
         if (mode_status == true) mode_status=false;
         else mode_status = true;
         if (mode_status){
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            editor = sharedPreferences.edit();
-            editor.putBoolean("night", mode_status);
-            editor.apply();
-        } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             editor = sharedPreferences.edit();
-            editor.putBoolean("night", mode_status);
+            editor.putBoolean("night", false);
+            editor.apply();
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            editor = sharedPreferences.edit();
+            editor.putBoolean("night", true);
             editor.apply();
         }
     }
@@ -140,8 +139,6 @@ public class main extends AppCompatActivity {
         noteAdapter= new NoteAdapter(this, R.layout.item_note, listNote);
         noteAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(noteAdapter);
-        // Gọi phương thức để sắp xếp lại danh sách
-        noteAdapter.sortNotesByFavorite();
     }
 
 
