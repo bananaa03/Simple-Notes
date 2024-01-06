@@ -38,7 +38,7 @@ public class note_take extends AppCompatActivity {
     TextView noteDay, countCharacter;
     Button btnDelete;
     boolean isFavorite;
-    Integer countword;
+    Integer countword, countword_before_text;
 
 
     @Override
@@ -60,18 +60,19 @@ public class note_take extends AppCompatActivity {
             edtnotetitle.setText(notetitle);
             noteDay.setText(noteday);
             cbFavorite.setChecked(isFavorite);
+            if (edtnotecontent!= null)
+                countword = edtnotecontent.length();
+            countCharacter.setText("Số lý tự: " + countword.toString());
         }
+
         edtnotecontent.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                countword = s.length();
-                countCharacter.setText(countword.toString());
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 countword = s.length();
-                countCharacter.setText(countword.toString());
+                countCharacter.setText("Số lý tự: " + countword.toString());
             }
 
             @Override
