@@ -11,12 +11,14 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -168,6 +170,14 @@ public class note_take extends AppCompatActivity {
         btnDeleteNote.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
         cbFavorite.setTypeface(typeface);
         cbFavorite.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+
+        // button setting -> popup menu
+        buttonSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopupMenu(v);
+            }
+        });
 }
 
     //ngoài onCreate
@@ -288,5 +298,28 @@ public class note_take extends AppCompatActivity {
         buttonBack = (ImageButton) findViewById(R.id.ImageButtonBack);
         btnSaveNote = (ImageButton) findViewById(R.id.iBt_Save);
         btnDelete = (Button) findViewById(R.id.btnDeleteNote);
+    }
+
+    public void showPopupMenu(View v){
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if(item.getItemId() == R.id.remind)
+                {
+                    showMessage("Bạn đã chọn nhắc nhở");
+                    Intent intent = new Intent(note_take.this, reminder_take.class);
+                    startActivity(intent);
+                }
+
+                return true;
+            }
+        });
+        popup.inflate(R.menu.popup_menu);
+        popup.show();
+    }
+
+    private void showMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
