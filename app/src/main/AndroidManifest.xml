@@ -24,10 +24,10 @@
         <activity android:name=".font"/>
         <activity android:name=".changePassword"/>
         <activity android:name=".reminder" />
-<!--        <activity android:name=".reminder_take" />-->
+        <activity android:name=".reminder_take" />
 
         <activity
-            android:name=".reminder_take"
+            android:name=".main"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
