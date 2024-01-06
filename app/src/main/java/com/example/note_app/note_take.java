@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
@@ -36,6 +38,7 @@ public class note_take extends AppCompatActivity {
     TextView noteDay, countCharacter;
     Button btnDelete;
     boolean isFavorite;
+    Integer countword;
 
 
     @Override
@@ -44,7 +47,7 @@ public class note_take extends AppCompatActivity {
         setContentView(R.layout.note_take);
         findbyviewIds();
         CheckBox cbFavorite = findViewById(R.id.cbFavorite);
-
+        countCharacter = (TextView) findViewById(R.id.count_character_note);
         // click vào 1 item: 1. lấy dữ liệu từ intent trước (day_main)
         Intent intent = getIntent();
         if (intent != null) {
@@ -58,7 +61,24 @@ public class note_take extends AppCompatActivity {
             noteDay.setText(noteday);
             cbFavorite.setChecked(isFavorite);
         }
+        edtnotecontent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                countword = s.length();
+                countCharacter.setText(countword.toString());
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                countword = s.length();
+                countCharacter.setText(countword.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         buttonSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -201,8 +221,8 @@ public class note_take extends AppCompatActivity {
         note.setNote_day(note_day);
         saveNoteToFireBase(note);
         //Chưa update số ký tự được
-        countCharacter = (TextView) findViewById(R.id.count_character_note);
-        edtnotecontent = (EditText) findViewById(R.id.edt_note_content);
+
+
         //int countContent = 0;
     }
     String noteId;
