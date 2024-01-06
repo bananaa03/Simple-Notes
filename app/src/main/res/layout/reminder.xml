@@ -54,7 +54,8 @@
                     app:layout_constraintLeft_toRightOf="@id/iBt_mode"
                     app:layout_constraintRight_toLeftOf="@id/iBt_settime"
                     app:layout_constraintTop_toTopOf="parent"
-                    style="@style/ImageButton_Note" />
+                    style="@style/ImageButton_Note"
+                    android:onClick="main" />
 
                 <ImageButton
                     android:id="@+id/iBt_settime"
@@ -74,7 +75,7 @@
                     android:layout_height="40dp"
                     android:layout_marginTop="13dp"
                     android:layout_marginEnd="1dp"
-                    android:onClick="setting_day"
+                    android:onClick="setting"
                     android:contentDescription="@string/settings"
                     android:scaleType="fitXY"
                     app:layout_constraintLeft_toRightOf="@id/iBt_settime"
