@@ -2,6 +2,7 @@ package com.example.note_app;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -93,8 +94,12 @@ public class note_take extends AppCompatActivity {
         btnSaveNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveNote();
-                // Khi lưu note thì sẽ thoát ra khỏi note và quay về trang menu
+                if(notecontent == null)
+                    saveNote();
+                else {
+                    deleteNoteFromFirebase();
+                    saveNote();
+                }
                 openBack();
             }
         });
@@ -104,6 +109,7 @@ public class note_take extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 deleteNoteFromFirebase();
+                openBack();
             }
         });
 
@@ -185,8 +191,7 @@ public class note_take extends AppCompatActivity {
         CheckBox checkBoxFavorite = findViewById(R.id.cbFavorite);
         boolean isFavorite = checkBoxFavorite.isChecked();
         note.setFavorite(isFavorite);
-
-       // note.setTimestamp(Timestamp.now());
+        // note.setTimestamp(Timestamp.now());
         long time = System.currentTimeMillis();
         String formatTimestamp = formatTimestamp(time);
         // save time vào textview ngày tháng năm
@@ -200,18 +205,17 @@ public class note_take extends AppCompatActivity {
         edtnotecontent = (EditText) findViewById(R.id.edt_note_content);
         //int countContent = 0;
     }
-
     String noteId;
     public void saveNoteToFireBase(Note note){
         DocumentReference documentReference;
         if(isEditMode){
             //update the note
-            documentReference = Utility.getCollectionReferenceForNotes().document(noteID);
+            documentReference = Utility.getCollectionReferenceForNotes().document(noteId);
+            //deleteNoteFromFirebase();
         }else{
             //create new note
             documentReference = Utility.getCollectionReferenceForNotes().document();
-             noteId= documentReference.getId();
-            // Gán note_id cho trường note_id của note
+            noteId= documentReference.getId();
             note.setNote_id(noteId);
         }
         documentReference.set(note).addOnCompleteListener(new OnCompleteListener<Void>() {
