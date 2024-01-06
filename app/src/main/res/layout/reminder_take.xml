@@ -20,7 +20,8 @@
             android:layout_weight="0.0001"
             style="@style/ImageButton_Back"
             android:scaleType="fitXY"
-            android:backgroundTint="@color/darkpink"/>
+            android:backgroundTint="@color/darkpink"
+            android:onClick="returned"/>
 
 
         <ImageButton
@@ -162,7 +163,8 @@
                     android:gravity="center"
                     android:text="Xóa nhắc nhở"
                     android:textSize="20sp"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:onClick="delete"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
