@@ -25,6 +25,7 @@
         <activity android:name=".changePassword"/>
         <activity android:name=".reminder_list" />
         <activity android:name=".reminder_take" />
+        <activity android:name=".statistic"/>
 
         <activity
             android:name=".main"
