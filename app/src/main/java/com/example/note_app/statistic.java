@@ -2,32 +2,30 @@ package com.example.note_app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
-import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.google.firebase.auth.FirebaseAuth;
-
-public class setting extends AppCompatActivity {
-
+public class statistic extends AppCompatActivity {
     ImageButton nightmode;
     SharedPreferences sharedPreferences;
     Boolean mode_status;
     SharedPreferences.Editor editor;
-    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.setting);
+        setContentView(R.layout.statistic);
 
         nightmode=findViewById(R.id.iBt_mode);
         sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
@@ -55,41 +53,31 @@ public class setting extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Failed to create typeface from file", Toast.LENGTH_SHORT).show();
             }
         }
-        Button thongke = findViewById(R.id.thongke);
-        //Button dongbo = findViewById(R.id.dongbo);
-        Button font = findViewById(R.id.font);
-        Button manage_user = findViewById(R.id.manage_user);
-        thongke.setTypeface(typeface);
-        thongke.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-        //dongbo.setTypeface(typeface);
-        //dongbo.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-        font.setTypeface(typeface);
-        font.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-        manage_user.setTypeface(typeface);
-        manage_user.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        TextView title = findViewById(R.id.title);
+        TextView txtFavorite = findViewById(R.id.txtFavorite);
+        TextView txtNote = findViewById(R.id.txtNote);
+        TextView txtReminder = findViewById(R.id.txtReminder);
+        TextView countFavorite = findViewById(R.id.countFavorite);
+        TextView countNote = findViewById(R.id.countNote);
+        TextView countReminder = findViewById(R.id.countReminder);
+
+        title.setTypeface(typeface);
+        title.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        txtFavorite.setTypeface(typeface);
+        txtFavorite.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        txtNote.setTypeface(typeface);
+        txtNote.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        txtReminder.setTypeface(typeface);
+        txtReminder.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        countFavorite.setTypeface(typeface);
+        countFavorite.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        countNote.setTypeface(typeface);
+        countNote.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        countReminder.setTypeface(typeface);
+        countReminder.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
     }
     public void btnBacktoMain_day(View view){
         Intent intent = new Intent(this, main.class);
-        startActivity(intent);
-        finish();
-    }
-    public void login_day(View view){
-        if (firebaseAuth.getCurrentUser() != null) {
-            // Người dùng đã đăng nhập, chuyển tới user.class
-            Intent intent = new Intent(this, user_manager.class);
-            startActivity(intent);
-            finish();
-        } else {
-            // Người dùng chưa đăng nhập, chuyển tới trang đăng nhập (log_in.class)
-            Intent intent = new Intent(this, log_in.class);
-            startActivity(intent);
-            finish();
-        }
-    }
-
-
-    public void font_day(View view){
-        Intent intent = new Intent(this, font.class);
         startActivity(intent);
         finish();
     }
@@ -98,9 +86,8 @@ public class setting extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
-    public void statistic(View view){
-        Intent intent = new Intent(this, statistic.class);
+    public void setting(View view){
+        Intent intent = new Intent(this, setting.class);
         startActivity(intent);
         finish();
     }

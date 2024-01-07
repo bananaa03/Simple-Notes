@@ -114,7 +114,8 @@
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/lineartextView"
                 android:weightSum="10"
-                android:layout_marginTop="50dp">
+                android:layout_marginTop="50dp"
+                android:layout_marginStart="30dp">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -127,18 +128,15 @@
                         android:text="@string/username"
                         android:textColor="@color/darkpink"
                         android:textSize="20sp"
-                        android:layout_gravity="end"
                         app:layout_constraintTop_toBottomOf="@+id/textView" />
                     <TextView
                         android:id="@+id/textView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
                         android:layout_marginTop="30dp"
                         android:text="@string/email"
                         android:textColor="@color/darkpink"
                         android:textSize="20sp"
-                        android:layout_gravity="end"
                         app:layout_constraintTop_toBottomOf="@+id/textView2" />
                 </LinearLayout>
 
