@@ -5,6 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -26,6 +29,8 @@
         <activity android:name=".reminder_list" />
         <activity android:name=".reminder_take" />
         <activity android:name=".statistic"/>
+        <receiver android:name=".AlarmReceiver"/>
+        <receiver android:name=".ReminderNotificationReceiver"/>
 
         <activity
             android:name=".main"

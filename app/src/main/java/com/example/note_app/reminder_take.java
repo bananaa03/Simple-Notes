@@ -1,5 +1,7 @@
 package com.example.note_app;
 
+import static android.app.PendingIntent.FLAG_IMMUTABLE;
+
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.Notification;
@@ -214,24 +216,24 @@ public class reminder_take extends AppCompatActivity {
             Toast.makeText(this, "Vui lòng nhập ngày và giờ", Toast.LENGTH_SHORT).show();
         }
 
-//        Calendar calendar = Calendar.getInstance();
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
-//        try {
-//            Date dateTime = dateFormat.parse(date + " " + time);
-//            if (dateTime != null) {
-//                calendar.setTime(dateTime);
-//
-//                // Nếu checkbox được chọn, đặt báo thức
-//                if (alarmChecked) {
-//                    setAlarm(calendar.getTimeInMillis());
-//                } else {
-//                    // Nếu không được chọn, gửi thông báo
-//                    sendNotification(calendar.getTimeInMillis());
-//                }
-//            }
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+        try {
+            Date dateTime = dateFormat.parse(date + " " + time);
+            if (dateTime != null) {
+                calendar.setTime(dateTime);
+
+                // Nếu checkbox được chọn, đặt báo thức
+                if (alarmChecked) {
+                    setAlarm(calendar.getTimeInMillis());
+                } else {
+                    // Nếu không được chọn, gửi thông báo
+                    sendNotification(calendar.getTimeInMillis());
+                }
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public void delete(View view){
@@ -257,36 +259,36 @@ public class reminder_take extends AppCompatActivity {
         finish();
     }
 
-//    private void setAlarm(long timeInMillis) {
-//        Intent intent = new Intent(this, AlarmReceiver.class);
-//        alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-//
-//        // Đặt báo thức
-//        alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis, alarmIntent);
-//        Toast.makeText(this, "Báo thức được đặt", Toast.LENGTH_SHORT).show();
-//    }
-//
-//    private void sendNotification(long timeInMillis) {
-//        // Tạo thông báo
-//        Intent intent = new Intent(this, ReminderNotificationReceiver.class);
-//        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-//
-//        // ... (Tạo notification)
-//
-//        // Hiển thị thông báo tại thời điểm xác định
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            NotificationChannel channel = new NotificationChannel("default", "Channel name", NotificationManager.IMPORTANCE_DEFAULT);
-//            notificationManager.createNotificationChannel(channel);
-//        }
-//
-//        Notification notification = new Notification.Builder(this, "default")
-//                .setContentTitle("Thông báo")
-//                .setContentText("Nội dung thông báo")
-//                .setSmallIcon(R.drawable.)
-//                .setContentIntent(pendingIntent)
-//                .setAutoCancel(true)
-//                .build();
-//
-//        notificationManager.notify(0, notification);
-//    }
+    private void setAlarm(long timeInMillis) {
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        alarmIntent = PendingIntent.getBroadcast(this, 0, intent, FLAG_IMMUTABLE);
+
+        // Đặt báo thức
+        alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis, alarmIntent);
+        Toast.makeText(this, "Báo thức được đặt", Toast.LENGTH_SHORT).show();
+    }
+
+    private void sendNotification(long timeInMillis) {
+        // Tạo thông báo
+        Intent intent = new Intent(this, ReminderNotificationReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, FLAG_IMMUTABLE);
+
+        // ... (Tạo notification)
+
+        // Hiển thị thông báo tại thời điểm xác định
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("default", "Channel name", NotificationManager.IMPORTANCE_DEFAULT);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        Notification notification = new Notification.Builder(this, "default")
+                .setContentTitle("Thông báo")
+                .setContentText("Nội dung thông báo")
+                .setSmallIcon(R.drawable.alarm)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .build();
+
+        notificationManager.notify(0, notification);
+    }
 }
