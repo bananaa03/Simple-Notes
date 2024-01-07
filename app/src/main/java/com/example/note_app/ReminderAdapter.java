@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,15 +35,17 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
     }
 
     public static class ReminderViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvTitle;
-        private TextView tvDate;
-        private TextView tvTime;
+        public TextView tvTitle;
+        public TextView tvDate;
+        public TextView tvTime;
+        public ImageView imageView;
 
         public ReminderViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tv_remindertitle);
             tvDate = itemView.findViewById(R.id.tv_reminderday);
             tvTime = itemView.findViewById(R.id.tv_reminderTime);
+            imageView = itemView.findViewById(R.id.imageView);
         }
 
         public void bind(Reminder reminder) {
@@ -65,6 +68,13 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
     public void onBindViewHolder(@NonNull ReminderViewHolder holder, int position) {
         Reminder reminder = reminderList.get(position);
         holder.bind(reminder);
+
+        // Cập nhật trạng thái của ImageView dựa trên isAlarmOn
+        if (reminder.isAlarmOn()) {
+            holder.imageView.setVisibility(View.VISIBLE);
+        } else {
+            holder.imageView.setVisibility(View.GONE);
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

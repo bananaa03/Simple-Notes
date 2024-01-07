@@ -1,9 +1,12 @@
 package com.example.note_app;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,11 +33,28 @@ public class reminder_list extends AppCompatActivity implements ReminderAdapter.
     private RecyclerView recyclerView;
     private ReminderAdapter adapter;
     private List<Reminder> reminderList;
+    ImageButton nightmode;
+    SharedPreferences sharedPreferences;
+    Boolean mode_status;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reminder);
+
+        nightmode=findViewById(R.id.iBt_mode);
+        sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        mode_status = sharedPreferences.getBoolean("night", false);
+        if(mode_status){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+        nightmode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changemode();
+            }
+        });
 
         // Khởi tạo RecyclerView và adapter
         recyclerView = findViewById(R.id.rcv_remind);
@@ -59,7 +80,8 @@ public class reminder_list extends AppCompatActivity implements ReminderAdapter.
                         String title = snapshot.child("Content").getValue(String.class);
                         String date = snapshot.child("Date").getValue(String.class);
                         String time = snapshot.child("Time").getValue(String.class);
-                        Reminder reminder = new Reminder(title, date, time);
+                        boolean alarm = snapshot.child("Alarm").getValue(boolean.class);
+                        Reminder reminder = new Reminder(title, date, time, alarm);
                         reminder.setKey(key);
                         reminderList.add(reminder);
                     }
@@ -68,7 +90,7 @@ public class reminder_list extends AppCompatActivity implements ReminderAdapter.
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Log.e("YourActivity", "Error: " + databaseError.getMessage());
+                    Log.e("Reminder", "Error: " + databaseError.getMessage());
                 }
             });
         }
@@ -82,6 +104,7 @@ public class reminder_list extends AppCompatActivity implements ReminderAdapter.
         intent.putExtra("title", clickedReminder.getTitle());
         intent.putExtra("date", clickedReminder.getDate());
         intent.putExtra("time", clickedReminder.getTime());
+        intent.putExtra("alarm",clickedReminder.getTime());
         startActivity(intent);
     }
 
@@ -105,5 +128,20 @@ public class reminder_list extends AppCompatActivity implements ReminderAdapter.
         Intent intent = new Intent(this, setting.class);
         startActivity(intent);
         finish();
+    }
+    private void changemode(){
+        if (mode_status == true) mode_status=false;
+        else mode_status = true;
+        if (mode_status){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            editor = sharedPreferences.edit();
+            editor.putBoolean("night", mode_status);
+            editor.apply();
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            editor = sharedPreferences.edit();
+            editor.putBoolean("night", mode_status);
+            editor.apply();
+        }
     }
 }

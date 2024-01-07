@@ -1,8 +1,15 @@
 package com.example.note_app;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,8 +22,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -45,6 +55,10 @@ public class reminder_take extends AppCompatActivity {
     private DatabaseReference mDatabase, nDatabase;
     String key;
 
+    private AlarmManager alarmManager;
+    private PendingIntent alarmIntent;
+    private NotificationManager notificationManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +67,11 @@ public class reminder_take extends AppCompatActivity {
         edtDate = findViewById(R.id.date);
         edtTime = findViewById(R.id.time);
         checkBoxAlarm = findViewById(R.id.alarm);
+
+        // Khởi tạo AlarmManager và NotificationManager
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
         // Nhận dữ liệu từ Intent
         Intent intent = getIntent();
         if (intent != null && intent.getExtras() != null) {
@@ -60,17 +79,12 @@ public class reminder_take extends AppCompatActivity {
             String title = intent.getStringExtra("title");
             String date = intent.getStringExtra("date");
             String time = intent.getStringExtra("time");
-            boolean isEdit = intent.getBooleanExtra("isEdit", false);
 
             // Hiển thị dữ liệu lên giao diện
             edtContent.setText(title);
             edtDate.setText(date);
             edtTime.setText(time);
 
-            if (isEdit) {
-                // Đổi tiêu đề và thay đổi button để chỉnh sửa thay vì tạo mới
-                setTitle("Chỉnh sửa nhắc nhở");
-            }
         }
 
         btnPickDate = findViewById(R.id.btnPickDate);
@@ -159,10 +173,14 @@ public class reminder_take extends AppCompatActivity {
         timePickerDialog.show();
     }
 
+
     public void save(View view) {
         String date = editTextDate.getText().toString().trim();
         String time = editTextTime.getText().toString().trim();
         String content = editTextContent.getText().toString().trim();
+        boolean alarmChecked = checkBoxAlarm.isChecked();
+        Reminder reminder = new Reminder();
+        reminder.setAlarmOn(alarmChecked);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (!date.isEmpty() && !time.isEmpty()) {
@@ -175,6 +193,7 @@ public class reminder_take extends AppCompatActivity {
             reminderUpdates.put("Content", content);
             reminderUpdates.put("Date", date);
             reminderUpdates.put("Time", time);
+            reminderUpdates.put("Alarm", alarmChecked);
 
             reminderRef.updateChildren(reminderUpdates).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -194,6 +213,25 @@ public class reminder_take extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Vui lòng nhập ngày và giờ", Toast.LENGTH_SHORT).show();
         }
+
+//        Calendar calendar = Calendar.getInstance();
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+//        try {
+//            Date dateTime = dateFormat.parse(date + " " + time);
+//            if (dateTime != null) {
+//                calendar.setTime(dateTime);
+//
+//                // Nếu checkbox được chọn, đặt báo thức
+//                if (alarmChecked) {
+//                    setAlarm(calendar.getTimeInMillis());
+//                } else {
+//                    // Nếu không được chọn, gửi thông báo
+//                    sendNotification(calendar.getTimeInMillis());
+//                }
+//            }
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void delete(View view){
@@ -218,4 +256,37 @@ public class reminder_take extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+//    private void setAlarm(long timeInMillis) {
+//        Intent intent = new Intent(this, AlarmReceiver.class);
+//        alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+//
+//        // Đặt báo thức
+//        alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis, alarmIntent);
+//        Toast.makeText(this, "Báo thức được đặt", Toast.LENGTH_SHORT).show();
+//    }
+//
+//    private void sendNotification(long timeInMillis) {
+//        // Tạo thông báo
+//        Intent intent = new Intent(this, ReminderNotificationReceiver.class);
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+//
+//        // ... (Tạo notification)
+//
+//        // Hiển thị thông báo tại thời điểm xác định
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            NotificationChannel channel = new NotificationChannel("default", "Channel name", NotificationManager.IMPORTANCE_DEFAULT);
+//            notificationManager.createNotificationChannel(channel);
+//        }
+//
+//        Notification notification = new Notification.Builder(this, "default")
+//                .setContentTitle("Thông báo")
+//                .setContentText("Nội dung thông báo")
+//                .setSmallIcon(R.drawable.)
+//                .setContentIntent(pendingIntent)
+//                .setAutoCancel(true)
+//                .build();
+//
+//        notificationManager.notify(0, notification);
+//    }
 }
