@@ -179,7 +179,7 @@ public class main extends AppCompatActivity {
             startActivity(new Intent(this, log_in.class));
             finish();
         }else {
-            Intent intent = new Intent(main.this, reminder.class);
+            Intent intent = new Intent(main.this, reminder_list.class);
             startActivity(intent);
             finish();
         }

@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -15,18 +17,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
 public class reminder_take extends AppCompatActivity {
     Button btnPickDate;
@@ -34,35 +36,61 @@ public class reminder_take extends AppCompatActivity {
     EditText editTextDate;
     EditText editTextTime;
     EditText editTextContent;
+    private EditText edtContent, edtDate, edtTime;
+    private CheckBox checkBoxAlarm;
 
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private TimePickerDialog.OnTimeSetListener timeSetListener;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase, nDatabase;
+    String key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reminder_take);
+        edtContent = findViewById(R.id.edt_content);
+        edtDate = findViewById(R.id.date);
+        edtTime = findViewById(R.id.time);
+        checkBoxAlarm = findViewById(R.id.alarm);
+        // Nhận dữ liệu từ Intent
+        Intent intent = getIntent();
+        if (intent != null && intent.getExtras() != null) {
+            key = intent.getStringExtra("reminder_id");
+            String title = intent.getStringExtra("title");
+            String date = intent.getStringExtra("date");
+            String time = intent.getStringExtra("time");
+            boolean isEdit = intent.getBooleanExtra("isEdit", false);
+
+            // Hiển thị dữ liệu lên giao diện
+            edtContent.setText(title);
+            edtDate.setText(date);
+            edtTime.setText(time);
+
+            if (isEdit) {
+                // Đổi tiêu đề và thay đổi button để chỉnh sửa thay vì tạo mới
+                setTitle("Chỉnh sửa nhắc nhở");
+            }
+        }
 
         btnPickDate = findViewById(R.id.btnPickDate);
         btnPickTime = findViewById(R.id.btnPickTime);
         editTextDate = findViewById(R.id.date);
         editTextTime = findViewById(R.id.time);
-        editTextContent=findViewById(R.id.edt_content);
+        editTextContent = findViewById(R.id.edt_content);
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             String userUID = currentUser.getUid();
             mDatabase = FirebaseDatabase.getInstance().getReference().child("reminder").child(userUID);
-            String key = mDatabase.push().getKey();
+            key = mDatabase.push().getKey();
             nDatabase = mDatabase.child(key);
         }
 
         // Lấy nội dung titile của intent note_take hiện lên edit text
-        Intent intent = getIntent();
-        String contentIntentFromNotetake = intent.getStringExtra("Title");
+        Intent intent1 = getIntent();
+        String contentIntentFromNotetake = intent1.getStringExtra("Title");
         editTextContent.setText(contentIntentFromNotetake);
 
         btnPickDate.setOnClickListener(new View.OnClickListener() {
@@ -133,14 +161,38 @@ public class reminder_take extends AppCompatActivity {
         String date = editTextDate.getText().toString().trim();
         String time = editTextTime.getText().toString().trim();
         String content = editTextContent.getText().toString().trim();
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
         if (!date.isEmpty() && !time.isEmpty()) {
-            nDatabase.child("Date").setValue(date + " " + time);
-            nDatabase.child("Content").setValue(content);
+            // Sử dụng key để xác định reminder cần chỉnh sửa trong Firebase Realtime Database
+            DatabaseReference reminderRef = FirebaseDatabase.getInstance().getReference()
+                    .child("reminder").child(currentUser.getUid()).child(key);
+
+            // Update dữ liệu của reminder tương ứng trong Firebase Realtime Database
+            Map<String, Object> reminderUpdates = new HashMap<>();
+            reminderUpdates.put("Content", content);
+            reminderUpdates.put("Date", date);
+            reminderUpdates.put("Time", time);
+
+            reminderRef.updateChildren(reminderUpdates)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(reminder_take.this, "Chỉnh sửa thành công", Toast.LENGTH_SHORT).show();
+                            finish(); // Đóng activity sau khi chỉnh sửa
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(reminder_take.this, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+            Toast.makeText(this, "Vui lòng nhập ngày và giờ", Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(this, "Đã lưu nhắc nhở" , Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(reminder_take.this, reminder.class);
-        startActivity(intent);
     }
+
     public void delete(View view){
         if (nDatabase != null) {
             nDatabase.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -148,7 +200,7 @@ public class reminder_take extends AppCompatActivity {
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
                         Toast.makeText(reminder_take.this, "Đã xóa nhắc nhở", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(reminder_take.this, reminder.class);
+                        Intent intent = new Intent(reminder_take.this, reminder_list.class);
                         startActivity(intent);
                         finish();
                     } else {
@@ -159,7 +211,7 @@ public class reminder_take extends AppCompatActivity {
         }
     }
     public void returned(View view){
-        Intent intent = new Intent(reminder_take.this, reminder.class);
+        Intent intent = new Intent(reminder_take.this, reminder_list.class);
         startActivity(intent);
         finish();
     }

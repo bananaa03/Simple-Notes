@@ -64,7 +64,7 @@ public class note_take extends AppCompatActivity {
             cbFavorite.setChecked(isFavorite);
             if (edtnotecontent!= null)
                 countword = edtnotecontent.length();
-            countCharacter.setText("Số lý tự: " + countword.toString());
+            countCharacter.setText("Số ký tự: " + countword.toString());
         }
 
         edtnotecontent.addTextChangedListener(new TextWatcher() {
@@ -74,7 +74,7 @@ public class note_take extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 countword = s.length();
-                countCharacter.setText("Số lý tự: " + countword.toString());
+                countCharacter.setText("Số ký tự: " + countword.toString());
             }
 
             @Override

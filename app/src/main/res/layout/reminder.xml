@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/Screenbackground"
-    tools:context=".reminder">
+    tools:context=".reminder_list">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
