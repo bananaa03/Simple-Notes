@@ -82,7 +82,7 @@ public class statistic extends AppCompatActivity {
         finish();
     }
     public void reminder(View view){
-        Intent intent = new Intent(this, reminder.class);
+        Intent intent = new Intent(this, reminder_list.class);
         startActivity(intent);
         finish();
     }

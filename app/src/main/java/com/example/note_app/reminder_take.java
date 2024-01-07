@@ -84,7 +84,9 @@ public class reminder_take extends AppCompatActivity {
         if (currentUser != null) {
             String userUID = currentUser.getUid();
             mDatabase = FirebaseDatabase.getInstance().getReference().child("reminder").child(userUID);
+            if(key == null){
             key = mDatabase.push().getKey();
+            }
             nDatabase = mDatabase.child(key);
         }
 
@@ -174,11 +176,12 @@ public class reminder_take extends AppCompatActivity {
             reminderUpdates.put("Date", date);
             reminderUpdates.put("Time", time);
 
-            reminderRef.updateChildren(reminderUpdates)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+            reminderRef.updateChildren(reminderUpdates).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Toast.makeText(reminder_take.this, "Chỉnh sửa thành công", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(reminder_take.this, "Lưu thành công", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(reminder_take.this, reminder_list.class);
+                            startActivity(intent);
                             finish(); // Đóng activity sau khi chỉnh sửa
                         }
                     })
