@@ -93,8 +93,6 @@ public class main extends AppCompatActivity {
     }
 
 
-
-
     //ngoài onCreate
     private void changemode(){
         if (mode_status == true) mode_status=false;

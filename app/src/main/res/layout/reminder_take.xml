@@ -37,16 +37,16 @@
             android:scaleType="fitXY" />
 
         <ImageButton
-            android:id="@+id/iBt_Save"
+            android:id="@+id/btnDeleteNote"
             android:layout_width="55dp"
             android:layout_height="50dp"
             android:layout_alignParentEnd="true"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.0001"
-            style="@style/ImageButton_Save"
+            style="@style/ImageButton_Delete"
             android:backgroundTint="@color/darkpink"
             android:scaleType="fitCenter"
-            android:onClick="save"/>
+            android:onClick="delete"/>
 
     </RelativeLayout>
 
@@ -159,12 +159,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
-                    style="@style/Button_Delete"
+                    style="@style/Button_Save"
                     android:gravity="center"
-                    android:text="Xóa nhắc nhở"
+                    android:text="Lưu nhắc nhở"
                     android:textSize="20sp"
                     android:textColor="@color/white"
-                    android:onClick="delete"/>
+                    android:onClick="save"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

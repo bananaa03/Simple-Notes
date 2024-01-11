@@ -45,7 +45,7 @@
         <item name="tint">@color/white</item>
     </style>
 
-    <style name="ImageButton_Save">
+    <style name="ImageButton_Delete">
         <item name="android:backgroundTint">@color/darkpink</item>
         <item name="android:src">@drawable/baseline_done_24</item>
         <item name="tint">@color/white</item>
@@ -65,7 +65,7 @@
         <item name="android:background">@drawable/custom_edit_textcontent</item>
     </style>
 
-    <style name="Button_Delete">
+    <style name="Button_Save">
         <item name="android:background">@color/darkpink</item>
         <item name="android:backgroundTint">@color/darkpink</item>
         <item name="backgroundTint">@color/darkpink</item>

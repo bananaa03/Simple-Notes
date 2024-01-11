@@ -1,8 +1,10 @@
 package com.example.note_app;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -34,11 +36,11 @@ public class note_take extends AppCompatActivity {
 
     private ImageButton buttonSetting, btnShare;
     EditText edtnotetitle, edtnotecontent;
-    ImageButton buttonBack, btnSaveNote;
+    ImageButton buttonBack, btnDelete;
     boolean isEditMode = false;
     String notetitle, notecontent, noteday, docId, noteID;
     TextView noteDay, countCharacter;
-    Button btnDelete;
+    Button btnSaveNote;
     boolean isFavorite;
     Integer countword, countword_before_text;
 
@@ -50,7 +52,7 @@ public class note_take extends AppCompatActivity {
         findbyviewIds();
         CheckBox cbFavorite = findViewById(R.id.cbFavorite);
         countCharacter = (TextView) findViewById(R.id.count_character_note);
-        // click vào 1 item: 1. lấy dữ liệu từ intent trước (day_main)
+        // click vào 1 item: 1. lấy dữ liệu từ intent trước (main)
         Intent intent = getIntent();
         if (intent != null) {
             notetitle = intent.getStringExtra("NOTE_TITLE");
@@ -131,8 +133,7 @@ public class note_take extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteNoteFromFirebase();
-                openBack();
+                showDeleteConfirmationDialog();
             }
         });
 
@@ -156,7 +157,7 @@ public class note_take extends AppCompatActivity {
         TextView note_day = findViewById(R.id.note_day);
         TextView count_character_note = findViewById(R.id.count_character_note);
         EditText edt_note_content = findViewById(R.id.edt_note_content);
-        Button btnDeleteNote = findViewById(R.id.btnDeleteNote);
+        ImageButton btnDeleteNote = findViewById(R.id.btnDeleteNote);
 
         edt_note_title.setTypeface(typeface);
         //edt_note_title.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
@@ -166,8 +167,6 @@ public class note_take extends AppCompatActivity {
         count_character_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
         edt_note_content.setTypeface(typeface);
         edt_note_content.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-        btnDeleteNote.setTypeface(typeface);
-        btnDeleteNote.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
         cbFavorite.setTypeface(typeface);
         cbFavorite.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
 
@@ -296,8 +295,8 @@ public class note_take extends AppCompatActivity {
         buttonSetting = (ImageButton) findViewById(R.id.ImageButtonSetting);
         btnShare = (ImageButton) findViewById(R.id.imgbtn_share);
         buttonBack = (ImageButton) findViewById(R.id.ImageButtonBack);
-        btnSaveNote = (ImageButton) findViewById(R.id.iBt_Save);
-        btnDelete = (Button) findViewById(R.id.btnDeleteNote);
+        btnSaveNote = (Button) findViewById(R.id.iBt_Save);
+        btnDelete = (ImageButton) findViewById(R.id.btnDeleteNote);
     }
 
     public void showPopupMenu(View v){
@@ -326,5 +325,33 @@ public class note_take extends AppCompatActivity {
 
     private void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void showDeleteConfirmationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Xác nhận xóa");
+        builder.setMessage("Bạn có chắc chắn muốn xóa ghi chú này không?");
+
+        // Nút xác nhận xóa
+        builder.setPositiveButton("Xóa", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deleteNoteFromFirebase();
+                openBack();
+                dialog.dismiss();
+            }
+        });
+
+        // Nút hủy
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        // Hiển thị AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

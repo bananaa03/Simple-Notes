@@ -10,6 +10,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.ParseException;
@@ -79,17 +81,12 @@ public class reminder_take extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null && intent.getExtras() != null) {
             String source = intent.getStringExtra("source");
-            Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
-
-
 
             // Kiểm tra xem Intent nào đã gửi dữ liệu
             if ("intent_remind_list".equals(source)) {
                 // Dữ liệu từ Intent 1
                 key = intent.getStringExtra("reminder_id");
                 String title = intent.getStringExtra("title");
-                String date = intent.getStringExtra("date");
-                String time = intent.getStringExtra("time");
                 date = intent.getStringExtra("date");
                 time = intent.getStringExtra("time");
 
@@ -251,23 +248,33 @@ public class reminder_take extends AppCompatActivity {
         }
     }
 
-    public void delete(View view){
-        if (nDatabase != null) {
-            nDatabase.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(reminder_take.this, "Đã xóa nhắc nhở", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(reminder_take.this, reminder_list.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Toast.makeText(reminder_take.this, "Xóa thất bại", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        }
+    public void delete(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Xác nhận xóa");
+        builder.setMessage("Bạn có chắc chắn muốn xóa nhắc nhở này không?");
+
+        // Nút xác nhận xóa
+        builder.setPositiveButton("Xóa", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                performDeleteAction();
+                dialog.dismiss();
+            }
+        });
+
+        // Nút hủy
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        // Hiển thị AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
+
     public void returned(View view){
         Intent intent = new Intent(reminder_take.this, reminder_list.class);
         startActivity(intent);
@@ -305,5 +312,22 @@ public class reminder_take extends AppCompatActivity {
                 .build();
 
         notificationManager.notify(0, notification);
+    }
+    private void performDeleteAction() {
+        if (nDatabase != null) {
+            nDatabase.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(reminder_take.this, "Đã xóa nhắc nhở", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(reminder_take.this, reminder_list.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(reminder_take.this, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
     }
 }
