@@ -21,7 +21,7 @@ public class log_in extends AppCompatActivity {
 
     TextInputEditText iedtEmail, iedtPassword;
     Button btn_signIn;
-    TextView tv_signUp;
+    TextView tv_signUp, tv_reset;
     FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +32,15 @@ public class log_in extends AppCompatActivity {
         iedtPassword = findViewById(R.id.input_passwd);
         btn_signIn = findViewById(R.id.btn_signin);
         tv_signUp = findViewById(R.id.tv_signup);
+        tv_reset = findViewById(R.id.tv_forgotpasswd);
+        tv_reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(log_in.this, email_verify.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         tv_signUp.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -105,6 +105,7 @@ public class reminder_list extends AppCompatActivity implements ReminderAdapter.
         intent.putExtra("date", clickedReminder.getDate());
         intent.putExtra("time", clickedReminder.getTime());
         intent.putExtra("alarm",clickedReminder.getTime());
+        intent.putExtra("source", "intent_remind_list");
         startActivity(intent);
     }
 

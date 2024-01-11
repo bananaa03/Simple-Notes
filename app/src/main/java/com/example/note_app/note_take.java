@@ -313,6 +313,7 @@ public class note_take extends AppCompatActivity {
                     // Lấy title từ intent note_take
                     String intentTitleNotetake = edtnotetitle.getText().toString();
                     intent.putExtra("Title", intentTitleNotetake);
+                    intent.putExtra("source", "intent_note_take");
                     startActivity(intent);
                 }
 

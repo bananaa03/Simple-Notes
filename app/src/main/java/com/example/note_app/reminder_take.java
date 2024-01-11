@@ -77,16 +77,27 @@ public class reminder_take extends AppCompatActivity {
         // Nhận dữ liệu từ Intent
         Intent intent = getIntent();
         if (intent != null && intent.getExtras() != null) {
-            key = intent.getStringExtra("reminder_id");
-            String title = intent.getStringExtra("title");
-            String date = intent.getStringExtra("date");
-            String time = intent.getStringExtra("time");
+            String source = intent.getStringExtra("source");
+            String data = intent.getStringExtra("DATA");
 
-            // Hiển thị dữ liệu lên giao diện
-            edtContent.setText(title);
-            edtDate.setText(date);
-            edtTime.setText(time);
+            // Kiểm tra xem Intent nào đã gửi dữ liệu
+            if ("intent_remind_list".equals(source)) {
+                // Dữ liệu từ Intent 1
+                key = intent.getStringExtra("reminder_id");
+                String title = intent.getStringExtra("title");
+                String date = intent.getStringExtra("date");
+                String time = intent.getStringExtra("time");
 
+                // Hiển thị dữ liệu lên giao diện
+                edtContent.setText(title);
+                edtDate.setText(date);
+                edtTime.setText(time);
+
+            } else if ("intent_note_take".equals(source)) {
+                // Dữ liệu từ Intent 2
+                String contentIntentFromNotetake = intent.getStringExtra("Title");
+                edtContent.setText(contentIntentFromNotetake);
+            }
         }
 
         btnPickDate = findViewById(R.id.btnPickDate);
@@ -107,9 +118,8 @@ public class reminder_take extends AppCompatActivity {
         }
 
         // Lấy nội dung titile của intent note_take hiện lên edit text
-        Intent intent1 = getIntent();
-        String contentIntentFromNotetake = intent1.getStringExtra("Title");
-        editTextContent.setText(contentIntentFromNotetake);
+
+
 
         btnPickDate.setOnClickListener(new View.OnClickListener() {
             @Override

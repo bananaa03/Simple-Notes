@@ -102,19 +102,5 @@ public class registerpage extends AppCompatActivity {
         });
 
     }
-    private void sendEmailVerification(){
-        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-        if (firebaseUser != null){
-            firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    Toast.makeText(getApplicationContext(), R.string.send_Email_Verification, Toast.LENGTH_SHORT).show();
-                    firebaseAuth.signOut();// Đăng xuất người dùng
-                }
-            });
-        }
-        else {
-            Toast.makeText(getApplicationContext(),R.string.fail_to_send_email_verify,Toast.LENGTH_SHORT).show();
-        }
-    }
+
 }
