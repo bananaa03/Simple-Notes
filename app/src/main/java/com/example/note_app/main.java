@@ -47,7 +47,6 @@ public class main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-
         findbyviewIds();
         //kiểm tra user
         if(currentUser==null){
@@ -91,7 +90,6 @@ public class main extends AppCompatActivity {
             }
         });
     }
-
 
     //ngoài onCreate
     private void changemode(){
