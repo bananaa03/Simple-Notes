@@ -155,7 +155,6 @@ public class main extends AppCompatActivity {
             finish();
         }
     }
-
     public void findNewNote(){
         Intent intent = new Intent(main.this, main.class);
         startActivity(intent);
