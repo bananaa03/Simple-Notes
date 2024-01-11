@@ -56,6 +56,7 @@ public class reminder_take extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase, nDatabase;
     String key;
+    String title, date, time, alarm;
 
     private AlarmManager alarmManager;
     private PendingIntent alarmIntent;
@@ -76,18 +77,16 @@ public class reminder_take extends AppCompatActivity {
 
         // Nhận dữ liệu từ Intent
         Intent intent = getIntent();
-        if (intent != null && intent.getExtras() != null) {
             key = intent.getStringExtra("reminder_id");
-            String title = intent.getStringExtra("title");
-            String date = intent.getStringExtra("date");
-            String time = intent.getStringExtra("time");
+            title = intent.getStringExtra("title");
+        Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
+            date = intent.getStringExtra("date");
+            time = intent.getStringExtra("time");
 
             // Hiển thị dữ liệu lên giao diện
             edtContent.setText(title);
             edtDate.setText(date);
             edtTime.setText(time);
-
-        }
 
         btnPickDate = findViewById(R.id.btnPickDate);
         btnPickTime = findViewById(R.id.btnPickTime);
@@ -177,9 +176,9 @@ public class reminder_take extends AppCompatActivity {
 
 
     public void save(View view) {
-        String date = editTextDate.getText().toString().trim();
-        String time = editTextTime.getText().toString().trim();
-        String content = editTextContent.getText().toString().trim();
+        date = editTextDate.getText().toString().trim();
+        time = editTextTime.getText().toString().trim();
+        title = editTextContent.getText().toString().trim();
         boolean alarmChecked = checkBoxAlarm.isChecked();
         Reminder reminder = new Reminder();
         reminder.setAlarmOn(alarmChecked);
@@ -192,7 +191,7 @@ public class reminder_take extends AppCompatActivity {
 
             // Update dữ liệu của reminder tương ứng trong Firebase Realtime Database
             Map<String, Object> reminderUpdates = new HashMap<>();
-            reminderUpdates.put("Content", content);
+            reminderUpdates.put("Content", title);
             reminderUpdates.put("Date", date);
             reminderUpdates.put("Time", time);
             reminderUpdates.put("Alarm", alarmChecked);
@@ -282,8 +281,8 @@ public class reminder_take extends AppCompatActivity {
         }
 
         Notification notification = new Notification.Builder(this, "default")
-                .setContentTitle("Thông báo")
-                .setContentText("Nội dung thông báo")
+                .setContentTitle("Nhắc nhở: "+date+" "+time)
+                .setContentText(title)
                 .setSmallIcon(R.drawable.alarm)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)

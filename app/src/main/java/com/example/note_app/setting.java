@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class setting extends AppCompatActivity {
 
@@ -24,6 +25,7 @@ public class setting extends AppCompatActivity {
     Boolean mode_status;
     SharedPreferences.Editor editor;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    FirebaseUser user = firebaseAuth.getCurrentUser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,11 +95,6 @@ public class setting extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-    public void reminder(View view){
-        Intent intent = new Intent(this, reminder_list.class);
-        startActivity(intent);
-        finish();
-    }
 
     public void statistic(View view){
         Intent intent = new Intent(this, statistic.class);
@@ -117,6 +114,17 @@ public class setting extends AppCompatActivity {
             editor = sharedPreferences.edit();
             editor.putBoolean("night", mode_status);
             editor.apply();
+        }
+    }
+    public void reminder(View view){
+        if(user==null){
+            Toast.makeText(this, "Vui lòng đăng nhập để bắt đầu nhắc nhở", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, log_in.class));
+            finish();
+        }else {
+            Intent intent = new Intent(setting.this, reminder_list.class);
+            startActivity(intent);
+            finish();
         }
     }
 }

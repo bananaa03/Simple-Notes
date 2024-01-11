@@ -17,11 +17,16 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class statistic extends AppCompatActivity {
     ImageButton nightmode;
     SharedPreferences sharedPreferences;
     Boolean mode_status;
     SharedPreferences.Editor editor;
+    FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+    FirebaseUser user = firebaseAuth.getCurrentUser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,9 +87,15 @@ public class statistic extends AppCompatActivity {
         finish();
     }
     public void reminder(View view){
-        Intent intent = new Intent(this, reminder_list.class);
-        startActivity(intent);
-        finish();
+        if(user==null){
+            Toast.makeText(this, "Vui lòng đăng nhập để bắt đầu nhắc nhở", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, log_in.class));
+            finish();
+        }else {
+            Intent intent = new Intent(statistic.this, reminder_list.class);
+            startActivity(intent);
+            finish();
+        }
     }
     public void setting(View view){
         Intent intent = new Intent(this, setting.class);
