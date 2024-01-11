@@ -26,6 +26,7 @@ public class registerpage extends AppCompatActivity {
     Button btnsignUp;
     TextView tvsignIn;
     FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+    FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +77,9 @@ public class registerpage extends AppCompatActivity {
                                 if (task.isSuccessful())
                                 {
                                     Toast.makeText(registerpage.this, "Registration Successfully",Toast.LENGTH_SHORT).show();
-                                    //sendEmailVerification();
+                                    sendEmailVerification();
+                                    if(firebaseUser!=null&&firebaseUser.isEmailVerified()){
+                                    }
                                     // Lấy UID của người dùng vừa đăng ký
                                     String userUID = firebaseAuth.getCurrentUser().getUid();
 
@@ -86,7 +89,6 @@ public class registerpage extends AppCompatActivity {
                                     // Lưu thông tin người dùng vào Realtime Database
                                     currentUserDb.child("email").setValue(email2);
                                     currentUserDb.child("username").setValue(username);
-
                                     Intent intent=new Intent(registerpage.this, log_in.class);
                                     startActivity(intent);
                                     finish();
@@ -102,5 +104,22 @@ public class registerpage extends AppCompatActivity {
         });
 
     }
+    private void sendEmailVerification(){
+        firebaseUser = firebaseAuth.getCurrentUser();
+        if (firebaseUser != null){
+            firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(getApplicationContext(), R.string.send_Email_Verification, Toast.LENGTH_SHORT).show();
+                    firebaseAuth.signOut();// Đăng xuất người dùng
+
+                }
+            });
+        }
+        else {
+            Toast.makeText(getApplicationContext(),R.string.fail_to_send_email_verify,Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
 }

@@ -81,6 +81,12 @@ public class reminder_take extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null && intent.getExtras() != null) {
             String source = intent.getStringExtra("source");
+<<<<<<< Updated upstream
+=======
+
+
+
+>>>>>>> Stashed changes
 
             // Kiểm tra xem Intent nào đã gửi dữ liệu
             if ("intent_remind_list".equals(source)) {
@@ -89,7 +95,7 @@ public class reminder_take extends AppCompatActivity {
                 String title = intent.getStringExtra("title");
                 date = intent.getStringExtra("date");
                 time = intent.getStringExtra("time");
-
+                Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
                 // Hiển thị dữ liệu lên giao diện
                 edtContent.setText(title);
                 edtDate.setText(date);
