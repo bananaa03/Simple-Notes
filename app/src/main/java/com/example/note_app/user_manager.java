@@ -37,13 +37,13 @@ public class user_manager extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     Boolean mode_status;
     SharedPreferences.Editor editor;
+    FirebaseUser user = firebaseAuth.getCurrentUser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_manage);
         Username=findViewById(R.id.username);
         Email=findViewById(R.id.email);
-        FirebaseUser user = firebaseAuth.getCurrentUser();
         nightmode=findViewById(R.id.iBt_mode);
 
         sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
@@ -168,6 +168,17 @@ public class user_manager extends AppCompatActivity {
             editor = sharedPreferences.edit();
             editor.putBoolean("night", mode_status);
             editor.apply();
+        }
+    }
+    public void reminder(View view){
+        if(user==null){
+            Toast.makeText(this, "Vui lòng đăng nhập để bắt đầu nhắc nhở", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, log_in.class));
+            finish();
+        }else {
+            Intent intent = new Intent(user_manager.this, reminder_list.class);
+            startActivity(intent);
+            finish();
         }
     }
 }

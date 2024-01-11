@@ -37,6 +37,7 @@ public class reminder_list extends AppCompatActivity implements ReminderAdapter.
     SharedPreferences sharedPreferences;
     Boolean mode_status;
     SharedPreferences.Editor editor;
+    String title, date, time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,9 +78,9 @@ public class reminder_list extends AppCompatActivity implements ReminderAdapter.
                     reminderList.clear();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         String key = snapshot.getKey();
-                        String title = snapshot.child("Content").getValue(String.class);
-                        String date = snapshot.child("Date").getValue(String.class);
-                        String time = snapshot.child("Time").getValue(String.class);
+                        title = snapshot.child("Content").getValue(String.class);
+                        date = snapshot.child("Date").getValue(String.class);
+                        time = snapshot.child("Time").getValue(String.class);
                         boolean alarm = snapshot.child("Alarm").getValue(boolean.class);
                         Reminder reminder = new Reminder(title, date, time, alarm);
                         reminder.setKey(key);
