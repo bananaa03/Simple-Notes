@@ -105,7 +105,7 @@ public class reminder_list extends AppCompatActivity implements ReminderAdapter.
         intent.putExtra("title", clickedReminder.getTitle());
         intent.putExtra("date", clickedReminder.getDate());
         intent.putExtra("time", clickedReminder.getTime());
-        intent.putExtra("alarm",clickedReminder.getTime());
+        intent.putExtra("alarm",clickedReminder.isAlarmOn());
         intent.putExtra("source", "intent_remind_list");
         startActivity(intent);
     }
@@ -145,5 +145,11 @@ public class reminder_list extends AppCompatActivity implements ReminderAdapter.
             editor.putBoolean("night", mode_status);
             editor.apply();
         }
+    }
+    public void reminder(View view){
+        Intent intent = new Intent(this, reminder_list.class);
+        startActivity(intent);
+        overridePendingTransition(0, 0);
+        finish();
     }
 }

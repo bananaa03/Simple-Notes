@@ -12,6 +12,10 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.AudioAttributes;
+import android.media.MediaPlayer;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +31,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -89,11 +94,18 @@ public class reminder_take extends AppCompatActivity {
                 String title = intent.getStringExtra("title");
                 date = intent.getStringExtra("date");
                 time = intent.getStringExtra("time");
+                boolean alarm =intent.getBooleanExtra("alarm",false);
 
                 // Hiển thị dữ liệu lên giao diện
                 edtContent.setText(title);
                 edtDate.setText(date);
                 edtTime.setText(time);
+                if(alarm){
+                    checkBoxAlarm.setChecked(true);
+                }else{
+                    checkBoxAlarm.setChecked(false);
+                }
+
 
             } else if ("intent_note_take".equals(source)) {
                 // Dữ liệu từ Intent 2
@@ -118,10 +130,6 @@ public class reminder_take extends AppCompatActivity {
             }
             nDatabase = mDatabase.child(key);
         }
-
-        // Lấy nội dung titile của intent note_take hiện lên edit text
-
-
 
         btnPickDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,8 +171,6 @@ public class reminder_take extends AppCompatActivity {
                 editTextTime.setText(selectedTime);
             }
         };
-
-
     }
 
     private void showDatePickerDialog() {
@@ -252,7 +258,6 @@ public class reminder_take extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Xác nhận xóa");
         builder.setMessage("Bạn có chắc chắn muốn xóa nhắc nhở này không?");
-
         // Nút xác nhận xóa
         builder.setPositiveButton("Xóa", new DialogInterface.OnClickListener() {
             @Override
@@ -261,7 +266,6 @@ public class reminder_take extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-
         // Nút hủy
         builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
             @Override
@@ -269,7 +273,6 @@ public class reminder_take extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-
         // Hiển thị AlertDialog
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -283,11 +286,19 @@ public class reminder_take extends AppCompatActivity {
 
     private void setAlarm(long timeInMillis) {
         Intent intent = new Intent(this, AlarmReceiver.class);
+        String title = editTextContent.getText().toString();
+        String date = editTextDate.getText().toString();
+        String time = editTextTime.getText().toString();
+        intent.putExtra("title", title);
+        intent.putExtra("date", date);
+        intent.putExtra("time", time);
         alarmIntent = PendingIntent.getBroadcast(this, 0, intent, FLAG_IMMUTABLE);
-
-        // Đặt báo thức
-        alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis, alarmIntent);
-        Toast.makeText(this, "Báo thức được đặt", Toast.LENGTH_SHORT).show();
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager != null) {
+            alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
+        }
     }
 
     private void sendNotification(long timeInMillis) {
@@ -295,17 +306,25 @@ public class reminder_take extends AppCompatActivity {
         Intent intent = new Intent(this, ReminderNotificationReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, FLAG_IMMUTABLE);
 
-        // ... (Tạo notification)
+        // Đặt lịch thông báo tại thời điểm cụ thể
+//        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//        if (alarmManager != null) {
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
+//            } else {
+//                alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
+//            }
+//        }
 
-        // Hiển thị thông báo tại thời điểm xác định
+        //(Tạo notification)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("default", "Channel name", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel channel = new NotificationChannel("default", "Reminder", NotificationManager.IMPORTANCE_DEFAULT);
             notificationManager.createNotificationChannel(channel);
         }
 
         Notification notification = new Notification.Builder(this, "default")
-                .setContentTitle("Nhắc nhở: "+date+" "+time)
-                .setContentText(title)
+                .setContentTitle("Nhắc nhở: "+title)
+                .setContentText(date +" "+time)
                 .setSmallIcon(R.drawable.alarm)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)

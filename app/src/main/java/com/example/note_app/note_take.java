@@ -230,10 +230,6 @@ public class note_take extends AppCompatActivity {
         // save time vào note_day
         note.setNote_day(note_day);
         saveNoteToFireBase(note);
-        //Chưa update số ký tự được
-
-
-        //int countContent = 0;
     }
     String noteId;
     public void saveNoteToFireBase(Note note){

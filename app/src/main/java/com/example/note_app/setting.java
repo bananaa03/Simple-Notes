@@ -127,4 +127,10 @@ public class setting extends AppCompatActivity {
             finish();
         }
     }
+    public void setting(View view){
+        Intent intent = new Intent(this, setting.class);
+        startActivity(intent);
+        overridePendingTransition(0, 0);
+        finish();
+    }
 }

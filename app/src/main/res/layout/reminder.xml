@@ -52,13 +52,13 @@
                     android:contentDescription="@string/note"
                     android:scaleType="fitXY"
                     app:layout_constraintLeft_toRightOf="@id/iBt_mode"
-                    app:layout_constraintRight_toLeftOf="@id/iBt_settime"
+                    app:layout_constraintRight_toLeftOf="@id/iBt_reminder"
                     app:layout_constraintTop_toTopOf="parent"
                     style="@style/ImageButton_Note"
                     android:onClick="main" />
 
                 <ImageButton
-                    android:id="@+id/iBt_settime"
+                    android:id="@+id/iBt_reminder"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="13dp"
@@ -67,7 +67,8 @@
                     app:layout_constraintLeft_toRightOf="@id/iBtFindNote"
                     app:layout_constraintRight_toLeftOf="@id/iBt_setting"
                     app:layout_constraintTop_toTopOf="parent"
-                    style="@style/ImageButton_Clock" />
+                    style="@style/ImageButton_Clock"
+                    android:onClick = "reminder"/>
 
                 <ImageButton
                     android:id="@+id/iBt_setting"
@@ -78,7 +79,7 @@
                     android:onClick="setting"
                     android:contentDescription="@string/settings"
                     android:scaleType="fitXY"
-                    app:layout_constraintLeft_toRightOf="@id/iBt_settime"
+                    app:layout_constraintLeft_toRightOf="@id/iBt_reminder"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     style="@style/ImageButton_Setting" />

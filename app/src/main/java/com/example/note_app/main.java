@@ -42,6 +42,7 @@ public class main extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     Boolean mode_status;
     SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -161,6 +162,7 @@ public class main extends AppCompatActivity {
     public void findNewNote(){
         Intent intent = new Intent(main.this, main.class);
         startActivity(intent);
+        overridePendingTransition(0, 0);
         finish();
     }
     private void findbyviewIds(){
@@ -170,7 +172,6 @@ public class main extends AppCompatActivity {
         btnAdd = (ImageButton) findViewById(R.id.iBt_Add);
         btnFindNote = (ImageButton) findViewById(R.id.iBtFindNote);
     }
-
     public void reminder(View view){
         if(currentUser==null){
             Toast.makeText(this, "Vui lòng đăng nhập để bắt đầu nhắc nhở", Toast.LENGTH_SHORT).show();
