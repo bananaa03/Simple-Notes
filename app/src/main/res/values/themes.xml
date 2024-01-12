@@ -33,6 +33,13 @@
         <item name="tint">@color/white</item>
     </style>
 
+    <style name="license_back_main">
+        <item name="android:src">@android:drawable/ic_menu_revert</item>
+        <item name="android:backgroundTint">@color/darkpink</item>
+        <item name="android:foregroundTint">@color/white</item>
+        <item name="tint">@color/white</item>
+    </style>
+
     <style name="ImageButton_SetANote">
         <item name="android:backgroundTint">@color/darkpink</item>
         <item name="android:src">@android:drawable/ic_menu_info_details</item>

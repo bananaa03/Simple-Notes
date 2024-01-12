@@ -103,18 +103,6 @@ public class note_take extends AppCompatActivity {
             }
         });
 
-        // Thêm sự kiện nghe cho CheckBox
-        cbFavorite.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            // Xử lý khi trạng thái của CheckBox thay đổi
-            if (isChecked) {
-                // Note được đánh dấu là yêu thích
-                Utility.showToast(note_take.this, "Note đã được đánh dấu là yêu thích");
-            } else {
-                // Note không được đánh dấu là yêu thích
-                Utility.showToast(note_take.this, "Note không còn là yêu thích");
-            }
-        });
-
         //Save note
         btnSaveNote.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,12 +116,30 @@ public class note_take extends AppCompatActivity {
                 openBack();
             }
         });
-
         //Delete note
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDeleteConfirmationDialog();
+            }
+        });
+
+        // button setting -> popup menu
+        buttonSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopupMenu(v);
+            }
+        });
+        // Thêm sự kiện nghe cho CheckBox
+        cbFavorite.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            // Xử lý khi trạng thái của CheckBox thay đổi
+            if (isChecked) {
+                // Note được đánh dấu là yêu thích
+                Utility.showToast(note_take.this, "Note đã được đánh dấu là yêu thích");
+            } else {
+                // Note không được đánh dấu là yêu thích
+                Utility.showToast(note_take.this, "Note không còn là yêu thích");
             }
         });
 
@@ -169,16 +175,7 @@ public class note_take extends AppCompatActivity {
         edt_note_content.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
         cbFavorite.setTypeface(typeface);
         cbFavorite.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-
-        // button setting -> popup menu
-        buttonSetting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPopupMenu(v);
-            }
-        });
 }
-
     //ngoài onCreate
     public void sharenote(){
         notetitle = edtnotetitle.getText().toString();
@@ -311,7 +308,6 @@ public class note_take extends AppCompatActivity {
                     intent.putExtra("source", "intent_note_take");
                     startActivity(intent);
                 }
-
                 return true;
             }
         });

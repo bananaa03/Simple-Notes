@@ -26,6 +26,7 @@ public class setting extends AppCompatActivity {
     SharedPreferences.Editor editor;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser user = firebaseAuth.getCurrentUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,10 +58,14 @@ public class setting extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Failed to create typeface from file", Toast.LENGTH_SHORT).show();
             }
         }
+
         Button thongke = findViewById(R.id.thongke);
         //Button dongbo = findViewById(R.id.dongbo);
         Button font = findViewById(R.id.font);
         Button manage_user = findViewById(R.id.manage_user);
+        Button phienban = findViewById(R.id.license_app);
+        phienban.setTypeface(typeface);
+        phienban.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
         thongke.setTypeface(typeface);
         thongke.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
         //dongbo.setTypeface(typeface);
@@ -69,6 +74,20 @@ public class setting extends AppCompatActivity {
         font.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
         manage_user.setTypeface(typeface);
         manage_user.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+
+        phienban.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openLicense(v);
+                //font_day(v);
+            }
+        });
+    }
+
+    public  void openLicense(View view){
+        Intent intent = new Intent(this, license.class);
+        startActivity(intent);
+        finish();
     }
     public void btnBacktoMain_day(View view){
         Intent intent = new Intent(this, main.class);
@@ -88,7 +107,6 @@ public class setting extends AppCompatActivity {
             finish();
         }
     }
-
 
     public void font_day(View view){
         Intent intent = new Intent(this, font.class);

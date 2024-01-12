@@ -48,7 +48,6 @@ public class main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-
         findbyviewIds();
         //kiểm tra user
         if(currentUser==null){
@@ -93,20 +92,19 @@ public class main extends AppCompatActivity {
         });
     }
 
-
     //ngoài onCreate
     private void changemode(){
         if (mode_status == true) mode_status=false;
         else mode_status = true;
         if (mode_status){
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            editor = sharedPreferences.edit();
-            editor.putBoolean("night", false);
-            editor.apply();
-        } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             editor = sharedPreferences.edit();
-            editor.putBoolean("night", true);
+            editor.putBoolean("night", mode_status);
+            editor.apply();
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            editor = sharedPreferences.edit();
+            editor.putBoolean("night", mode_status);
             editor.apply();
         }
     }
@@ -158,7 +156,6 @@ public class main extends AppCompatActivity {
             finish();
         }
     }
-
     public void findNewNote(){
         Intent intent = new Intent(main.this, main.class);
         startActivity(intent);

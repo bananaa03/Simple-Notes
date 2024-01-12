@@ -17,6 +17,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class font extends AppCompatActivity {
     private TextView selectFontTextView;
     private TextView chooseSizeTextView;
@@ -27,6 +30,10 @@ public class font extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     Boolean mode_status;
     SharedPreferences.Editor editor;
+
+    FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+    FirebaseUser user = firebaseAuth.getCurrentUser();
+    ImageButton nhacnho;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +49,7 @@ public class font extends AppCompatActivity {
         radioDancing = findViewById(R.id.radioDancing);
         radioComfortaa = findViewById(R.id.radioComfortaa);
         nightmode= findViewById(R.id.iBt_mode);
+        nhacnho = findViewById(R.id.iBt_settime);
 
         sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
         mode_status = sharedPreferences.getBoolean("night", false);
@@ -52,6 +60,12 @@ public class font extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changemode();
+            }
+        });
+        nhacnho.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reminder(v);
             }
         });
 
@@ -183,6 +197,17 @@ public class font extends AppCompatActivity {
             editor = sharedPreferences.edit();
             editor.putBoolean("night", mode_status);
             editor.apply();
+        }
+    }
+    public void reminder(View view){
+        if(user==null){
+            Toast.makeText(this, "Vui lòng đăng nhập để bắt đầu nhắc nhở", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, log_in.class));
+            finish();
+        }else {
+            Intent intent = new Intent(font.this, reminder_list.class);
+            startActivity(intent);
+            finish();
         }
     }
 }
