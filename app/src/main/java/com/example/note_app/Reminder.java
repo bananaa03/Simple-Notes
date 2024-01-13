@@ -5,17 +5,15 @@ public class Reminder {
     private String title;
     private String date;
     private String time;
-    private boolean isAlarmOn;
 
     public Reminder() {
         // Empty constructor needed for Firebase
     }
 
-    public Reminder(String title, String date, String time, boolean isAlarmOn) {
+    public Reminder(String title, String date, String time) {
         this.title = title;
         this.date = date;
         this.time = time;
-        this.isAlarmOn = isAlarmOn;
     }
     public String getTitle() {
         return title;
@@ -48,12 +46,5 @@ public class Reminder {
         this.key = key;
     }
 
-    public boolean isAlarmOn() {
-        return isAlarmOn;
-    }
-
-    public void setAlarmOn(boolean alarmOn) {
-        this.isAlarmOn = alarmOn;
-    }
 }
 

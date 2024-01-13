@@ -56,14 +56,13 @@ public class reminder_take extends AppCompatActivity {
     EditText editTextTime;
     EditText editTextContent;
     private EditText edtContent, edtDate, edtTime;
-    private CheckBox checkBoxAlarm;
 
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private TimePickerDialog.OnTimeSetListener timeSetListener;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase, nDatabase;
     String key;
-    String title, date, time, alarm;
+    String title, date, time;
 
     private AlarmManager alarmManager;
     private PendingIntent alarmIntent;
@@ -76,7 +75,6 @@ public class reminder_take extends AppCompatActivity {
         edtContent = findViewById(R.id.edt_content);
         edtDate = findViewById(R.id.date);
         edtTime = findViewById(R.id.time);
-        checkBoxAlarm = findViewById(R.id.alarm);
 
         // Khởi tạo AlarmManager và NotificationManager
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -94,17 +92,11 @@ public class reminder_take extends AppCompatActivity {
                 String title = intent.getStringExtra("title");
                 date = intent.getStringExtra("date");
                 time = intent.getStringExtra("time");
-                boolean alarm =intent.getBooleanExtra("alarm",false);
 
                 // Hiển thị dữ liệu lên giao diện
                 edtContent.setText(title);
                 edtDate.setText(date);
                 edtTime.setText(time);
-                if(alarm){
-                    checkBoxAlarm.setChecked(true);
-                }else{
-                    checkBoxAlarm.setChecked(false);
-                }
 
 
             } else if ("intent_note_take".equals(source)) {
@@ -198,9 +190,7 @@ public class reminder_take extends AppCompatActivity {
         date = editTextDate.getText().toString().trim();
         time = editTextTime.getText().toString().trim();
         title = editTextContent.getText().toString().trim();
-        boolean alarmChecked = checkBoxAlarm.isChecked();
         Reminder reminder = new Reminder();
-        reminder.setAlarmOn(alarmChecked);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (!date.isEmpty() && !time.isEmpty()) {
@@ -213,7 +203,6 @@ public class reminder_take extends AppCompatActivity {
             reminderUpdates.put("Content", title);
             reminderUpdates.put("Date", date);
             reminderUpdates.put("Time", time);
-            reminderUpdates.put("Alarm", alarmChecked);
 
             reminderRef.updateChildren(reminderUpdates).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -240,14 +229,8 @@ public class reminder_take extends AppCompatActivity {
             Date dateTime = dateFormat.parse(date + " " + time);
             if (dateTime != null) {
                 calendar.setTime(dateTime);
-
-                // Nếu checkbox được chọn, đặt báo thức
-                if (alarmChecked) {
-                    setAlarm(calendar.getTimeInMillis());
-                } else {
-                    // Nếu không được chọn, gửi thông báo
-                    sendNotification(calendar.getTimeInMillis());
-                }
+//                setAlarm(calendar.getTimeInMillis());
+                sendNotification(calendar.getTimeInMillis());
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -283,54 +266,23 @@ public class reminder_take extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
-    private void setAlarm(long timeInMillis) {
+    private void sendNotification(long timeInMillis) {
+        // Tạo thông báo
         Intent intent = new Intent(this, AlarmReceiver.class);
-        String title = editTextContent.getText().toString();
-        String date = editTextDate.getText().toString();
-        String time = editTextTime.getText().toString();
         intent.putExtra("title", title);
         intent.putExtra("date", date);
         intent.putExtra("time", time);
-        alarmIntent = PendingIntent.getBroadcast(this, 0, intent, FLAG_IMMUTABLE);
+
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        if (alarmManager != null) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
+        } else {
             alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
         }
-    }
-
-    private void sendNotification(long timeInMillis) {
-        // Tạo thông báo
-        Intent intent = new Intent(this, ReminderNotificationReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, FLAG_IMMUTABLE);
-
-        // Đặt lịch thông báo tại thời điểm cụ thể
-//        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-//        if (alarmManager != null) {
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
-//            } else {
-//                alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
-//            }
-//        }
-
-        //(Tạo notification)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("default", "Reminder", NotificationManager.IMPORTANCE_DEFAULT);
-            notificationManager.createNotificationChannel(channel);
-        }
-
-        Notification notification = new Notification.Builder(this, "default")
-                .setContentTitle("Nhắc nhở: "+title)
-                .setContentText(date +" "+time)
-                .setSmallIcon(R.drawable.alarm)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true)
-                .build();
-
-        notificationManager.notify(0, notification);
     }
     private void performDeleteAction() {
         if (nDatabase != null) {

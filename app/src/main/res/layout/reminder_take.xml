@@ -138,33 +138,18 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:gravity="center"
-                >
+                android:layout_marginTop="10dp">
 
-                <CheckBox
-                    android:id="@+id/alarm"
-                    style="@style/Screenbackground"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="false"
-                    android:text="Thêm chuông báo"
-                    android:textSize="20sp"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
                 <Button
+                    style="@style/Button_Save"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    style="@style/Button_Save"
+                    android:layout_marginBottom="20dp"
                     android:gravity="center"
+                    android:onClick="save"
                     android:text="Lưu nhắc nhở"
-                    android:textSize="20sp"
                     android:textColor="@color/white"
-                    android:onClick="save"/>
+                    android:textSize="20sp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

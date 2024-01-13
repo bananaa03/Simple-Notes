@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -20,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,11 +41,26 @@ public class reminder_list extends AppCompatActivity implements ReminderAdapter.
     Boolean mode_status;
     SharedPreferences.Editor editor;
     String title, date, time;
+    SearchView searchView;
+    ReminderAdapter reminderAdapter;
+    ArrayList<Reminder> listReminder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reminder);
+        searchView = findViewById(R.id.search_View);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(reminderAdapter != null) reminderAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
 
         nightmode=findViewById(R.id.iBt_mode);
         sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
@@ -81,8 +99,7 @@ public class reminder_list extends AppCompatActivity implements ReminderAdapter.
                         title = snapshot.child("Content").getValue(String.class);
                         date = snapshot.child("Date").getValue(String.class);
                         time = snapshot.child("Time").getValue(String.class);
-                        boolean alarm = snapshot.child("Alarm").getValue(boolean.class);
-                        Reminder reminder = new Reminder(title, date, time, alarm);
+                        Reminder reminder = new Reminder(title, date, time);
                         reminder.setKey(key);
                         reminderList.add(reminder);
                     }
@@ -105,7 +122,6 @@ public class reminder_list extends AppCompatActivity implements ReminderAdapter.
         intent.putExtra("title", clickedReminder.getTitle());
         intent.putExtra("date", clickedReminder.getDate());
         intent.putExtra("time", clickedReminder.getTime());
-        intent.putExtra("alarm",clickedReminder.isAlarmOn());
         intent.putExtra("source", "intent_remind_list");
         startActivity(intent);
     }
