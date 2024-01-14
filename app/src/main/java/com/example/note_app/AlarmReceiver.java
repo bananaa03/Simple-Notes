@@ -1,5 +1,8 @@
 package com.example.note_app;
 
+import static android.app.PendingIntent.FLAG_IMMUTABLE;
+
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -15,16 +18,26 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 public class AlarmReceiver extends BroadcastReceiver {
+    private NotificationManager notificationManager;
     @Override
     public void onReceive(Context context, Intent intent) {
-
-        Toast.makeText(context, "Báo thức: ", Toast.LENGTH_LONG).show();
-
-        // Tạo Notification
-//        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "channel_id")
-//                        .setContentTitle("Báo thức: " + title)
-//                        .setContentText("Nội dung thông báo")
-//                        .setSmallIcon(R.drawable.alarm);
+        String title = intent.getStringExtra("title");
+        String date = intent.getStringExtra("date");
+        String time = intent.getStringExtra("time");
+        Toast.makeText(context, "Báo thức: " + title, Toast.LENGTH_LONG).show();
+// Hiển thị thông báo tại thời điểm xác định
+//    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//        NotificationChannel channel = new NotificationChannel("default", "Channel name", NotificationManager.IMPORTANCE_DEFAULT);
+//        notificationManager.createNotificationChannel(channel);
+//    }
+//    Notification notification = new Notification.Builder(context, "default")
+//            .setContentTitle("Nhắc nhở: " + title)
+////            .setContentText(date+" "+time)
+//            .setSmallIcon(R.drawable.alarm)
+//            .setAutoCancel(true)
+//            .build();
+//
+//    notificationManager.notify(0, notification);
 
         // Phát âm thanh từ raw resource (ví dụ: sound.mp3 trong thư mục raw)
         MediaPlayer mediaPlayer = MediaPlayer.create(context, R.raw.sound);

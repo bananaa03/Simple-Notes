@@ -229,7 +229,7 @@ public class reminder_take extends AppCompatActivity {
             Date dateTime = dateFormat.parse(date + " " + time);
             if (dateTime != null) {
                 calendar.setTime(dateTime);
-                sendNotification(calendar.getTimeInMillis());
+                setAlarm(calendar.getTimeInMillis());
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -265,40 +265,43 @@ public class reminder_take extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-//    private void sendNotification(long timeInMillis) {
-//
-//        // Tạo Intent để gửi đến AlarmReceiver
-//        Intent intent = new Intent(this, AlarmReceiver.class);
-//        alarmIntent = PendingIntent.getBroadcast(
-//                this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//
-//        // Đặt báo thức
-//        alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis, alarmIntent);
-//        Toast.makeText(this, "Báo thức được đặt", Toast.LENGTH_SHORT).show();
-//    }
-private void sendNotification(long timeInMillis) {
-    // Tạo thông báo
-    Intent intent = new Intent(this, ReminderNotificationReceiver.class);
-    PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, FLAG_IMMUTABLE);
+    private void setAlarm(long timeInMillis) {
 
-    // ... (Tạo notification)
+        // Tạo Intent để gửi đến AlarmReceiver
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        intent.putExtra("title", editTextContent.getText().toString());
+        intent.putExtra("date", editTextDate.getText().toString());
+        intent.putExtra("time", editTextTime.getText().toString());
+        alarmIntent = PendingIntent.getBroadcast(
+                this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
-    // Hiển thị thông báo tại thời điểm xác định
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        NotificationChannel channel = new NotificationChannel("default", "Channel name", NotificationManager.IMPORTANCE_DEFAULT);
-        notificationManager.createNotificationChannel(channel);
+        // Đặt báo thức
+        alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis, alarmIntent);
+        Toast.makeText(this, "Báo thức được đặt", Toast.LENGTH_SHORT).show();
     }
-
-    Notification notification = new Notification.Builder(this, "default")
-            .setContentTitle("Nhắc nhở: " + title)
-            .setContentText(date+" "+time)
-            .setSmallIcon(R.drawable.alarm)
-            .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
-            .build();
-
-    notificationManager.notify(0, notification);
-}
+//private void sendNotification(long timeInMillis) {
+//    // Tạo thông báo
+//    Intent intent = new Intent(this, ReminderNotificationReceiver.class);
+//    PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, FLAG_IMMUTABLE);
+//
+//    // ... (Tạo notification)
+//
+//    // Hiển thị thông báo tại thời điểm xác định
+//    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//        NotificationChannel channel = new NotificationChannel("default", "Channel name", NotificationManager.IMPORTANCE_DEFAULT);
+//        notificationManager.createNotificationChannel(channel);
+//    }
+//
+//    Notification notification = new Notification.Builder(this, "default")
+//            .setContentTitle("Nhắc nhở: " + title)
+//            .setContentText(date+" "+time)
+//            .setSmallIcon(R.drawable.alarm)
+//            .setContentIntent(pendingIntent)
+//            .setAutoCancel(true)
+//            .build();
+//
+//    notificationManager.notify(0, notification);
+//}
     private void performDeleteAction() {
         if (nDatabase != null) {
             nDatabase.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
