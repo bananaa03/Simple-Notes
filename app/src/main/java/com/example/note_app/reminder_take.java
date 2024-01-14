@@ -1,6 +1,7 @@
 package com.example.note_app;
 
 import static android.app.PendingIntent.FLAG_IMMUTABLE;
+import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
 
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
@@ -76,7 +77,6 @@ public class reminder_take extends AppCompatActivity {
         edtDate = findViewById(R.id.date);
         edtTime = findViewById(R.id.time);
 
-        // Khởi tạo AlarmManager và NotificationManager
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -190,7 +190,7 @@ public class reminder_take extends AppCompatActivity {
         date = editTextDate.getText().toString().trim();
         time = editTextTime.getText().toString().trim();
         title = editTextContent.getText().toString().trim();
-        Reminder reminder = new Reminder();
+
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (!date.isEmpty() && !time.isEmpty()) {
@@ -229,7 +229,6 @@ public class reminder_take extends AppCompatActivity {
             Date dateTime = dateFormat.parse(date + " " + time);
             if (dateTime != null) {
                 calendar.setTime(dateTime);
-//                setAlarm(calendar.getTimeInMillis());
                 sendNotification(calendar.getTimeInMillis());
             }
         } catch (ParseException e) {
@@ -266,24 +265,40 @@ public class reminder_take extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-    private void sendNotification(long timeInMillis) {
-        // Tạo thông báo
-        Intent intent = new Intent(this, AlarmReceiver.class);
-        intent.putExtra("title", title);
-        intent.putExtra("date", date);
-        intent.putExtra("time", time);
+//    private void sendNotification(long timeInMillis) {
+//
+//        // Tạo Intent để gửi đến AlarmReceiver
+//        Intent intent = new Intent(this, AlarmReceiver.class);
+//        alarmIntent = PendingIntent.getBroadcast(
+//                this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//        // Đặt báo thức
+//        alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis, alarmIntent);
+//        Toast.makeText(this, "Báo thức được đặt", Toast.LENGTH_SHORT).show();
+//    }
+private void sendNotification(long timeInMillis) {
+    // Tạo thông báo
+    Intent intent = new Intent(this, ReminderNotificationReceiver.class);
+    PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, FLAG_IMMUTABLE);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    // ... (Tạo notification)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
-        } else {
-            alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
-        }
+    // Hiển thị thông báo tại thời điểm xác định
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        NotificationChannel channel = new NotificationChannel("default", "Channel name", NotificationManager.IMPORTANCE_DEFAULT);
+        notificationManager.createNotificationChannel(channel);
     }
+
+    Notification notification = new Notification.Builder(this, "default")
+            .setContentTitle("Nhắc nhở: " + title)
+            .setContentText(date+" "+time)
+            .setSmallIcon(R.drawable.alarm)
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+            .build();
+
+    notificationManager.notify(0, notification);
+}
     private void performDeleteAction() {
         if (nDatabase != null) {
             nDatabase.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {

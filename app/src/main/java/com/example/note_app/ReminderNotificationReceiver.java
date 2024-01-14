@@ -1,4 +1,5 @@
 package com.example.note_app;
+
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -11,8 +12,6 @@ public class ReminderNotificationReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String title = intent.getStringExtra("title");
-        String date = intent.getStringExtra("date");
-        String time =intent.getStringExtra("time");
 
         // Hiển thị thông báo
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -22,8 +21,8 @@ public class ReminderNotificationReceiver extends BroadcastReceiver {
         }
 
         Notification notification = new Notification.Builder(context, "default")
-                .setContentTitle("Reminder: " + date + time)
-                .setContentText(title)
+                .setContentTitle("Reminder: " + title)
+                .setContentText("Nội dung thông báo")
                 .setSmallIcon(R.drawable.alarm)
                 .setAutoCancel(true)
                 .build();
@@ -33,4 +32,3 @@ public class ReminderNotificationReceiver extends BroadcastReceiver {
         }
     }
 }
-

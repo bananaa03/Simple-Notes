@@ -45,7 +45,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="369dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -53,15 +53,16 @@
                 android:id="@+id/tv_reminderday"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
                 android:layout_weight="8"
                 android:gravity="end"
                 android:text="@string/dd_mm_yy"
-                android:layout_marginEnd="20dp"
                 android:textSize="15sp" />
+
             <TextView
                 android:id="@+id/tv_reminderTime"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="end"
                 android:text="00:00"
                 android:textSize="15sp" />
